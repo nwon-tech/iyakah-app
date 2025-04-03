@@ -1,0 +1,324 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to top right, rgba(59, 130, 246, 0.2), rgba(219, 234, 254, 0.2), white);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 4rem 0;
+  }
+  
+  .hero-content {
+    max-width: 800px;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .hero p {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-primary {
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #1565c0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-primary:disabled {
+    background-color: #90caf9;
+    cursor: not-allowed;
+  }
+  
+  .btn-outline {
+    background-color: transparent;
+    color: #1976d2;
+    border: 1px solid #1976d2;
+  }
+  
+  .btn-outline:hover {
+    background-color: rgba(25, 118, 210, 0.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Tabs Section */
+  .tabs-section {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0 4rem;
+    overflow: hidden;
+  }
+  
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f5f5f5;
+  }
+  
+  .tab-btn {
+    flex: 1;
+    padding: 1rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .tab-btn:hover {
+    background-color: #eeeeee;
+  }
+  
+  .tab-btn.active {
+    color: #1976d2;
+    border-bottom: 2px solid #1976d2;
+    background-color: white;
+  }
+  
+  .tab-btn .material-icons {
+    font-size: 20px;
+  }
+  
+  .tab-content {
+    padding: 2rem;
+  }
+  
+  .tab-pane {
+    display: none;
+  }
+  
+  .tab-pane.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .tab-pane h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .tab-pane p {
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Input Fields */
+  .input-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .input-field {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border 0.3s ease;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+  }
+  
+  .textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  /* Option Tabs for Fake News Detector */
+  .input-options {
+    margin-top: 1rem;
+  }
+  
+  .option-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .option-tab {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .option-tab.active {
+    color: #1976d2;
+    border-bottom: 2px solid #1976d2;
+  }
+  
+  .option-content {
+    display: none;
+  }
+  
+  .option-content.active {
+    display: block;
+  }
+  
+  .option-content .input-field {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  
+  /* Image Upload */
+  .upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .upload-area {
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .upload-area:hover {
+    border-color: #1976d2;
+    background-color: rgba(25, 118, 210, 0.05);
+  }
+  
+  .upload-area .material-icons {
+    font-size: 48px;
+    color: #1976d2;
+    margin-bottom: 1rem;
+  }
+  
+  .upload-area p {
+    margin-bottom: 0;
+  }
+  
+  /* Centered Hero Section */
+  .centered-hero {
+    padding: 4rem 0;
+    text-align: center;
+  }
+  
+  .centered-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .centered-hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .centered-hero p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2.5rem;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1976d2;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .tabs {
+      flex-direction: column;
+    }
+    
+    .tab-btn {
+      justify-content: flex-start;
+    }
+    
+    .input-group {
+      flex-direction: column;
+    }
+    
+    .stats {
+      gap: 2rem;
+    }
+  }

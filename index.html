@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="/_vercel/insights/script.js"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <title>Iyakah - Discover the Truth</title>
+    <meta name="description" content="Discover the truth." />
+  </head>
+  <body>
+    <main class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Iyakah?</h1>
+          <p>
+            Discover the truth with Iyakah, your trusted platform for insights
+            and analytics.
+          </p>
+          <div class="button-group">
+            <button class="btn btn-primary">Get Started</button>
+            <button class="btn btn-outline">Learn More</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabs Section -->
+      <section class="tabs-section">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="tab1">
+            <span class="material-icons">security</span>
+            Website Legitimacy
+          </button>
+          <button class="tab-btn" data-tab="tab2">
+            <span class="material-icons">article</span>
+            Fake News Detector
+          </button>
+          <button class="tab-btn" data-tab="tab3">
+            <span class="material-icons">image</span>
+            Fake Image Detector
+          </button>
+        </div>
+
+        <div class="tab-content">
+          <!-- Tab 1: Website Legitimacy Checker -->
+          <div class="tab-pane active" id="tab1">
+            <h3>Check Website Legitimacy</h3>
+            <p>
+              Enter a URL to verify the legitimacy of a website and check for
+              potential security issues.
+            </p>
+            <div class="input-group">
+              <input
+                type="url"
+                placeholder="Enter website URL (e.g., https://example.com)"
+                class="input-field"
+              />
+              <button class="btn btn-primary">Check</button>
+            </div>
+          </div>
+
+          <!-- Tab 2: Fake News Detector -->
+          <div class="tab-pane" id="tab2">
+            <h3>Detect Fake News</h3>
+            <p>
+              Analyze news articles for misinformation and bias using our
+              advanced AI algorithms.
+            </p>
+            <div class="input-options">
+              <div class="option-tabs">
+                <button class="option-tab active" data-option="text">
+                  Text Input
+                </button>
+                <button class="option-tab" data-option="url">URL Input</button>
+              </div>
+              <div class="option-content active" id="text-option">
+                <textarea
+                  class="input-field textarea"
+                  placeholder="Paste the news article text here..."
+                ></textarea>
+                <button class="btn btn-primary">Analyze Text</button>
+              </div>
+              <div class="option-content" id="url-option">
+                <input
+                  type="url"
+                  placeholder="Enter news article URL"
+                  class="input-field"
+                />
+                <button class="btn btn-primary">Analyze URL</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Fake Image Detector -->
+          <div class="tab-pane" id="tab3">
+            <h3>Detect Manipulated Images</h3>
+            <p>
+              Upload an image to check if it has been digitally altered or
+              manipulated.
+            </p>
+            <div class="upload-container">
+              <div class="upload-area" id="upload-area">
+                <span class="material-icons">cloud_upload</span>
+                <p>Drag & drop an image or click to browse</p>
+                <input type="file" id="image-upload" accept="image/*" hidden />
+              </div>
+              <button class="btn btn-primary" id="analyze-image" disabled>
+                Analyze Image
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Centered Hero Section -->
+      <section class="centered-hero">
+        <div class="centered-hero-content">
+          <h2>Why Choose Our Tools?</h2>
+          <p>
+            Our fact-checking tools use advanced AI algorithms to provide
+            accurate and reliable results. With over 95% accuracy, our tools
+            have helped thousands of users verify information and avoid
+            misinformation.
+          </p>
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-number">95%</span>
+              <span class="stat-label">Accuracy</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">10K+</span>
+              <span class="stat-label">Daily Checks</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">50K+</span>
+              <span class="stat-label">Users</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="middleware.js"></script>
+    <script src="./scripts/script.js"></script>
+  </body>
+</html>
