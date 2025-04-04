@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  fileInput.addEventListener("change", (e) => {
+  fileInput.addEventListener("change", () => {
     if (fileInput.files.length) {
       handleFileSelect(fileInput.files[0]);
     }
@@ -133,5 +133,77 @@ document.addEventListener("DOMContentLoaded", () => {
         resetUploadArea();
       }
     });
+  });
+
+  // Website Legitimacy Checker functionality
+  const websiteInput = document.getElementById("website-input");
+  const checkWebsiteButton = document.getElementById("check-website");
+
+  checkWebsiteButton.addEventListener("click", () => {
+    const websiteUrl = websiteInput.value.trim();
+
+    if (websiteUrl) {
+      // Prepare the data for API submission
+      const formData = new FormData();
+      formData.append("url", websiteUrl);
+
+      // Send the website URL to the Java backend
+      fetch("http://your-java-backend-url/api/check-website", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to check website legitimacy");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Response from backend:", data);
+          alert(`Website legitimacy result: ${data.result}`);
+        })
+        .catch((error) => {
+          console.error("Error checking website:", error);
+          alert("Error checking website. Please try again.");
+        });
+    } else {
+      alert("Please enter a valid website URL.");
+    }
+  });
+
+  // Fake News Detector functionality
+  const newsInput = document.getElementById("news-input");
+  const checkNewsButton = document.getElementById("check-news");
+
+  checkNewsButton.addEventListener("click", () => {
+    const newsContent = newsInput.value.trim();
+
+    if (newsContent) {
+      // Prepare the data for API submission
+      const formData = new FormData();
+      formData.append("news", newsContent);
+
+      // Send the news content to the Java backend
+      fetch("http://your-java-backend-url/api/check-news", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to check news legitimacy");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Response from backend:", data);
+          alert(`Fake news detection result: ${data.result}`);
+        })
+        .catch((error) => {
+          console.error("Error checking news:", error);
+          alert("Error checking news. Please try again.");
+        });
+    } else {
+      alert("Please enter news content to analyze.");
+    }
   });
 });
