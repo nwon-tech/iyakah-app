@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+  
   // Tab switching functionality
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabPanes = document.querySelectorAll(".tab-pane");
 
   tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
+
       // Remove active class from all buttons and panes
       tabButtons.forEach((btn) => btn.classList.remove("active"));
       tabPanes.forEach((pane) => pane.classList.remove("active"));
@@ -22,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   optionTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
+      
       // Remove active class from all option tabs and contents
       optionTabs.forEach((t) => t.classList.remove("active"));
       optionContents.forEach((c) => c.classList.remove("active"));
@@ -55,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     uploadArea.classList.remove("active");
 
+    // handle image object for analysis
     if (e.dataTransfer.files.length) {
       fileInput.files = e.dataTransfer.files;
       handleFileSelect(e.dataTransfer.files[0]);
@@ -81,6 +85,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Enable the analyze button
       analyzeButton.disabled = false;
+
+      // Prepare the file for API submission
+      analyzeButton.addEventListener("click", () => {
+        const formData = new FormData();
+        formData.append("image", file);
+
+        // Send the image to the Java backend
+        fetch("http://your-java-backend-url/api/upload", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to upload image");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Response from backend:", data);
+            alert("Image uploaded successfully!");
+          })
+          .catch((error) => {
+            console.error("Error uploading image:", error);
+            alert("Error uploading image. Please try again.");
+          });
+      });
     } else {
       alert("Please select an image file.");
       resetUploadArea();
