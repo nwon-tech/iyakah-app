@@ -4,7 +4,68 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
+  /* Navbar Styles */
+  .navbar {
+    background-color: #1a1a1a; /* Contrasting dark color */
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+  }
+
+  .navbar .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .navbar .nav-links a:hover {
+    color: #90caf9;
+  }
+
+  .navbar .menu-icon {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+  }
+
+  /* Responsive Navbar */
+  @media (max-width: 768px) {
+    .navbar .nav-links {
+      display: none;
+      flex-direction: column;
+      background-color: #1a1a1a;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 100%;
+      padding: 1rem 0;
+    }
+
+    .navbar .nav-links.active {
+      display: flex;
+    }
+
+    .navbar .menu-icon {
+      display: block;
+    }
+  }
   body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(to top right, rgba(59, 130, 246, 0.2), rgba(219, 234, 254, 0.2), white);
