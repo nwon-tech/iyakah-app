@@ -13,8 +13,31 @@ document.addEventListener("DOMContentLoaded", () => {
       button.classList.add("active");
       const tabId = button.getAttribute("data-tab");
       document.getElementById(tabId).classList.add("active");
+
+      // Hide all result cards when switching tabs
+      hideAllResults();
     });
   });
+
+  // Function to hide all result cards
+  function hideAllResults() {
+    const resultCards = document.querySelectorAll(".result-card");
+    resultCards.forEach((card) => {
+      card.style.display = "none";
+      card.className = card.className.replace(
+        /\b(positive|negative|neutral)\b/g,
+        ""
+      );
+    });
+
+    // Hide all loading indicators
+    const loadingSpinners = document.querySelectorAll(".spinner-container");
+    loadingSpinners.forEach((spinner) => {
+      spinner.style.display = "none";
+    });
+  }
+
+  // Removed unused functions: showLoading, hideLoading, and showResult
 
   // Option tabs for Fake News Detector
   const optionTabs = document.querySelectorAll(".option-tab");
@@ -83,31 +106,34 @@ document.addEventListener("DOMContentLoaded", () => {
       // Enable the analyze button
       analyzeButton.disabled = false;
 
-      // Prepare the file for API submission
-      analyzeButton.addEventListener("click", () => {
-        const formData = new FormData();
-        formData.append("image", file);
+      // Prepare the file for API submission (only add this event listener once)
+      if (!analyzeButton.hasEventListener) {
+        analyzeButton.hasEventListener = true;
+        analyzeButton.addEventListener("click", () => {
+          const formData = new FormData();
+          formData.append("image", file);
 
-        // Send the image to the Java backend
-        fetch("http://your-java-backend-url/api/upload", {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to upload image");
-            }
-            return response.json();
+          // Send the image to the Java backend
+          fetch("http://your-java-backend-url/api/upload", {
+            method: "POST",
+            body: formData,
           })
-          .then((data) => {
-            console.log("Response from backend:", data);
-            alert("Image uploaded successfully!");
-          })
-          .catch((error) => {
-            console.error("Error uploading image:", error);
-            alert("Error uploading image. Please try again.");
-          });
-      });
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Failed to upload image");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Response from backend:", data);
+              alert("Image uploaded successfully!");
+            })
+            .catch((error) => {
+              console.error("Error uploading image:", error);
+              alert("Error uploading image. Please try again.");
+            });
+        });
+      }
     } else {
       alert("Please select an image file.");
       resetUploadArea();
@@ -140,28 +166,97 @@ document.addEventListener("DOMContentLoaded", () => {
     const websiteUrl = websiteInput.value.trim();
 
     if (websiteUrl) {
-      // Prepare the data for API submission
-      const formData = new FormData();
-      formData.append("url", websiteUrl);
+      // Show loading state
+      checkWebsiteButton.disabled = true;
+      checkWebsiteButton.textContent = "Checking...";
+
+      // Make sure URL has a protocol, add http:// if none exists
+      let processedUrl = websiteUrl;
+      if (
+        !processedUrl.startsWith("http://") &&
+        !processedUrl.startsWith("https://")
+      ) {
+        processedUrl = "https://" + processedUrl;
+      }
+
+      // Prepare the data in the format expected by the Java backend
+      const requestBody = {
+        url: processedUrl,
+      };
+
+      // Convert the request body to JSON string
+      const requestBodyString = JSON.stringify(requestBody);
+
+      // Log the request for debugging
+      console.log("Sending request to backend:", requestBodyString);
+
+      // Get the API endpoint - use a local proxy if needed to avoid CORS issues
+      const apiUrl =
+        "http://149.104.26.84:8088/analysislog/addAnalysisLogByUrl";
 
       // Send the website URL to the Java backend
-      fetch("http://149.104.26.84:8088/analysislog/addAnalysisLogByUrl", {
+      fetch(apiUrl, {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: requestBodyString,
       })
         .then((response) => {
+          // Reset button state
+          checkWebsiteButton.disabled = false;
+          checkWebsiteButton.textContent = "Check";
+
           if (!response.ok) {
-            throw new Error("Failed to check website legitimacy");
+            console.error("Response status:", response.status);
+            throw new Error(
+              `Failed to check website legitimacy (Status: ${response.status})`
+            );
           }
           return response.json();
         })
         .then((data) => {
           console.log("Response from backend:", data);
-          alert(`Website legitimacy result: ${data.result}`);
+
+          // Extract the result from the response
+          let resultMessage = "Analysis complete";
+          if (data && data.result) {
+            resultMessage = `Website legitimacy result: ${data.result}`;
+          } else if (data && data.message) {
+            resultMessage = data.message;
+          } else {
+            resultMessage = "Analysis complete. See console for details.";
+          }
+
+          alert(resultMessage);
         })
         .catch((error) => {
+          // Reset button state
+          checkWebsiteButton.disabled = false;
+          checkWebsiteButton.textContent = "Check";
+
           console.error("Error checking website:", error);
-          alert("Error checking website. Please try again.");
+
+          // More detailed error message
+          let errorMessage = "Error checking website. ";
+
+          // Check if it's a network error
+          if (
+            error.message.includes("NetworkError") ||
+            error.message.includes("Failed to fetch") ||
+            error.message.includes("ERR_CONNECTION_RESET")
+          ) {
+            errorMessage +=
+              "Cannot connect to the server. The server might be down or unreachable. Please try again later.";
+          } else {
+            errorMessage += "Please try again.";
+          }
+
+          alert(errorMessage);
+
+          // Provide a way to test with mock data for development
+          console.log("For development, you can use mock data to test the UI");
         });
     } else {
       alert("Please enter a valid website URL.");
@@ -177,12 +272,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (newsContent) {
       // Prepare the data for API submission
-      const formData = new FormData();
-      formData.append("news", newsContent);
+      const formData = JSON.stringify({ text: newsContent });
+
+      // Log the news content for debugging
+      console.log("Sending news content to backend:", formData);
 
       // Send the news content to the Java backend
-      fetch("http://your-java-backend-url/api/check-news", {
+      fetch("http://149.104.26.84:8088/analysislog/addAnalysisLogByNews", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: formData,
       })
         .then((response) => {
