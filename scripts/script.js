@@ -1,12 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  
   // Tab switching functionality
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabPanes = document.querySelectorAll(".tab-pane");
 
   tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
-
       // Remove active class from all buttons and panes
       tabButtons.forEach((btn) => btn.classList.remove("active"));
       tabPanes.forEach((pane) => pane.classList.remove("active"));
@@ -24,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   optionTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      
       // Remove active class from all option tabs and contents
       optionTabs.forEach((t) => t.classList.remove("active"));
       optionContents.forEach((c) => c.classList.remove("active"));
@@ -148,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("url", websiteUrl);
 
       // Send the website URL to the Java backend
-      fetch("http://your-java-backend-url/api/check-website", {
+      fetch("http://149.104.26.84:8088/analysislog/addAnalysisLogByUrl", {
         method: "POST",
         body: formData,
       })

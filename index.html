@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Removed or replaced the script to avoid potential errors -->
+    <!-- <script
+      defer
+      src="/_vercel/insights/script.js"
+      onerror="console.error('Insights script failed to load.')"
+    ></script> -->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -59,11 +64,12 @@
             </p>
             <div class="input-group">
               <input
+                id="website-input"
                 type="url"
                 placeholder="Enter website URL (e.g., https://example.com)"
                 class="input-field"
               />
-              <button class="btn btn-primary">Check</button>
+              <button class="btn btn-primary" id="check-website">Check</button>
             </div>
           </div>
 
@@ -83,10 +89,13 @@
               </div>
               <div class="option-content active" id="text-option">
                 <textarea
+                  id="news-input"
                   class="input-field textarea"
                   placeholder="Paste the news article text here..."
                 ></textarea>
-                <button class="btn btn-primary">Analyze Text</button>
+                <button class="btn btn-primary" id="check-news">
+                  Analyze Text
+                </button>
               </div>
               <div class="option-content" id="url-option">
                 <input
@@ -112,9 +121,17 @@
                 <p>Drag & drop an image or click to browse</p>
                 <input type="file" id="image-upload" accept="image/*" hidden />
               </div>
-              <button class="btn btn-primary" id="analyze-image" disabled>
+              <button class="btn btn-primary" id="analyze-image">
                 Analyze Image
               </button>
+              <script>
+                document
+                  .getElementById("image-upload")
+                  .addEventListener("change", function () {
+                    document.getElementById("analyze-image").disabled =
+                      !this.files.length;
+                  });
+              </script>
             </div>
           </div>
         </div>
