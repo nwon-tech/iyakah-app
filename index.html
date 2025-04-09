@@ -128,6 +128,16 @@
                 </button>
                 <button class="option-tab" data-option="url">URL Input</button>
               </div>
+              <div class="option-content active"  id="text-option">
+                <p>Media Name:</p>
+                <input
+                  id="media-name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Media Name"
+                />
+                <div id="autocomplete-list" class="list-group"></div>
+                <p>Article Title:</p>
               <div class="option-content active" id="text-option">
                 <textarea
                   id="news-input"
@@ -177,6 +187,10 @@
           </div>
         </div>
       </section>
+
+      <div>
+        <button class="btn btn-primary" id="getAQI">GET</button>
+      </div>
 
       <!-- Centered Hero Section -->
       <section class="centered-hero">

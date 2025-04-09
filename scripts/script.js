@@ -19,6 +19,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   const mediaNames = []; // This list will be populated from script.js
+  //   const input = document.getElementById("media-name");
+  //   const autocompleteList = document.getElementById("autocomplete-list");
+
+  //   input.addEventListener("input", function () {
+  //     const query = this.value.toLowerCase();
+  //     autocompleteList.innerHTML = ""; // Clear previous suggestions
+
+  //     if (!query) return;
+
+  //     const matches = mediaNames.filter((name) =>
+  //       name.toLowerCase().includes(query)
+  //     );
+
+  //     matches.forEach((match) => {
+  //       const item = document.createElement("button");
+  //       item.className = "list-group-item list-group-item-action";
+  //       item.textContent = match;
+  //       item.addEventListener("click", function () {
+  //         input.value = match;
+  //         autocompleteList.innerHTML = ""; // Clear suggestions
+  //       });
+  //       autocompleteList.appendChild(item);
+  //     });
+  //   });
+
+  //   document.addEventListener("click", function (e) {
+  //     if (e.target !== input) {
+  //       autocompleteList.innerHTML = ""; // Close suggestions when clicking outside
+  //     }
+  //   });
+  // });
+
   // Function to hide all result cards
   function hideAllResults() {
     const resultCards = document.querySelectorAll(".result-card");
@@ -303,4 +337,138 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please enter news content to analyze.");
     }
   });
+});
+
+// Website Legitimacy Checker functionality
+const websiteInput = document.getElementById("website-input");
+const checkWebsiteButton = document.getElementById("check-website");
+
+checkWebsiteButton.addEventListener("click", () => {
+  const websiteUrl = websiteInput.value.trim();
+
+  if (websiteUrl) {
+    // Show loading state
+    checkWebsiteButton.disabled = true;
+    checkWebsiteButton.textContent = "Checking...";
+
+    // Make sure URL has a protocol, add http:// if none exists
+    let processedUrl = websiteUrl;
+    if (
+      !processedUrl.startsWith("http://") &&
+      !processedUrl.startsWith("https://")
+    ) {
+      processedUrl = "https://" + processedUrl;
+    }
+
+    // Prepare the data in the format expected by the Java backend
+    const requestBody = {
+      url: processedUrl,
+    };
+
+    // Convert the request body to JSON string
+    const requestBodyString = JSON.stringify(requestBody);
+
+    // Log the request for debugging
+    console.log("Sending request to backend:", requestBodyString);
+
+    // Get the API endpoint - use a local proxy if needed to avoid CORS issues
+    const apiUrl = "https://149.104.26.84:8088/analysislog/addAnalysisLogByUrl";
+
+    // Send the website URL to the Java backend
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: requestBodyString,
+    })
+      .then((response) => {
+        // Reset button state
+        checkWebsiteButton.disabled = false;
+        checkWebsiteButton.textContent = "Check";
+
+        if (!response.ok) {
+          console.error("Response status:", response.status);
+          throw new Error(
+            `Failed to check website legitimacy (Status: ${response.status})`
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Response from backend:", data);
+
+        // Extract the result from the response
+        let resultMessage = "Analysis complete";
+        if (data && data.result) {
+          resultMessage = `Website legitimacy result: ${data.result}`;
+        } else if (data && data.message) {
+          resultMessage = data.message;
+        } else {
+          resultMessage = "Analysis complete. See console for details.";
+        }
+
+        alert(resultMessage);
+      })
+      .catch((error) => {
+        // Reset button state
+        checkWebsiteButton.disabled = false;
+        checkWebsiteButton.textContent = "Check";
+
+        console.error("Error checking website:", error);
+
+        // More detailed error message
+        let errorMessage = "Error checking website. ";
+
+        // Check if it's a network error
+        if (
+          error.message.includes("NetworkError") ||
+          error.message.includes("Failed to fetch") ||
+          error.message.includes("ERR_CONNECTION_RESET")
+        ) {
+          errorMessage +=
+            "Cannot connect to the server. The server might be down or unreachable. Please try again later.";
+        } else {
+          errorMessage += "Please try again.";
+        }
+
+        alert(errorMessage);
+
+        // Provide a way to test with mock data for development
+        console.log("For development, you can use mock data to test the UI");
+      });
+  } else {
+    alert("Please enter a valid website URL.");
+  }
+});
+
+const get = document.getElementById("getAQI");
+
+get.addEventListener("click", () => {
+  const getURL = "https://www.pollucheck8.com:8088/cityaqi/getCityAqi/35";
+
+  console.log("Sending GET request to backend:", getURL);
+
+  fetch(getURL, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Response from backend:", data);
+      alert(`Data fetched successfully!`);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+      alert("Error fetching data. Please try again.");
+    });
 });
