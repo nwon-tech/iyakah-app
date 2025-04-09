@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Get the API endpoint - use a local proxy if needed to avoid CORS issues
       const apiUrl =
-        "http://149.104.26.84:8088/analysislog/addAnalysisLogByUrl";
+        "https://149.104.26.84:8088/analysislog/addAnalysisLogByUrl";
 
       // Send the website URL to the Java backend
       fetch(apiUrl, {
