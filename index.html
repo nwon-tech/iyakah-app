@@ -50,7 +50,7 @@
               <a class="nav-link" href="#features">Features</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" >About</a>
+              <a class="nav-link">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="education.html">Learn More</a>
@@ -112,6 +112,7 @@
               />
               <button class="btn btn-primary" id="check-website">Check</button>
             </div>
+            <div class="result-container" id="result-container"></div>
           </div>
 
           <!-- Tab 2: Fake News Detector -->
@@ -126,35 +127,39 @@
                 <button class="option-tab active" data-option="text">
                   Text Input
                 </button>
-                <button class="option-tab" data-option="url">URL Input</button>
+                <!-- <button class="option-tab" data-option="url">URL Input</button> -->
               </div>
-              <div class="option-content active"  id="text-option">
-                <p>Media Name:</p>
+              <div class="option-content active" id="text-option">
+                <p>Media Name (Optional):</p>
                 <input
                   id="media-name"
                   type="text"
                   class="form-control"
                   placeholder="Enter Media Name"
+                  autocomplete="off"
                 />
-                <div id="autocomplete-list" class="list-group"></div>
-                <p>Article Title:</p>
-              <div class="option-content active" id="text-option">
-                <textarea
-                  id="news-input"
-                  class="input-field textarea"
-                  placeholder="Paste the news article text here..."
-                ></textarea>
-                <button class="btn btn-primary" id="check-news">
-                  Analyze Text
-                </button>
-              </div>
-              <div class="option-content" id="url-option">
-                <input
-                  type="url"
-                  placeholder="Enter news article URL"
-                  class="input-field"
-                />
-                <button class="btn btn-primary">Analyze URL</button>
+                <div id="autocomplete-list" class="list-group"  style="position: absolute; z-index: 1000; width: 100%;"></div>
+                <p> <strong> Article Text <span style="color: red"></span>:</strong></p>
+                <div class="option-content active" id="text-option">
+                  <textarea
+                    id="news-input"
+                    class="input-field textarea"
+                    placeholder="Paste the news article text here..."
+                    required
+                  ></textarea>
+                  <button class="btn btn-primary" id="check-news">
+                    Analyze Text
+                  </button>
+                </div>
+                <div class="result-container" id="result-container"></div>
+                <!-- <div class="option-content" id="url-option">
+                  <input
+                    type="url"
+                    placeholder="Enter news article URL"
+                    class="input-field"
+                  />
+                  <button class="btn btn-primary">Analyze URL</button>
+                </div> -->
               </div>
             </div>
           </div>
@@ -221,13 +226,19 @@
     </main>
     <footer class="footer py-4">
       <div class="container">
-      <p class="mb-2">
-        <strong>Disclaimer:</strong> The tools and services provided on this platform utilise machine learning algorithms to interpret data. While we strive for accuracy, the results may not always be definitive. Users are encouraged to make their own decisions and interpret the results based on their own judgment.
-      </p>
-      <p class="mb-0">
-        By using this platform, you agree that any information uploaded or analyzed is done at your own discretion. We do not store or share your data without your consent.
-      </p>
-      <p class="mt-3">&copy; TM08. All rights reserved.</p>
+        <p class="mb-2">
+          <strong>Disclaimer:</strong> The tools and services provided on this
+          platform utilise machine learning algorithms to interpret data. While
+          we strive for accuracy, the results may not always be definitive.
+          Users are encouraged to make their own decisions and interpret the
+          results based on their own judgment.
+        </p>
+        <p class="mb-0">
+          By using this platform, you agree that any information uploaded or
+          analyzed is done at your own discretion. We do not store or share your
+          data without your consent.
+        </p>
+        <p class="mt-3">&copy; TM08. All rights reserved.</p>
       </div>
     </footer>
     <script src="middleware.js"></script>
