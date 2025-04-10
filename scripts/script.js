@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
               }" alt="${websiteResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
               <p>${websiteResultSummary}</p>
               <p>Confidence Score: ${websiteConfidenceScore}</p>
+              <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
             </div>
             `;
           }
@@ -236,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <p>Confidence Score: ${newsConfidenceScore}</p>
               <p>Media Bias Rating: ${newsMediaBiasRating}</p>
               <p>Media Bias Score: ${newsMediamediaBiasScore}</p>
+              <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
             </div>
             `;
         }
