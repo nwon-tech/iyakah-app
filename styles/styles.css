@@ -435,14 +435,4 @@ body {
   color: #90caf9;
 }
 
-#autocomplete-list {
-  position: absolute;
-  z-index: 1000;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-}
 
-.list-group-item {
-  cursor: pointer;
-}

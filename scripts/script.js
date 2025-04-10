@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   // Tab switching functionality
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabPanes = document.querySelectorAll(".tab-pane");
@@ -342,15 +343,6 @@ function resetUploadArea() {
   analyzeButton.disabled = true;
 }
 
-// Reset upload area when switching tabs
-tabButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (button.getAttribute("data-tab") !== "tab3") {
-      resetUploadArea();
-    }
-  });
-});
-
 // Function to hide all result cards
 function hideAllResults() {
   const resultCards = document.querySelectorAll(".result-card");
@@ -364,40 +356,37 @@ function hideAllResults() {
 }
 
 // autocomplete functionality for media name input
-fetch('mediaNames.json')
-  .then((response) => response.json())
-  .then((mediaNames) => {
-    const input = document.getElementById("media-name");
-    const list = document.getElementById("autocomplete-list");
 
-    input.addEventListener("input", function () {
-      const query = this.value.toLowerCase();
-      list.innerHTML = "";
+let items = [];
 
-      if (!query) return;
-
-      const matches = mediaNames
-        .filter((name) => name.toLowerCase().includes(query))
-        .slice(0, 10); // Limit to 10 suggestions
-
-      matches.forEach((match) => {
-        const item = document.createElement("button");
-        item.className = "list-group-item list-group-item-action";
-        item.textContent = match;
-        item.addEventListener("click", function () {
-          input.value = match;
-          list.innerHTML = "";
-        });
-        list.appendChild(item);
-      });
-    });
-
-    document.addEventListener("click", function (e) {
-      if (e.target !== input) {
-        list.innerHTML = "";
-      }
-    });
-  })
-  .catch((error) => {
-    console.error("Failed to load media names:", error);
+fetch('data.json')
+  .then(response => response.json())
+  .then(data => {
+    items = data;
   });
+
+const input = document.getElementById('autocomplete-input');
+const resultsList = document.getElementById('autocomplete-results');
+
+input.addEventListener('input', function () {
+  const query = this.value.toLowerCase();
+  resultsList.innerHTML = '';
+
+  if (query.length === 0) return;
+
+  const matches = items
+    .filter(item =>
+      item.site_name.toLowerCase().startsWith(query)
+    )
+    .slice(0, 10); // Limit to 10 suggestions
+
+  matches.forEach(match => {
+    const li = document.createElement('li');
+    li.textContent = match.site_name;
+    li.addEventListener('click', () => {
+      input.value = match.site_name;
+      resultsList.innerHTML = '';
+    });
+    resultsList.appendChild(li);
+  });
+});

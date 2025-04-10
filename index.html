@@ -131,15 +131,13 @@
               </div>
               <div class="option-content active" id="text-option">
                 <p>Media Name (Optional):</p>
-                <input
-                  id="media-name"
-                  type="text"
-                  class="form-control"
-                  placeholder="Enter Media Name"
-                  autocomplete="off"
-                />
-                <div id="autocomplete-list" class="list-group"  style="position: absolute; z-index: 1000; width: 100%;"></div>
-                <p> <strong> Article Text <span style="color: red"></span>:</strong></p>
+                <input 
+                type="text" 
+                id="autocomplete-input" 
+                autocomplete="off" />
+                <ul id="autocomplete-results"></ul>
+                <br\>
+                <p>Article Text</p>
                 <div class="option-content active" id="text-option">
                   <textarea
                     id="news-input"
@@ -192,10 +190,6 @@
           </div>
         </div>
       </section>
-
-      <div>
-        <button class="btn btn-primary" id="getAQI">GET</button>
-      </div>
 
       <!-- Centered Hero Section -->
       <section class="centered-hero">
