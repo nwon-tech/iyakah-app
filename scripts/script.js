@@ -326,6 +326,10 @@ function handleFileSelect(file) {
             var imageResultSummary =
               data.data.resultSummary || "No result available";
             var imageConfidenceScore = data.data.confidenceScore || "No score available";
+            var imageCaptureDate = data.data.captureDate || "No date available";
+            var imageCaptureLocation =
+              data.data.location || "No location available";
+            var imageCameraModel = data.data.cameraModel || "No model available";
 
             // formatting output
             if (imageResultSummary === "Real Image") {
@@ -334,7 +338,7 @@ function handleFileSelect(file) {
             else {
               imageResultSummary = "AI-Generated Image";
             } 
-
+            
             // display the data on the index.html page
             const imageResultContainer = document.getElementById(
               "image-result-container"
@@ -351,6 +355,9 @@ function handleFileSelect(file) {
                   }" alt="${imageResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
                   <p>${imageResultSummary}</p>
                   <p>Confidence Score: ${imageConfidenceScore}</p>
+                  <p>Capture Date: ${imageCaptureDate}</p>
+                  <p>Capture Location: ${imageCaptureLocation}</p>
+                  <p>Camera Model: ${imageCameraModel}</p>
                   <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
                 </div>
                 `;
