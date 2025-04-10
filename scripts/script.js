@@ -99,41 +99,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // data.data.resultSummary is the expected format for the result summary
           // data.data.confidenceScore is the expected format for the confidence score
-          var resultSummary = data.data.resultSummary || "No result available";
-          var confidenceScore =
+          var websiteResultSummary = data.data.resultSummary || "No result available";
+          var websiteConfidenceScore =
             data.data.confidenceScore || "No score available";
 
           // formatting output
-          if (resultSummary.toLowerCase() === "safe website") {
-            resultSummary = "Safe Website";
+          if (websiteResultSummary.toLowerCase() === "safe website") {
+            websiteResultSummary = "Safe Website";
           } else {
-            resultSummary = "Unsafe Website";
+            websiteResultSummary = "Unsafe Website";
           }
 
           // Display the data on the index.html page
-          const resultContainer = document.getElementById("result-container");
-          if (resultContainer) {
-            resultContainer.innerHTML = `
+          const websiteResultContainer = document.getElementById(
+            "website-result-container"
+          );
+
+          if (websiteResultContainer) {
+            websiteResultContainer.innerHTML = `
               <div class="result-card ${
-                resultSummary === "Safe Website" ? "safe" : "unsafe"
+                websiteResultSummary === "Safe Website" ? "safe" : "unsafe"
               }">
-                <div class="icon">
-                  ${
-                    resultSummary === "Safe Website"
-                      ? '<span class="material-icons">check_circle</span>'
-                      : '<span class="material-icons">cancel</span>'
-                  }
-                </div>
-                <p>${resultSummary}</p>
-                <p>Confidence Score: ${confidenceScore}</p>
-              </div>
+              <img src="scripts/website-detection-result/${
+                websiteResultSummary === "Safe Website"
+                  ? "result-trustworthy.png"
+                  : "result-highrisk.png"
+              }" alt="${websiteResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+              <p>${websiteResultSummary}</p>
+              <p>Confidence Score: ${websiteConfidenceScore}</p>
+            </div>
             `;
-            // resultContainer.innerHTML = `
-            //   <p>${resultSummary}</p>
-            //   <p>${confidenceScore}</p>
-            // `;
-          } else {
-            console.warn("Result container not found in the DOM.");
           }
         })
         .catch((error) => {
@@ -206,7 +201,44 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((data) => {
         console.log("Response from backend:", data);
-        alert(`Fake news detection result: ${data.result}`);
+
+        var newsResultSummary =
+          data.data.resultSummary || "No result available";
+        var newsConfidenceScore =
+          data.data.confidenceScore || "No score available";
+        var newsMediaBiasRating =
+          data.data.mediaBiasRating || "No rating available";
+        var newsMediamediaBiasScore =
+          data.data.mediaBiasScore || "No score available";
+
+        // formatting output
+        if (newsResultSummary.toLowerCase() === "AI-generated") {
+          newsResultSummary = "Ai-Generated";
+        } else {
+          newsResultSummary = "Human-written";
+        }
+
+        // Display the data on the index.html page
+        const newsResultContainer = document.getElementById(
+          "news-result-container"
+        );
+        if (newsResultContainer) {
+          newsResultContainer.innerHTML = `
+            <div class="result-card ${
+              newsResultSummary === "Ai-Generated" ? "safe" : "unsafe"
+            }">
+              <img src="scripts/news-detection-results/${
+                newsResultSummary === "Ai-Generated"
+                  ? "result-aigenerated.png"
+                  : "result-real.png"
+              }" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+              <p>${newsResultSummary}</p>
+              <p>Confidence Score: ${newsConfidenceScore}</p>
+              <p>Media Bias Rating: ${newsMediaBiasRating}</p>
+              <p>Media Bias Score: ${newsMediamediaBiasScore}</p>
+            </div>
+            `;
+        }
       })
       .catch((error) => {
         console.error("Error checking news:", error);
