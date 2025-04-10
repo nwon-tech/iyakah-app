@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   // Tab switching functionality
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabPanes = document.querySelectorAll(".tab-pane");
@@ -19,40 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
       hideAllResults();
     });
   });
-
-  // document.addEventListener("DOMContentLoaded", function () {
-  //   const mediaNames = []; // This list will be populated from script.js
-  //   const input = document.getElementById("media-name");
-  //   const autocompleteList = document.getElementById("autocomplete-list");
-
-  //   input.addEventListener("input", function () {
-  //     const query = this.value.toLowerCase();
-  //     autocompleteList.innerHTML = ""; // Clear previous suggestions
-
-  //     if (!query) return;
-
-  //     const matches = mediaNames.filter((name) =>
-  //       name.toLowerCase().includes(query)
-  //     );
-
-  //     matches.forEach((match) => {
-  //       const item = document.createElement("button");
-  //       item.className = "list-group-item list-group-item-action";
-  //       item.textContent = match;
-  //       item.addEventListener("click", function () {
-  //         input.value = match;
-  //         autocompleteList.innerHTML = ""; // Clear suggestions
-  //       });
-  //       autocompleteList.appendChild(item);
-  //     });
-  //   });
-
-  //   document.addEventListener("click", function (e) {
-  //     if (e.target !== input) {
-  //       autocompleteList.innerHTML = ""; // Close suggestions when clicking outside
-  //     }
-  //   });
-  // });
 
   // Option tabs for Fake News Detector
   const optionTabs = document.querySelectorAll(".option-tab");
@@ -206,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fake News Detector functionality
   const newsInput = document.getElementById("news-input");
   const checkNewsButton = document.getElementById("check-news");
-  const mediaInput = document.getElementById("media-name");
+  const mediaInput = document.getElementById("media-input");
 
   checkNewsButton.addEventListener("click", () => {
     const newsContent = newsInput.value.trim();
@@ -359,40 +324,38 @@ function hideAllResults() {
 
 let items = [];
 
-fetch('scripts/data.json')
-  .then(response => response.json())
-  .then(data => {
+fetch("scripts/data.json")
+  .then((response) => response.json())
+  .then((data) => {
     items = data;
   });
 
-const input = document.getElementById('autocomplete-input');
-const resultsList = document.getElementById('autocomplete-results');
+const input = document.getElementById("media-input");
+const resultsList = document.getElementById("autocomplete-results");
 
-input.addEventListener('input', function () {
+input.addEventListener("input", function () {
   const query = this.value.toLowerCase();
-  resultsList.innerHTML = '';
+  resultsList.innerHTML = "";
 
   if (query.length === 0) return;
 
   const matches = items
-    .filter(item =>
-      item.site_name.toLowerCase().startsWith(query)
-    )
+    .filter((item) => item.site_name.toLowerCase().startsWith(query))
     .slice(0, 10); // Limit to 10 suggestions
 
-  matches.forEach(match => {
-    const li = document.createElement('li');
+  matches.forEach((match) => {
+    const li = document.createElement("li");
     li.textContent = match.site_name;
-    li.addEventListener('click', () => {
+    li.addEventListener("click", () => {
       input.value = match.site_name;
-      resultsList.innerHTML = '';
+      resultsList.innerHTML = "";
     });
     resultsList.appendChild(li);
   });
 
-  document.addEventListener('click', function (event) {
+  document.addEventListener("click", function (event) {
     if (!resultsList.contains(event.target) && event.target !== input) {
-      resultsList.innerHTML = ''; // Clear results when clicking outside
+      resultsList.innerHTML = ""; // Clear results when clicking outside
     }
   });
 });
