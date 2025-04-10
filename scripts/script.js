@@ -306,8 +306,10 @@ function handleFileSelect(file) {
         const formData = new FormData();
         formData.append("image", file);
 
+        console.log("Image sent: ", formData)
+
         // Send the image to the Java backend
-        fetch("http://your-java-backend-url/api/upload", {
+        fetch("https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByImage", {
           method: "POST",
           body: formData,
         })
@@ -319,7 +321,42 @@ function handleFileSelect(file) {
           })
           .then((data) => {
             console.log("Response from backend:", data);
-            alert("Image uploaded successfully!");
+
+            // seperate the result into variables
+            var imageResultSummary =
+              data.data.resultSummary || "No result available";
+            var imageConfidenceScore = data.data.confidenceScore || "No score available";
+
+            // formatting output
+            if (imageResultSummary === "Real Image") {
+              imageResultSummary = "Real Image";
+            }
+            else {
+              imageResultSummary = "AI-Generated Image";
+            } 
+
+            // display the data on the index.html page
+            const imageResultContainer = document.getElementById(
+              "image-result-container"
+            );
+            if (imageResultContainer) {
+              imageResultContainer.innerHTML = `
+                <div class="result-card ${
+                  imageResultSummary === "Real Image" ? "safe" : "unsafe"
+                }">
+                  <img src="scripts/image-detection-result/${
+                    imageResultSummary === "Real Image"
+                      ? "result-real.png"
+                      : "result-aigenerated.png"
+                  }" alt="${imageResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                  <p>${imageResultSummary}</p>
+                  <p>Confidence Score: ${imageConfidenceScore}</p>
+                  <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
+                </div>
+                `;
+            }
+
+
           })
           .catch((error) => {
             console.error("Error uploading image:", error);
