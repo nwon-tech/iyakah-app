@@ -136,9 +136,11 @@
                 id="autocomplete-input" 
                 autocomplete="off" />
                 <ul id="autocomplete-results"></ul>
-                <br\>
+                <!-- do not remove, line break purposes -->
+                <p></p>
+
                 <p>Article Text</p>
-                <div class="option-content active" id="text-option">
+                
                   <textarea
                     id="news-input"
                     class="input-field textarea"
@@ -148,7 +150,7 @@
                   <button class="btn btn-primary" id="check-news">
                     Analyze Text
                   </button>
-                </div>
+                
                 <div class="result-container" id="result-container"></div>
                 <!-- <div class="option-content" id="url-option">
                   <input
@@ -235,7 +237,7 @@
         <p class="mt-3">&copy; TM08. All rights reserved.</p>
       </div>
     </footer>
-    <script src="middleware.js"></script>
-    <script src="./scripts/script.js"></script>
+    <script type="module" src="middleware.js"></script>
+    <script type="module" src="./scripts/script.js"></script>
   </body>
 </html>

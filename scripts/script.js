@@ -359,7 +359,7 @@ function hideAllResults() {
 
 let items = [];
 
-fetch('data.json')
+fetch('scripts/data.json')
   .then(response => response.json())
   .then(data => {
     items = data;
@@ -388,5 +388,11 @@ input.addEventListener('input', function () {
       resultsList.innerHTML = '';
     });
     resultsList.appendChild(li);
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!resultsList.contains(event.target) && event.target !== input) {
+      resultsList.innerHTML = ''; // Clear results when clicking outside
+    }
   });
 });

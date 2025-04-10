@@ -435,4 +435,40 @@ body {
   color: #90caf9;
 }
 
+#autocomplete-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
 
+#autocomplete-results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  position: absolute;
+  z-index: 1000;
+}
+
+#autocomplete-results li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#autocomplete-results li:hover {
+  background-color: #f0f0f0;
+}
+
+p + p {
+  margin-top: 10px;
+}
