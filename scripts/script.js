@@ -99,9 +99,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // data.data.resultSummary is the expected format for the result summary
           // data.data.confidenceScore is the expected format for the confidence score
-          var websiteResultSummary = data.data.resultSummary || "No result available";
+          var websiteResultSummary =
+            data.data.resultSummary || "No result available";
           var websiteConfidenceScore =
             data.data.confidenceScore || "No score available";
+
+          // websiteLogId to check for dynamic update
+          var websiteLogId = data.data.logId || "No log ID available";
+
+          // urlResult
+          var googleResult = data.data.urlResult.googleResult || "No result available";
+          var officialResults = data.data.urlResult.officialResults || "No result available";
+          var sslCaResult = data.data.urlResult.sslCaResult || "No result available";
+          var sslValidityResult = data.data.urlResult.sslValidityResult || "No result available";
+          var sslKeyResult = data.data.urlResult.sslKeyResult || "No result available";
 
           // formatting output
           if (websiteResultSummary.toLowerCase() === "safe website") {
@@ -115,18 +126,25 @@ document.addEventListener("DOMContentLoaded", () => {
             "website-result-container"
           );
 
+          // <img src="scripts/website-detection-result/${
+          //   websiteResultSummary === "Safe Website"
+          //     ? "result-trustworthy.png"
+          //     : "result-highrisk.png"
+          // }" alt="${websiteResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+          //  <p>${websiteResultSummary}</p>
+
           if (websiteResultContainer) {
             websiteResultContainer.innerHTML = `
               <div class="result-card ${
                 websiteResultSummary === "Safe Website" ? "safe" : "unsafe"
               }">
-              <img src="scripts/website-detection-result/${
-                websiteResultSummary === "Safe Website"
-                  ? "result-trustworthy.png"
-                  : "result-highrisk.png"
-              }" alt="${websiteResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-              <p>${websiteResultSummary}</p>
+              <p>Log ID: ${websiteLogId}</p>
               <p>Confidence Score: ${websiteConfidenceScore}</p>
+              <p>Google Result: ${googleResult}</p>
+              <p>Official Results: ${officialResults}</p>
+              <p>SSL CA Result: ${sslCaResult}</p>
+              <p>SSL Validity Result: ${sslValidityResult}</p>
+              <p>SSL Key Result: ${sslKeyResult}</p>
               <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
             </div>
             `;
@@ -306,13 +324,16 @@ function handleFileSelect(file) {
         const formData = new FormData();
         formData.append("image", file);
 
-        console.log("Image sent: ", formData)
+        console.log("Image sent: ", formData);
 
         // Send the image to the Java backend
-        fetch("https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByImage", {
-          method: "POST",
-          body: formData,
-        })
+        fetch(
+          "https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByImage",
+          {
+            method: "POST",
+            body: formData,
+          }
+        )
           .then((response) => {
             if (!response.ok) {
               throw new Error("Failed to upload image");
@@ -325,20 +346,22 @@ function handleFileSelect(file) {
             // seperate the result into variables
             var imageResultSummary =
               data.data.resultSummary || "No result available";
-            var imageConfidenceScore = data.data.confidenceScore || "No score available";
             var imageCaptureDate = data.data.captureDate || "No date available";
             var imageCaptureLocation =
               data.data.location || "No location available";
-            var imageCameraModel = data.data.cameraModel || "No model available";
+            var imageCameraModel =
+              data.data.cameraModel || "No model available";
+
+            // logID to check for dynamic update
+            var imagelogId = data.data.logId || "No log ID available";
 
             // formatting output
             if (imageResultSummary === "Real Image") {
               imageResultSummary = "Real Image";
-            }
-            else {
+            } else {
               imageResultSummary = "AI-Generated Image";
-            } 
-            
+            }
+
             // display the data on the index.html page
             const imageResultContainer = document.getElementById(
               "image-result-container"
@@ -354,7 +377,7 @@ function handleFileSelect(file) {
                       : "result-aigenerated.png"
                   }" alt="${imageResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
                   <p>${imageResultSummary}</p>
-                  <p>Confidence Score: ${imageConfidenceScore}</p>
+                  <p>LogID: ${imagelogId}</p>
                   <p>Capture Date: ${imageCaptureDate}</p>
                   <p>Capture Location: ${imageCaptureLocation}</p>
                   <p>Camera Model: ${imageCameraModel}</p>
@@ -362,8 +385,6 @@ function handleFileSelect(file) {
                 </div>
                 `;
             }
-
-
           })
           .catch((error) => {
             console.error("Error uploading image:", error);
