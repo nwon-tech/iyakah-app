@@ -108,11 +108,16 @@ document.addEventListener("DOMContentLoaded", () => {
           var websiteLogId = data.data.logId || "No log ID available";
 
           // urlResult
-          var googleResult = data.data.urlResult.googleResult || "No result available";
-          var officialResults = data.data.urlResult.officialResults || "No result available";
-          var sslCaResult = data.data.urlResult.sslCaResult || "No result available";
-          var sslValidityResult = data.data.urlResult.sslValidityResult || "No result available";
-          var sslKeyResult = data.data.urlResult.sslKeyResult || "No result available";
+          var googleResult =
+            data.data.urlResult.googleResult || "No result available";
+          var officialResults =
+            data.data.urlResult.officialResults || "No result available";
+          var sslCaResult =
+            data.data.urlResult.sslCaResult || "No result available";
+          var sslValidityResult =
+            data.data.urlResult.sslValidityResult || "No result available";
+          var sslKeyResult =
+            data.data.urlResult.sslKeyResult || "No result available";
 
           // formatting output
           if (websiteResultSummary.toLowerCase() === "safe website") {
@@ -272,6 +277,8 @@ const uploadArea = document.getElementById("upload-area");
 const fileInput = document.getElementById("image-upload");
 const analyzeButton = document.getElementById("analyze-image");
 
+let file; // Global file variable to store the selected image
+
 uploadArea.addEventListener("click", () => {
   fileInput.click();
 });
@@ -292,27 +299,31 @@ uploadArea.addEventListener("drop", (e) => {
   // handle image object for analysis
   if (e.dataTransfer.files.length) {
     fileInput.files = e.dataTransfer.files;
-    handleFileSelect(e.dataTransfer.files[0]);
+    file = e.dataTransfer.files[0]; // Update the global file variable
+    handleFileSelect(file);
   }
 });
 
-fileInput.addEventListener("change", () => {
-  if (fileInput.files.length) {
-    handleFileSelect(fileInput.files[0]);
+// Single event listener for file input change
+fileInput.addEventListener("change", (event) => {
+  if (event.target.files.length) {
+    file = event.target.files[0]; // Update the global file variable
+    console.log("File updated:", file);
+    handleFileSelect(file);
   }
 });
 
-function handleFileSelect(file) {
-  if (file.type.startsWith("image/")) {
+function handleFileSelect(selectedFile) {
+  if (selectedFile.type.startsWith("image/")) {
     // Display the selected image
     const reader = new FileReader();
     reader.onload = function (e) {
       uploadArea.innerHTML = `
           <img src="${e.target.result}" alt="Selected image" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-          <p>${file.name}</p>
+          <p>${selectedFile.name}</p>
         `;
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(selectedFile);
 
     // Enable the analyze button
     analyzeButton.disabled = false;
@@ -321,10 +332,19 @@ function handleFileSelect(file) {
     if (!analyzeButton.hasEventListener) {
       analyzeButton.hasEventListener = true;
       analyzeButton.addEventListener("click", () => {
-        const formData = new FormData();
-        formData.append("image", file);
+        // Clear the previous results
+        const imageResultContainer = document.getElementById(
+          "image-result-container"
+        );
 
-        console.log("Image sent: ", formData);
+        if (imageResultContainer) {
+          imageResultContainer.innerHTML = "";
+        }
+
+        const formData = new FormData();
+        formData.append("image", file); // Using the global file variable
+
+        console.log("Image sent: ", file.name); // Log the file name being sent
 
         // Send the image to the Java backend
         fetch(
@@ -343,47 +363,42 @@ function handleFileSelect(file) {
           .then((data) => {
             console.log("Response from backend:", data);
 
-            // seperate the result into variables
-            var imageResultSummary =
+            // Extract the result data
+            const imageResultSummary =
               data.data.resultSummary || "No result available";
-            var imageCaptureDate = data.data.captureDate || "No date available";
-            var imageCaptureLocation =
+            const imagelogId = data.data.logId || "No log ID available";
+            const imageCaptureDate =
+              data.data.captureDate || "No date available";
+            const imageCaptureLocation =
               data.data.location || "No location available";
-            var imageCameraModel =
+            const imageCameraModel =
               data.data.cameraModel || "No model available";
 
-            // logID to check for dynamic update
-            var imagelogId = data.data.logId || "No log ID available";
+            // Formatting output
+            const resultText =
+              imageResultSummary === "Real Image"
+                ? "Real Image"
+                : "AI-Generated Image";
+            const resultClass =
+              imageResultSummary === "Real Image" ? "safe" : "unsafe";
+            const resultImage =
+              imageResultSummary === "Real Image"
+                ? "result-real.png"
+                : "result-aigenerated.png";
 
-            // formatting output
-            if (imageResultSummary === "Real Image") {
-              imageResultSummary = "Real Image";
-            } else {
-              imageResultSummary = "AI-Generated Image";
-            }
-
-            // display the data on the index.html page
-            const imageResultContainer = document.getElementById(
-              "image-result-container"
-            );
+            // Display the data on the index.html page
             if (imageResultContainer) {
               imageResultContainer.innerHTML = `
-                <div class="result-card ${
-                  imageResultSummary === "Real Image" ? "safe" : "unsafe"
-                }">
-                  <img src="scripts/image-detection-result/${
-                    imageResultSummary === "Real Image"
-                      ? "result-real.png"
-                      : "result-aigenerated.png"
-                  }" alt="${imageResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-                  <p>${imageResultSummary}</p>
+                <div class="result-card ${resultClass}">
+                  <img src="scripts/image-detection-result/${resultImage}" alt="${resultText}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                  <p>${resultText}</p>
                   <p>LogID: ${imagelogId}</p>
                   <p>Capture Date: ${imageCaptureDate}</p>
                   <p>Capture Location: ${imageCaptureLocation}</p>
                   <p>Camera Model: ${imageCameraModel}</p>
                   <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
                 </div>
-                `;
+              `;
             }
           })
           .catch((error) => {
@@ -404,6 +419,7 @@ function resetUploadArea() {
       <p>Drag & drop an image or click to browse</p>
     `;
   fileInput.value = "";
+  file = null; // Clear the global file variable
   analyzeButton.disabled = true;
 }
 
