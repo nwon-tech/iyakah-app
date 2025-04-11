@@ -199,7 +199,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!newsContent) {
       alert("Please enter news content to check.");
       return;
+    } else {
+      checkNewsButton.disabled = true;
+      checkNewsButton.textContent = "Checking...";
     }
+
     // Prepare the data for API submission
     const formData = JSON.stringify({
       text: newsContent,
@@ -266,6 +270,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       })
       .catch((error) => {
+        // Reset button state
+        checkNewsButton.disabled = false;
+        checkNewsButton.textContent = "Check";
+
         console.error("Error checking news:", error);
         alert("Error checking news. Please try again.");
       });
@@ -332,6 +340,9 @@ function handleFileSelect(selectedFile) {
     if (!analyzeButton.hasEventListener) {
       analyzeButton.hasEventListener = true;
       analyzeButton.addEventListener("click", () => {
+        analyzeButton.disabled = true;
+        analyzeButton.textContent = "Checking...";
+
         // Clear the previous results
         const imageResultContainer = document.getElementById(
           "image-result-container"
@@ -400,9 +411,15 @@ function handleFileSelect(selectedFile) {
                 </div>
               `;
             }
+
+            analyzeButton.disabled = false;
+            analyzeButton.textContent = "Check";
+            
           })
           .catch((error) => {
             console.error("Error uploading image:", error);
+            analyzeButton.disabled = false;
+            analyzeButton.textContent = "Check";
             alert("Error uploading image. Please try again.");
           });
       });
@@ -420,7 +437,9 @@ function resetUploadArea() {
     `;
   fileInput.value = "";
   file = null; // Clear the global file variable
-  analyzeButton.disabled = true;
+  
+  analyzeButton.disabled = false;
+  analyzeButton.textContent = "Check";
 }
 
 // Function to hide all result cards
