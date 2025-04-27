@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Helvetica", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 /* nav bar */
@@ -29,6 +29,12 @@
   display: flex;
   gap: 40px;
   color: black;
+}
+
+/* remove the blue underline for links */
+.nav-links > li > a{
+    text-decoration: none;
+    color: inherit;
 }
 
 .nav-item {
@@ -87,10 +93,10 @@
   color: #666;
 }
 
-#video-playing{
-    height: 360px;
-    width: fit-content;
-    overflow: hidden;
+#video-playing {
+  height: 360px;
+  width: fit-content;
+  overflow: hidden;
 }
 
 /* carousel */
