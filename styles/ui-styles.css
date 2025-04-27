@@ -32,9 +32,9 @@
 }
 
 /* remove the blue underline for links */
-.nav-links > li > a{
-    text-decoration: none;
-    color: inherit;
+.nav-links > li > a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .nav-item {
@@ -95,7 +95,7 @@
 
 #video-playing {
   height: 360px;
-  width: fit-content;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -107,7 +107,7 @@
   text-align: center;
 }
 
-.carousel-container {
+.carousel-section {
   overflow: hidden;
   position: relative;
 }
@@ -119,24 +119,6 @@
 
 .carousel-item.active {
   display: block;
-}
-
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-.carousel-btn.left {
-  left: 10px;
-}
-
-.carousel-btn.right {
-  right: 10px;
 }
 
 /* info */
@@ -158,6 +140,13 @@
 
 .info-img {
   flex: 1;
+}
+
+.info-img > p {
+  text-align: center;
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  font-size: 24px;
 }
 
 .info-img img {
@@ -214,6 +203,17 @@
 
 .card h3 {
   margin-bottom: 15px;
+}
+
+/* added next section, applicable to Get Started too */
+.landing-next-section {
+  margin-top: 60px;
+  font-size: 18px;
+}
+
+.landing-next-section > a {
+  text-decoration: none;
+  color: #000;
 }
 
 /* footer */
