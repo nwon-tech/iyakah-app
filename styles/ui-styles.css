@@ -162,22 +162,33 @@
   text-align: center;
 }
 
+.resources h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
 .resource-gallery {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
   margin-top: 40px;
+  text-decoration: none;
 }
 
 .resource-gallery a img {
-  width: 200px;
+  width: 428px;
   border-radius: 10px;
   transition: transform 0.3s;
 }
 
 .resource-gallery a img:hover {
   transform: scale(1.05);
+}
+
+.resource-gallery > a > p {
+  color: white;
 }
 
 /* why iyakah */
