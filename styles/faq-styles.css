@@ -1,0 +1,35 @@
+.faq-section {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-section .faq-card {
+    padding: 1rem;
+    margin-left: calc(var(--index, 0) * 10px);
+}
+
+h2{
+    font-size: 3rem;
+    text-align: right;
+}
+
+.next-section{
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: 18px;
+  }
+  
+  .next-section a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .faq-cat {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+  }

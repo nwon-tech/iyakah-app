@@ -69,5 +69,9 @@
   text-align: center;
   margin-bottom: 60px;
   font-size: 18px;
+}
+
+.next-section a {
   text-decoration: none;
+  color: black;
 }
