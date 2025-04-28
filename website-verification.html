@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      defer
+      src="/_vercel/insights/script.js"
+      onerror="console.error('Insights script failed to load.')"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- general font for the page -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- dancing script font for the header styling -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- alamri header -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Iyakah - Discover the Truth</title>
+    <meta name="description" content="Discover the truth." />
+
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="./styles/styles.css" />
+
+    <!-- website verification -->
+    <link rel="stylesheet" href="./styles/web-styles.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <div class="nav-logo">IYAKAH</div>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item">
+          About
+          <ul class="dropdown">
+            <!-- introduction link -->
+            <li><a href="./introduction.html">Introduction</a></li>
+            <!-- open data link -->
+            <li><a href="./open-data.html">Open Data</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          Support
+          <ul class="dropdown">
+            <!-- FAQ link -->
+            <li><a href="./faq.html">FAQ</a></li>
+            <!-- search ranking link -->
+            <li><a href="./search-ranking.html">Search Ranking</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- website verification  -->
+    <main class="container">
+      <div class="tab-pane" id="tab1">
+        <h3>Check Website Legitimacy</h3>
+
+        <p id="caption">Check website security and credibility</p>
+
+        <p id="description">
+          Enter a URL to verify the legitimacy of a website and check for
+          potential security issues.
+        </p>
+        <div class="input-group">
+          <input
+            id="website-input"
+            type="url"
+            placeholder="Enter website URL (e.g., https://example.com)"
+            class="input-field"
+          />
+          <button class="btn btn-primary" id="check-website">Analyse</button>
+        </div>
+        <div class="result-container" id="website-result-container"></div>
+      </div>
+    </main>
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <p>IYAKAH</p>
+          <p>Your number one fraud-detection partner</p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h4>Products and Services</h4>
+            <a href="./website-verification.html">Website Verification</a>
+            <a href="./image-verification.html">Image Verification</a>
+            <a href="./news-verification.html">News Verification</a>
+            <a href="./resources.html">Resources</a>
+          </div>
+          <div>
+            <h4>About Us</h4>
+            <a href="#">Who we are</a>
+            <a href="#">Our Story</a>
+          </div>
+          <div>
+            <h4>Help & Support</h4>
+            <a href="./faq.html">FAQ</a>
+            <a href="#">Support Team</a>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="footer-bottom">
+        <p>© 2025 IYAKAH. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="middleware.js"></script>
+    <script type="module" src="./scripts/script.js"></script>
+  </body>
+</html>

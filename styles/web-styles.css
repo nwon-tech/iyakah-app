@@ -1,0 +1,100 @@
+.tab-pane {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.tab-pane.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-pane h3 {
+    font-family: 'Almarao', sans-serif;
+  font-weight: 700;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.tab-pane p {
+  color: #666;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Input Fields */
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.input-field {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* button */
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: black;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:disabled {
+  background-color: #90caf9;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #1976d2;
+  border: 1px solid #1976d2;
+}
+
+.btn-outline:hover {
+  background-color: rgba(25, 118, 210, 0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
