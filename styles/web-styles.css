@@ -33,6 +33,14 @@
   margin-bottom: 1.5rem;
 }
 
+#caption{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: black;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
 /* Input Fields */
 .input-group {
   display: flex;
