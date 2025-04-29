@@ -414,7 +414,6 @@ function handleFileSelect(selectedFile) {
 
             analyzeButton.disabled = false;
             analyzeButton.textContent = "Check";
-            
           })
           .catch((error) => {
             console.error("Error uploading image:", error);
@@ -437,7 +436,7 @@ function resetUploadArea() {
     `;
   fileInput.value = "";
   file = null; // Clear the global file variable
-  
+
   analyzeButton.disabled = false;
   analyzeButton.textContent = "Check";
 }
