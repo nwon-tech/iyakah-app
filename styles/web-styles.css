@@ -20,10 +20,11 @@
 }
 
 .tab-pane h3 {
-    font-family: 'Almarao', sans-serif;
+  margin-top: 2rem;
+  font-family: "Almarao", sans-serif;
   font-weight: 700;
   font-size: 4rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   color: #333;
 }
 
@@ -33,12 +34,12 @@
   margin-bottom: 1.5rem;
 }
 
-#caption{
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: black;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
+#caption {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: black;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
 }
 
 /* Input Fields */
@@ -98,11 +99,297 @@
 
 .btn-outline {
   background-color: transparent;
-  color: #1976d2;
-  border: 1px solid #1976d2;
+  color: black;
+  border: 1px solid black;
 }
 
 .btn-outline:hover {
   background-color: rgba(25, 118, 210, 0.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* return value */
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.info-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 4 6px 12px rgba(0, 0, 0, 0.08);
+  width: 200px;
+  color: #b4aeb8;
+  font-family: "Inter", sans-serif;
+}
+
+.info-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.info-icon i {
+  width: 32px;
+  height: 32px;
+  stroke-width: 1.5;
+  margin-bottom: 0.25rem;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.result-container > p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #333;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* feedback */
+
+.hero-feedback {
+  background-color: #fdfdfd;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.feedback-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.feedback-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: right;
+}
+
+.feedback-row {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin: 1.5rem 0;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.feedback-label {
+  font-weight: 600;
+  min-width: 200px;
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.thumb-btn {
+  background-color: black;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.thumb-btn:hover {
+  transform: scale(1.15);
+}
+
+.thumb-btn i {
+  color: black;
+  width: 24px;
+  height: 24px;
+  stroke-width: 2;
+}
+
+#feedback-text {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 250px;
+  font-size: 0.95rem;
+}
+
+.submit-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #333;
+}
+
+.thumb-btn.active i {
+  stroke: #007bff;
+  fill: #007bff;
+}
+
+/* education */
+.website-education {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.website-education section h2 {
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.education-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+/* Responsive sizes: adjust these to control column widths */
+.text-container-left {
+  flex: 1;
+  min-width: 200px;
+}
+
+.image-container {
+  flex: 1.5;
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.text-container-right {
+  flex: 2;
+  min-width: 250px;
+}
+
+/* container 2 */
+.text-container-left-2 {
+  flex: 1.2;
+  min-width: 200px;
+}
+
+.image-container-2 {
+  flex: 1.5;
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+}
+
+.text-container-right-2 {
+  flex: 0.8;
+  min-width: 250px;
+}
+
+/* container 3 */
+
+.text-container-left-3 {
+  flex: 1.3;
+  min-width: 200px;
+}
+
+.image-container-3 {
+  flex: 1.5;
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+}
+
+.text-container-righ-3 {
+  flex: 0.7;
+  min-width: 250px;
+}
+
+/* Common styles */
+.education-label {
+  font-weight: 600;
+  font-size: 1.4rem;
+  display: block;
+  margin-bottom: 3.5rem;
+}
+
+.education-text {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Responsive stacking for smaller screens */
+@media screen and (max-width: 768px) {
+  .education-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text-container-left,
+  .text-container-right,
+  .image-container {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+
+/* next section */
+.next-section-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  font-size: 18px;
+}
+
+.next-section > .next > label{
+  display: flex;
+  vertical-align: middle;
+}
+
+.section-options {
+  display: flex;
+  flex-flow: column;
+  margin: 0 1rem;
+}
+
+.section-options span {
+  text-align: left;
+}
+
+.section-options span > a{
+  text-decoration: none;
+  color: black;
 }

@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (websiteUrl) {
       // Show loading state
       checkWebsiteButton.disabled = true;
-      checkWebsiteButton.textContent = "Checking...";
+      checkWebsiteButton.textContent = "Analysing...";
 
       // Make sure URL has a protocol, add http:// if none exists
       let processedUrl = websiteUrl;
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => {
           // Reset button state
           checkWebsiteButton.disabled = false;
-          checkWebsiteButton.textContent = "Check";
+          checkWebsiteButton.textContent = "Analyse";
 
           if (!response.ok) {
             console.error("Response status:", response.status);
@@ -126,39 +126,153 @@ document.addEventListener("DOMContentLoaded", () => {
             websiteResultSummary = "Unsafe Website";
           }
 
-          // Display the data on the index.html page
-          const websiteResultContainer = document.getElementById(
-            "website-result-container"
-          );
+          var safetyRating = "";
+          var imgRating = "";
 
-          // <img src="scripts/website-detection-result/${
-          //   websiteResultSummary === "Safe Website"
-          //     ? "result-trustworthy.png"
-          //     : "result-highrisk.png"
-          // }" alt="${websiteResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-          //  <p>${websiteResultSummary}</p>
+          if (websiteConfidenceScore < 50) {
+            safetyRating = "High Risk";
+            imgRating =
+              "./scripts/website-detection-result/website-unsafe-icon.png";
+          } else if (websiteConfidenceScore < 70) {
+            safetyRating = "Doubtful";
+            imgRating =
+              "./scripts/website-detection-result/website-doubtful-icon.png";
+          } else {
+            safetyRating = "Safe";
+            imgRating =
+              "./scripts/website-detection-result/website-safe-icon.png";
+          }
+
+          // Display the data on the index.html page
+          const websiteResultContainer =
+            document.getElementById("info-card-website");
 
           if (websiteResultContainer) {
             websiteResultContainer.innerHTML = `
-              <div class="result-card ${
-                websiteResultSummary === "Safe Website" ? "safe" : "unsafe"
-              }">
-              <p>Log ID: ${websiteLogId}</p>
-              <p>Confidence Score: ${websiteConfidenceScore}</p>
-              <p>Google Result: ${googleResult}</p>
-              <p>Official Results: ${officialResults}</p>
-              <p>SSL CA Result: ${sslCaResult}</p>
-              <p>SSL Validity Result: ${sslValidityResult}</p>
-              <p>SSL Key Result: ${sslKeyResult}</p>
-              <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <img src="${imgRating}" alt="${safetyRating}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                <span class="label">${safetyRating}</span>
+              </div>
+              <div class="info-value">${websiteConfidenceScore}</div>
             </div>
+            <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
+
+            <div>
+            <section class="hero-feedback">
+              <div class="feedback-container">
+                <h2>Your Feedback Matters</h2>
+
+                <div class="feedback-row">
+                  <label class="feedback-label">Was this result helpful?</label>
+                  <div class="feedback-buttons">
+                    <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
+                      👍🏻
+                    </button>
+                    <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
+                      👎🏻
+                    </button>
+                  </div>
+                </div>
+
+                <div class="feedback-row">
+                  <label class="feedback-label">Tell us more (optional)</label>
+                  <input type="text" id="feedback-text" placeholder="Please enter your feedback" />
+                  <button class="submit-btn">Submit</button>
+                </div>
+              </div>
+            </section>
+            </div>
+
+            <div class="website-education">
+              <section>
+                <h2>How to Spot a Phishing or Scam Website</h2>
+
+                <div class="education-row">
+                  <div class="text-container-left">
+                    <label class="education-label">Check the URL carefully</label>
+                    <p class="education-text">
+                      Avoid websites with strange spellings, extra characters, or unfamiliar
+                      domain extensions (like .xyz, .top, etc.).
+                    </p>
+                  </div>
+                  <div class="image-container">
+                    <img
+                      src="./scripts/website-detection-result/website-education-row1.jpg"
+                      alt="URL Check"
+                    />
+                  </div>
+                  <div class="text-container-right">
+                    <label class="education-label"
+                      >Never enter sensitive info on suspicious pages</label
+                    >
+                    <p class="education-text">
+                      Avoid giving your passwords, ID numbers, or payment details unless
+                      you’re 100% sure the site is legitimate.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="education-row">
+                  <div class="text-container-left-2">
+                    <label class="education-label"
+                      >Watch for urgent messages or threats</label
+                    >
+                    <p class="education-text">
+                      Scam sites often try to scare you with fake deadlines or account
+                      closures.
+                    </p>
+                  </div>
+                  <div class="image-container-2">
+                    <img
+                      src="./scripts/website-detection-result/website-education-row2.png"
+                      alt="URL Check"
+                    />
+                  </div>
+                  <div class="text-container-right-2">
+                    <label class="education-label">Look for HTTPS & the padlock icon</label>
+                    <p class="education-text">
+                      Legitimate sites use secure connections. No padlock = risky.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="education-row">
+                  <div class="text-container-left-3">
+                    <label class="education-label"
+                      >Check for spelling & design errors</label
+                    >
+                    <p class="education-text">
+                      Poor grammar, weird formatting, or low-quality images can be a red
+                      flag.
+                    </p>
+                  </div>
+                  <div class="image-container-3">
+                    <img
+                      src="./scripts/website-detection-result/website-education-row3.jpg"
+                      alt="URL Check"
+                    />
+                  </div>
+                  <div class="text-container-right-3">
+                    <label class="education-label"
+                      >Don’t trust “too good to be true” offers</label
+                    >
+                    <p class="education-text">
+                      If it promises huge rewards for little effort, it’s probably a scam.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </div>
+
             `;
           }
         })
         .catch((error) => {
           // Reset button state
           checkWebsiteButton.disabled = false;
-          checkWebsiteButton.textContent = "Check";
+          checkWebsiteButton.textContent = "Analyse";
 
           console.error("Error checking website:", error);
 
@@ -491,4 +605,21 @@ input.addEventListener("input", function () {
       resultsList.innerHTML = ""; // Clear results when clicking outside
     }
   });
+});
+
+// feedback form
+feather.replace();
+
+// Optional: toggle button state
+const up = document.getElementById("thumb-up");
+const down = document.getElementById("thumb-down");
+
+up.addEventListener("click", () => {
+  up.classList.add("active");
+  down.classList.remove("active");
+});
+
+down.addEventListener("click", () => {
+  down.classList.add("active");
+  up.classList.remove("active");
 });
