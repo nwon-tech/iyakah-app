@@ -159,6 +159,40 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 
+            <table>
+              <caption>
+                Google Safe Service Results
+              </caption>
+
+              <colgroup>
+                <col style="width: 30%" />
+                <col style="width: 70%" />
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>Results</td>
+                  <td>${googleResult}</td>
+                </tr>
+                <tr>
+                  <td>Rating by Agencies</td>
+                  <td>${officialResults}</td>
+                </tr>
+                <tr>
+                  <td>SSL Certificate</td>
+                  <td>${sslCaResult}</td>
+                </tr>
+                <tr>
+                  <td>SSL Validity</td>
+                  <td>${sslValidityResult}</td>
+                </tr>
+                <tr>
+                  <td>SSL Key</td>
+                  <td>${sslKeyResult}</td>
+                </tr>
+              </tbody>
+            </table>
+
             <div>
             <section class="hero-feedback">
               <div class="feedback-container">

@@ -162,6 +162,39 @@
   color: #333;
   margin-top: 50px;
   margin-bottom: 50px;
+  border-radius: 1.25rem;
+  box-shadow: 4 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* table */
+table {
+  width: 60%;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 12px 20px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  width: -30%;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+caption {
+  caption-side: top;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 /* feedback */
