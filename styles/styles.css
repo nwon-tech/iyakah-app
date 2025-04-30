@@ -73,14 +73,25 @@
 /* hero */
 .hero {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   background-color: white;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.hero-content {
+  z-index: 2;
+  position: relative;
+  color: white;
 }
 
 .hero-content h1 {
   font-size: 3rem;
   font-weight: bold;
+  z-index: 3;
+  position: relative;
 }
 
 .hero-content span {
@@ -97,10 +108,15 @@
   font-family: 'Dancing Script', cursive;
 }
 
+.hero-video {
+  z-index: 1;
+  position: relative;
+}
+
 #video-playing {
   height: 450px;
   width: 100%;
-  opacity: 1;
+  object-fit: cover;
 }
 
 /* carousel */
@@ -148,9 +164,9 @@
 
 .info-img > p {
   text-align: center;
-  font-family: "Dancing Script", cursive;
+  font-family: 'Dancing Script', sans-serif;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 36px;
 }
 
 .info-img img {
