@@ -407,7 +407,7 @@ caption {
   font-size: 18px;
 }
 
-.next-section > .next > label{
+.next-section > .next > label {
   display: flex;
   vertical-align: middle;
 }
@@ -422,7 +422,7 @@ caption {
   text-align: left;
 }
 
-.section-options span > a{
+.section-options span > a {
   text-decoration: none;
   color: black;
 }
