@@ -118,7 +118,6 @@
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 1.25rem;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
 .info-card {
@@ -127,7 +126,7 @@
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 1.25rem;
-  box-shadow: 4 6px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
   width: 200px;
   color: #b4aeb8;
   font-family: "Inter", sans-serif;
@@ -202,7 +201,6 @@ caption {
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  background-color: #f9f9f9;
 }
 
 .website-education section h2 {
@@ -270,13 +268,13 @@ caption {
 }
 
 .image-container-3 {
-  flex: 1.5;
+  flex: 1.2;
   min-width: 250px;
   display: flex;
   justify-content: center;
 }
 
-.text-container-righ-3 {
+.text-container-right-3 {
   flex: 0.7;
   min-width: 250px;
 }
