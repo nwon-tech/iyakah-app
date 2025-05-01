@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IYAKAH - Truth Detection</title>
+    <script
+      defer
+      src="/_vercel/insights/script.js"
+      onerror="console.error('Insights script failed to load.')"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- general font for the page -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- link to alternative styling -->
+    <link rel="stylesheet" href="./styles/alternative-styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="hero" id="hero">
+        <div class="pattern-overlay"></div>
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+          <div class="company-name-container">
+            <span class="company-name" id="company-name">IYAKAH</span>
+            <span class="question-mark" id="question-mark">?</span>
+          </div>
+          <p class="hero-subtitle" id="hero-subtitle">
+            Uncover the truth in a world of digital deception
+          </p>
+
+          <div class="features">
+            <a
+              href="./website-verification.html"
+              class="feature-card"
+              id="feature-1"
+            >
+              <i class="fas fa-globe-americas"></i>
+              <h3>Website Verification</h3>
+              <p>
+                Detect phishing attempts and verify website authenticity in
+                real-time with our advanced security tools.
+              </p>
+            </a>
+
+            <a
+              href="./image-verification.html"
+              class="feature-card"
+              id="feature-2"
+            >
+              <i class="fas fa-camera-retro"></i>
+              <h3>Fake Image Detection</h3>
+              <p>
+                Identify AI-generated and manipulated images with
+                state-of-the-art detection technology.
+              </p>
+            </a>
+
+            <a
+              href="./news-verification.html"
+              class="feature-card"
+              id="feature-3"
+            >
+              <i class="fas fa-balance-scale"></i>
+              <h3>News Bias Detection</h3>
+              <p>
+                Analyse news sources for bias and get a balanced perspective on
+                current events and topics.
+              </p>
+            </a>
+          </div>
+
+          <div class="cta-button" id="cta-button"></div>
+        </div>
+
+        <div class="scroll-indicator" id="scroll-indicator">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </section>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <h2>The Misinformation Crisis</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" data-target="69">0</div>
+          <div class="stat-label">
+            % of Malaysians encounter fake news weekly
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="454">0</div>
+          <div class="stat-label">
+            cases of fraud are caused by deepfakes in 2024
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="2">0</div>
+          <div class="stat-label">Billion RM lost to cybercrime in 2024</div>
+        </div>
+      </div>
+      <caption>
+        Sourced from: The Star, MyCERT Report, NST Malaysia
+      </caption>
+    </section>
+
+    <!-- resources -->
+    <section class="resources">
+      <h2>See It in Action</h2>
+      <div class="resource-gallery">
+        <!-- deepfake -->
+        <a>
+          <iframe
+            loading="lazy"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/6_QX12szXTM?si=DVHeBIf92XUG0Jvm"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </a>
+
+        <a>
+          <iframe
+            loading="lazy"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/ACWNZIkTTBM?si=xm_DejXK-VNlsOr-"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </a>
+
+        <a>
+          <iframe
+            loading="lazy"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/aO858HyFbKI?si=-OXN9-WqM70ivVOm"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </a>
+
+        <a>
+          <iframe
+            loading="lazy"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/6R6-2_8m4Co?si=Dql-d7LWitj1zHtl"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </a>
+      </div>
+
+      <div id="view-more">
+        <span><a href="./quiz.html">VIEW MORE</a></span>
+      </div>
+    </section>
+
+    <!-- why iyakah -->
+    <section class="why-iyakah">
+      <h2>Why Iyakah?</h2>
+      <div class="why-cards">
+        <div class="card">
+          <img src="./styles/media/why-shield.png" alt="shield" />
+          <h3>Comprehensive Safety Testing</h3>
+          <p>
+            Providing end-to-end security analysis of websites, images and news
+            to help build a trustworthy online experience.
+          </p>
+        </div>
+        <div class="card">
+          <img src="./styles/media/why-lightning.png" alt="lightning" />
+          <h3>Fast and Accurate Results</h3>
+          <p>
+            Using AI-powered technology to immediately detect security
+            vulnerabilities across web, images and media.
+          </p>
+        </div>
+        <div class="card">
+          <img src="./styles/media/why-lock.png" alt="lock" />
+          <h3>Data Security</h3>
+          <p>
+            Strict data encryption and privacy protection to safeguard your
+            sensitive information securely.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <p>IYAKAH</p>
+          <p>Your number one fraud-detection partner</p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h4>Products and Services</h4>
+            <a href="./website-verification.html">Website Verification</a>
+            <a href="./image-verification.html">Image Verification</a>
+            <a href="./news-verification.html">News Verification</a>
+            <a href="./resources.html">Resources</a>
+          </div>
+          <div>
+            <h4>About Us</h4>
+            <a href="#">Who we are</a>
+            <a href="#">Our Story</a>
+          </div>
+          <div>
+            <h4>Help & Support</h4>
+            <a href="./faq.html">FAQ</a>
+            <a href="#">Support Team</a>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="footer-bottom">
+        <p>© 2025 IYAKAH. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="middleware.js"></script>
+    <script type="module" src="scripts/alternative-landing.js"></script>
+  </body>
+</html>
