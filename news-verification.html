@@ -446,6 +446,10 @@
               const imgBias =
                 "./scripts/news-detection-results/news-bias-icon.png";
 
+              // media bias potrait
+              const imgMediaBias =
+                "./scripts/news-detection-results/news-media-icon.png";
+
               // Display the data on the index.html page
 
               const newsResultContainer = document.getElementById(
@@ -475,6 +479,14 @@
                       </div>
                       <div class="info-value">${newsBiasScore}%</div>
                     </div>
+
+                    <div class="info-card">
+                      <div class="info-icon">
+                        <img src="${imgMediaBias}" alt="${newsMediaBiasRating}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                        <span class="label">${newsMediaBiasRating}</span>
+                      </div>
+                    </div>
+
                   </div>
 
                   <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
@@ -490,6 +502,8 @@
                       ${biasTableRows}
                     </tbody>
                   </table>
+
+                  <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 
                   <div>
                   <section class="hero-feedback">
