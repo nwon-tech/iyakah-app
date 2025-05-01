@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      defer
+      src="/_vercel/insights/script.js"
+      onerror="console.error('Insights script failed to load.')"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- general font for the page -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- dancing script font for the header styling -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- alamri header -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Iyakah - Discover the Truth</title>
+    <meta name="description" content="Discover the truth." />
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="./styles/styles.css" />
+
+    <!-- fake image -->
+    <link rel="stylesheet" href="./styles/news-styles.css" />
+
+    <!-- Add autocomplete specific CSS -->
+    <style>
+      #autocomplete-results {
+        position: absolute;
+        z-index: 999;
+        background: white;
+        border: 1px solid #ddd;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: none;
+      }
+
+      #autocomplete-results li {
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      #autocomplete-results li:hover {
+        background-color: #f7f7f7;
+      }
+
+      .media-input-container {
+        position: relative;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <div class="nav-logo">IYAKAH</div>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item">
+          About
+          <ul class="dropdown">
+            <!-- introduction link -->
+            <li><a href="./introduction.html">Introduction</a></li>
+            <!-- open data link -->
+            <li><a href="./open-data.html">Open Data</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          Support
+          <ul class="dropdown">
+            <!-- FAQ link -->
+            <li><a href="./faq.html">FAQ</a></li>
+            <!-- search ranking link -->
+            <li><a href="./search-ranking.html">Search Ranking</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- news verification  -->
+    <main class="container">
+      <div class="tab-pane active" id="tab1">
+        <h3>News Bias Detection</h3>
+        <p id="caption">News bias and AI-generated analysis</p>
+
+        <p id="description">
+          Enter news content and we will analyze potential biases, and detect
+          whether the article is AI-generated or human-written
+        </p>
+        <div class="input-options">
+          <div class="option-content active" id="text-option">
+            <p>Article Text</p>
+
+            <textarea
+              id="news-input"
+              class="input-field textarea"
+              placeholder="Please enter news content"
+              required
+            ></textarea>
+
+            <p>Support .txt, .doc, .docx formats or directly paste text</p>
+
+            <!-- do not remove, line break purposes -->
+            <p></p>
+
+            <p>Media Name (Optional):</p>
+            <div class="media-input-container">
+              <input
+                type="text"
+                id="media-input"
+                autocomplete="off"
+                placeholder="Enter media name here..."
+              />
+              <ul id="autocomplete-results"></ul>
+            </div>
+            <div class="button-container">
+              <button class="btn btn-primary" id="check-news">Analyse</button>
+            </div>
+
+            <!-- result output -->
+            <div class="result-container" id="news-result-container"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Section Navigation -->
+      <div class="next-section-options">
+        <div class="next">
+          <label>Next</label>
+        </div>
+        <div class="section-options">
+          <span
+            >->
+            <a href="./website-verification.html"
+              >Fake Website Verification</a
+            ></span
+          >
+          <span
+            >-> <a href="./image-verification.html">AI Image Detection</a></span
+          >
+        </div>
+      </div>
+    </main>
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <p>IYAKAH</p>
+          <p>Your number one fraud-detection partner</p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h4>Products and Services</h4>
+            <a href="./website-verification.html">Website Verification</a>
+            <a href="./image-verification.html">Image Verification</a>
+            <a href="./news-verification.html">News Verification</a>
+            <a href="./resources.html">Resources</a>
+          </div>
+          <div>
+            <h4>About Us</h4>
+            <a href="#">Who we are</a>
+            <a href="#">Our Story</a>
+          </div>
+          <div>
+            <h4>Help & Support</h4>
+            <a href="./faq.html">FAQ</a>
+            <a href="#">Support Team</a>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="footer-bottom">
+        <p>© 2025 IYAKAH. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Add the missing feather icon script -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Load the autocomplete data first -->
+    <script>
+      // Global variable to store media data
+      let mediaItems = [];
+
+      // Fetch data.json before other scripts
+      fetch("./scripts/data.json")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to load data.json");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          mediaItems = data;
+          console.log("Media data loaded:", mediaItems.length, "items");
+        })
+        .catch((error) => {
+          console.error("Error loading media data:", error);
+        });
+    </script>
+
+    <!-- Load the main script after DOM is ready -->
+    <script>
+      // Function to process bias data and create table content
+      function processBiasData(data) {
+        // Check if bias data exists
+        if (
+          !data ||
+          !data.data ||
+          !data.data.textBiasResult ||
+          !data.data.textBiasResult.biased_sentences
+        ) {
+          return '<tr><td colspan="2">No bias data available</td></tr>';
+        }
+
+        const biasedSentences = data.data.textBiasResult.biased_sentences;
+
+        // Group sentences by bias type
+        const biasByType = {};
+
+        // Process each biased sentence
+        biasedSentences.forEach((sentence) => {
+          const biasType = sentence.bias_type;
+
+          // Initialize the array for this bias type if it doesn't exist
+          if (!biasByType[biasType]) {
+            biasByType[biasType] = [];
+          }
+
+          // Add this sentence to its bias type group
+          biasByType[biasType].push(sentence);
+        });
+
+        // For each bias type, find the sentence with highest probability
+        const highestProbabilitySentences = {};
+
+        Object.keys(biasByType).forEach((biasType) => {
+          // Sort sentences by probability (descending)
+          const sortedSentences = biasByType[biasType].sort(
+            (a, b) => b.bias_probability - a.bias_probability
+          );
+
+          // Get the sentence with highest probability
+          highestProbabilitySentences[biasType] = sortedSentences[0];
+        });
+
+        // Create table rows for each bias type
+        let tableHTML = "";
+
+        // Define descriptions for different bias types
+        const biasDescriptions = {
+          political:
+            "Supporting a particular political view or party while ignoring others.",
+          gender:
+            "Preferring one gender over another, often seen in language or role assumptions.",
+          racial:
+            "Stereotyping or favoring certain races or ethnic groups in the content.",
+        };
+
+        // Create rows for each bias type found
+        Object.keys(highestProbabilitySentences).forEach((biasType) => {
+          const sentence = highestProbabilitySentences[biasType];
+          const biasDescription =
+            biasDescriptions[biasType] || `Bias related to ${biasType}`;
+          const probability = Math.floor(sentence.bias_probability * 100);
+
+          tableHTML += `
+      <tr>
+        <td>${biasType.charAt(0).toUpperCase() + biasType.slice(1)} Bias</td>
+        <td>
+          <p><strong>${biasDescription}</strong></p>
+          <p class="biased-text">Detected Sentence: "${sentence.text}"</p>
+          <p class="bias-probability">Confidence: ${probability}%</p>
+        </td>
+      </tr>
+    `;
+        });
+
+        return (
+          tableHTML || '<tr><td colspan="2">No specific bias detected</td></tr>'
+        );
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        // Fake News Detector functionality
+        const newsInput = document.getElementById("news-input");
+        const checkNewsButton = document.getElementById("check-news");
+        const mediaInput = document.getElementById("media-input");
+        const resultsList = document.getElementById("autocomplete-results");
+
+        // Setup autocomplete functionality
+        mediaInput.addEventListener("input", function () {
+          const query = this.value.toLowerCase();
+          resultsList.innerHTML = "";
+
+          if (query.length === 0) {
+            resultsList.style.display = "none";
+            return;
+          }
+
+          if (!mediaItems || mediaItems.length === 0) {
+            console.log("No media items available for autocomplete");
+            return;
+          }
+
+          const matches = mediaItems
+            .filter((item) => item.site_name.toLowerCase().startsWith(query))
+            .slice(0, 10); // Limit to 10 suggestions
+
+          if (matches.length > 0) {
+            resultsList.style.display = "block";
+
+            matches.forEach((match) => {
+              const li = document.createElement("li");
+              li.textContent = match.site_name;
+              li.addEventListener("click", () => {
+                mediaInput.value = match.site_name;
+                resultsList.style.display = "none";
+              });
+              resultsList.appendChild(li);
+            });
+          } else {
+            resultsList.style.display = "none";
+          }
+        });
+
+        // Hide autocomplete when clicking outside
+        document.addEventListener("click", function (event) {
+          if (
+            !resultsList.contains(event.target) &&
+            event.target !== mediaInput
+          ) {
+            resultsList.style.display = "none";
+          }
+        });
+
+        // News verification functionality
+        checkNewsButton.addEventListener("click", () => {
+          const newsContent = newsInput.value.trim();
+          const mediaName = mediaInput.value.trim();
+
+          if (!newsContent) {
+            alert("Please enter news content to check.");
+            return;
+          } else {
+            checkNewsButton.disabled = true;
+            checkNewsButton.textContent = "Checking...";
+          }
+
+          // Prepare the data for API submission
+          const formData = JSON.stringify({
+            text: newsContent,
+            mediaName: mediaName || null,
+          });
+
+          // Log the news content for debugging
+          console.log("Sending news content to backend:", formData);
+
+          // Send the news content to the Java backend
+          fetch(
+            "https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByNews",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: formData,
+            }
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Failed to check news legitimacy");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Response from backend:", data);
+
+              var newsResultSummary =
+                data.data.resultSummary || "No result available";
+              var newsConfidenceScore =
+                data.data.confidenceScore || "No score available";
+              var newsMediaBiasRating =
+                data.data.mediaBiasRating || "No rating available";
+              var newsMediamediaBiasScore =
+                data.data.mediaBiasScore || "No score available";
+
+              // for textBiasResult Section
+              var newsBiasScore =
+                data.data.textBiasScore || "No data available";
+
+              var newsBiasType =
+                data.data.textBiasResult?.document_analysis.bias_type ||
+                "No data available";
+
+              // show sentences for bias analysis
+              var newsBiasSentences =
+                data.data.textBiasResult.biased_sentences.text ||
+                "No data available";
+
+              // formatting output
+              if (newsResultSummary.toLowerCase() === "AI-generated") {
+                newsResultSummary = "Ai-Generated";
+              } else {
+                newsResultSummary = "Human-written";
+              }
+
+              var imgRating = "";
+
+              if (newsResultSummary === "Ai-Generated") {
+                imgRating =
+                  "./scripts/news-detection-results/news-unsafe-icon.png";
+              } else {
+                imgRating =
+                  "./scripts/news-detection-results/news-safe-icon.png";
+              }
+
+              // floor the number
+              newsConfidenceScore = Math.floor(newsConfidenceScore);
+              newsBiasScore = Math.floor(newsBiasScore);
+
+              // bias portrait
+              const imgBias =
+                "./scripts/news-detection-results/news-bias-icon.png";
+
+              // Display the data on the index.html page
+
+              const newsResultContainer = document.getElementById(
+                "news-result-container"
+              );
+              if (newsResultContainer) {
+                // Process the bias data to create table rows
+                const biasTableRows = processBiasData(data);
+
+                newsResultContainer.innerHTML = `
+                <div class="info-container">
+                    <div class="info-card">
+                      <div class="info-icon">
+                        <img src="${imgRating}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                        <span class="label">${newsResultSummary}</span>
+                      </div>
+                      <div class="info-value">${newsConfidenceScore}%</div>
+                    </div>
+
+                    <div class="info-card">
+                      <div class="info-icon">
+                        <img src="${imgBias}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                        <span class="label">${
+                          newsBiasType.charAt(0).toUpperCase() +
+                          newsBiasType.slice(1)
+                        } Bias</span>
+                      </div>
+                      <div class="info-value">${newsBiasScore}%</div>
+                    </div>
+                  </div>
+
+                  <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
+                  
+                  <h2> Bias Analysis Report</h2>
+                  <table>
+                    <colgroup>
+                      <col style="width: 30%" />
+                      <col style="width: 70%" />
+                    </colgroup>
+
+                    <tbody>
+                      ${biasTableRows}
+                    </tbody>
+                  </table>
+
+                  <div>
+                  <section class="hero-feedback">
+                    <div class="feedback-container">
+                      <h2>Your Feedback Matters</h2>
+
+                      <div class="feedback-row">
+                        <label class="feedback-label">Was this result helpful?</label>
+                        <div class="feedback-buttons">
+                          <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
+                            👍🏻
+                          </button>
+                          <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
+                            👎🏻
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="feedback-row">
+                        <label class="feedback-label">Tell us more (optional)</label>
+                        <input type="text" id="feedback-text" placeholder="Please enter your feedback" />
+                        <button class="submit-btn">Submit</button>
+                      </div>
+                    </div>
+                  </section>
+                  </div>
+                `;
+              }
+
+              // Re-enable the button
+              checkNewsButton.disabled = false;
+              checkNewsButton.textContent = "Analyse";
+            })
+            .catch((error) => {
+              // Reset button state
+              checkNewsButton.disabled = false;
+              checkNewsButton.textContent = "Analyse";
+
+              console.error("Error checking news:", error);
+              alert("Error checking news. Please try again.");
+            });
+        });
+      });
+    </script>
+    <script type="module" src="middleware.js"></script>
+  </body>
+</html>

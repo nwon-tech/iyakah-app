@@ -723,6 +723,7 @@ const input = document.getElementById("media-input");
 const resultsList = document.getElementById("autocomplete-results");
 
 input.addEventListener("input", function () {
+  console.log("Received autocomplete input");
   const query = this.value.toLowerCase();
   resultsList.innerHTML = "";
 
