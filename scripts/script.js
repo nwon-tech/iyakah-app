@@ -120,11 +120,11 @@ document.addEventListener("DOMContentLoaded", () => {
             data.data.urlResult.sslKeyResult || "No result available";
 
           // formatting output
-          if (websiteResultSummary.toLowerCase() === "safe website") {
-            websiteResultSummary = "Safe Website";
-          } else {
-            websiteResultSummary = "Unsafe Website";
-          }
+          // if (websiteResultSummary.toLowerCase() === "safe website") {
+          //   websiteResultSummary = "Safe Website";
+          // } else {
+          //   websiteResultSummary = "Unsafe Website";
+          // }
 
           var safetyRating = "";
           var imgRating = "";
@@ -545,6 +545,25 @@ function handleFileSelect(selectedFile) {
                 ? "result-real.png"
                 : "result-aigenerated.png";
 
+            var safetyRating = "";
+            var imgRating = "";
+
+            
+
+            // if (websiteConfidenceScore < 50) {
+            //   safetyRating = "High Risk";
+            //   imgRating =
+            //     "./scripts/website-detection-result/website-unsafe-icon.png";
+            // } else if (websiteConfidenceScore < 70) {
+            //   safetyRating = "Doubtful";
+            //   imgRating =
+            //     "./scripts/website-detection-result/website-doubtful-icon.png";
+            // } else {
+            //   safetyRating = "Safe";
+            //   imgRating =
+            //     "./scripts/website-detection-result/website-safe-icon.png";
+            // }
+
             // Display the data on the index.html page
             if (imageResultContainer) {
               imageResultContainer.innerHTML = `
@@ -557,6 +576,28 @@ function handleFileSelect(selectedFile) {
                   <p>Camera Model: ${imageCameraModel}</p>
                   <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
                 </div>
+
+                <div class="info-card">
+              <div class="info-icon">
+                <img src="${imgRating}" alt="${safetyRating}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                <span class="label">${safetyRating}</span>
+              </div>
+              <div class="info-value">${websiteConfidenceScore}</div>
+            </div>
+            <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
+
+                <div class="feedback-row">
+                  <label class="feedback-label">Was this result helpful?</label>
+                  <div class="feedback-buttons">
+                    <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
+                      👍🏻
+                    </button>
+                    <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
+                      👎🏻
+                    </button>
+                  </div>
+                </div>
+
               `;
             }
 
