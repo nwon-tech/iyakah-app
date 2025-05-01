@@ -246,19 +246,19 @@ caption {
 
 /* container 2 */
 .text-container-left-2 {
-  flex: 1.2;
+  flex: 1;
   min-width: 200px;
 }
 
 .image-container-2 {
-  flex: 1.5;
+  flex: 1;
   min-width: 250px;
   display: flex;
   justify-content: center;
 }
 
 .text-container-right-2 {
-  flex: 0.8;
+  flex: 1;
   min-width: 250px;
 }
 

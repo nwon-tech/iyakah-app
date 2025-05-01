@@ -3,73 +3,100 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Table</title>
+    <title>Website Safety Information</title>
     <style>
-      table {
-        width: 60%;
-        border-collapse: collapse;
-        margin: 20px auto;
+      body {
         font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+      }
+      .result-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-self: center;
+        background-color: #fff;
+        padding: 1.5rem;
+        border-radius: 1.25rem;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
       }
 
-      th,
-      td {
-        border: 1px solid #ccc;
-        padding: 12px 20px;
-        text-align: left;
+      .info-card {
+        display: flex;
+        justify-content: space-between;
+        background-color: #fff;
+        padding: 1.5rem;
+        border-radius: 1.25rem;
+        box-shadow: 4 6px 12px rgba(0, 0, 0, 0.08);
+        width: 200px;
+        color: #b4aeb8;
+        font-family: "Inter", sans-serif;
       }
 
-      th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-        width: -30%;
+      .info-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.9rem;
       }
 
-      tr:nth-child(even) {
-        background-color: #f9f9f9;
+      .info-icon i {
+        width: 32px;
+        height: 32px;
+        stroke-width: 1.5;
+        margin-bottom: 0.25rem;
       }
 
-      caption {
-        caption-side: top;
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin-bottom: 10px;
+      .label {
+        font-weight: 500;
+      }
+
+      .info-value {
+        font-size: 2.5rem;
+        font-weight: 600;
+      }
+
+      .result-container > p {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #333;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border-radius: 1.25rem;
+        box-shadow: 4 6px 12px rgba(0, 0, 0, 0.08);
       }
     </style>
   </head>
   <body>
-    <table>
-      <caption>
-        Sample Info Table
-      </caption>
-
-      <colgroup>
-        <col style="width: 30%" />
-        <col style="width: 70%" />
-      </colgroup>
-
-      <tbody>
-        <tr>
-          <td>Alice</td>
-          <td>Engineer</td>
-        </tr>
-        <tr>
-          <td>Bob</td>
-          <td>Designer</td>
-        </tr>
-        <tr>
-          <td>Charlie</td>
-          <td>Teacher</td>
-        </tr>
-        <tr>
-          <td>Diana</td>
-          <td>Developer</td>
-        </tr>
-        <tr>
-          <td>Edward</td>
-          <td>Manager</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="info-container">
+      <div class="info-card">
+        <div class="info-icon">
+          <img
+            src="${imgRating}"
+            alt="${resultText}"
+            style="max-width: 100%; max-height: 200px; margin-bottom: 1rem"
+          />
+          <span class="label">${resultText}</span>
+        </div>
+        <div class="info-value">${imageConfidenceScore}</div>
+      </div>
+      <div class="info-metadata">
+        <div class="info-metadata-header">
+          <h3>Metadata</h3>
+        </div>
+        <div class="info-metadata-content">
+          <h4>Shooting Date</h4>
+          <p>${imageCaptureDate}</p>
+        </div>
+        <div class="info-metadata-content">
+          <h4>Filming Locations</h4>
+          <p>${imageCaptureLocation}</p>
+        </div>
+        <div class="info-metadata-content">
+          <h4>Filming Equipment</h4>
+          <p>${imageCameraModel}</p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

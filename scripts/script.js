@@ -489,7 +489,7 @@ function handleFileSelect(selectedFile) {
       analyzeButton.hasEventListener = true;
       analyzeButton.addEventListener("click", () => {
         analyzeButton.disabled = true;
-        analyzeButton.textContent = "Checking...";
+        analyzeButton.textContent = "Analysing...";
 
         // Clear the previous results
         const imageResultContainer = document.getElementById(
@@ -517,97 +517,164 @@ function handleFileSelect(selectedFile) {
             if (!response.ok) {
               throw new Error("Failed to upload image");
             }
+            console.log("Response status:", response.status);
             return response.json();
           })
           .then((data) => {
             console.log("Response from backend:", data);
 
-            // Extract the result data
+            // labelling the image
             const imageResultSummary =
               data.data.resultSummary || "No result available";
-            const imagelogId = data.data.logId || "No log ID available";
+            const imageConfidenceScore =
+              data.data.confidenceScore || "No score available";
+
+            // Metadata Field (only present for actual DSLR images)
+            // Shooting Date
             const imageCaptureDate =
               data.data.captureDate || "No date available";
+            // Filming Locations
             const imageCaptureLocation =
               data.data.location || "No location available";
+            // Filming Equipment
             const imageCameraModel =
               data.data.cameraModel || "No model available";
 
             // Formatting output
             const resultText =
-              imageResultSummary === "Real Image"
-                ? "Real Image"
-                : "AI-Generated Image";
-            const resultClass =
-              imageResultSummary === "Real Image" ? "safe" : "unsafe";
-            const resultImage =
-              imageResultSummary === "Real Image"
-                ? "result-real.png"
-                : "result-aigenerated.png";
+              imageResultSummary === "Real Image" ? "Real" : "AI-Generated";
 
-            var safetyRating = "";
-            var imgRating = "";
+            let imgRating = "";
 
-            
-
-            // if (websiteConfidenceScore < 50) {
-            //   safetyRating = "High Risk";
-            //   imgRating =
-            //     "./scripts/website-detection-result/website-unsafe-icon.png";
-            // } else if (websiteConfidenceScore < 70) {
-            //   safetyRating = "Doubtful";
-            //   imgRating =
-            //     "./scripts/website-detection-result/website-doubtful-icon.png";
-            // } else {
-            //   safetyRating = "Safe";
-            //   imgRating =
-            //     "./scripts/website-detection-result/website-safe-icon.png";
-            // }
+            // update info card based on the result
+            if (resultText === "Real") {
+              imgRating =
+                "./scripts/image-detection-result/image-safe-icon.png";
+            } else {
+              imgRating =
+                "./scripts/image-detection-result/image-unsafe-icon.png";
+            }
 
             // Display the data on the index.html page
             if (imageResultContainer) {
               imageResultContainer.innerHTML = `
-                <div class="result-card ${resultClass}">
-                  <img src="scripts/image-detection-result/${resultImage}" alt="${resultText}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-                  <p>${resultText}</p>
-                  <p>LogID: ${imagelogId}</p>
-                  <p>Capture Date: ${imageCaptureDate}</p>
-                  <p>Capture Location: ${imageCaptureLocation}</p>
-                  <p>Camera Model: ${imageCameraModel}</p>
-                  <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
-                </div>
 
-                <div class="info-card">
-              <div class="info-icon">
-                <img src="${imgRating}" alt="${safetyRating}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-                <span class="label">${safetyRating}</span>
-              </div>
-              <div class="info-value">${websiteConfidenceScore}</div>
-            </div>
-            <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
-
-                <div class="feedback-row">
-                  <label class="feedback-label">Was this result helpful?</label>
-                  <div class="feedback-buttons">
-                    <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
-                      👍🏻
-                    </button>
-                    <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
-                      👎🏻
-                    </button>
+                <div class="info-container">
+                  <div class="info-card">
+                    <div class="info-icon">
+                      <img
+                        src="${imgRating}"
+                        alt="${resultText}"
+                        style="max-width: 100%; max-height: 200px; margin-bottom: 1rem"
+                      />
+                      <span class="label">${resultText}</span>
+                    </div>
+                    <div class="info-value">${imageConfidenceScore}</div>
+                  </div>
+                  <div class="info-metadata">
+                    <div class="info-metadata-header">
+                      <h3>Metadata</h3>
+                    </div>
+                    <div class="info-metadata-content">
+                      <h4>Shooting Date</h4>
+                      <p>${imageCaptureDate}</p>
+                    </div>
+                    <div class="info-metadata-content">
+                      <h4>Filming Locations</h4>
+                      <p>${imageCaptureLocation}</p>
+                    </div>
+                    <div class="info-metadata-content">
+                      <h4>Filming Equipment</h4>
+                      <p>${imageCameraModel}</p>
+                    </div>
                   </div>
                 </div>
+
+                <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
+
+                <div>
+                <section class="hero-feedback">
+                  <div class="feedback-container">
+                    <h2>Your Feedback Matters</h2>
+
+                    <div class="feedback-row">
+                      <label class="feedback-label">Was this result helpful?</label>
+                      <div class="feedback-buttons">
+                        <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
+                          👍🏻
+                        </button>
+                        <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
+                          👎🏻
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="feedback-row">
+                      <label class="feedback-label">Tell us more (optional)</label>
+                      <input type="text" id="feedback-text" placeholder="Please enter your feedback" />
+                      <button class="submit-btn">Submit</button>
+                    </div>
+                  </div>
+                </section>
+                </div>
+
+                <div class="website-education">
+                <section>
+                  <h2>How to Spot AI-Generated Images</h2>
+
+                  <div class="education-row">
+                    <div class="text-container">
+                      <label class="education-label">Check for distorted details</label>
+                      <p class="education-text">
+                        AI images often have strange hands, mismatched earrings, or unnatural eyes and teeth.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="education-row">
+                        <div class="text-container-left-2">
+                          <label class="education-label"
+                            >Look at the background</label
+                          >
+                          <p class="education-text">
+                            Blurry or chaotic backgrounds can be a sign the image was generated by AI.
+                          </p>
+                        </div>
+                        <div class="image-container-2">
+                          <img
+                            src="./scripts/image-detection-result/image-education-row2.jpg"
+                            alt="image check"
+                          />
+                        </div>
+                        <div class="text-container-right-2">
+                          <label class="education-label">Look for symmetry issues</label>
+                          <p class="education-text">
+                            Faces or objects may be oddly symmetrical — or not symmetrical when they should be.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="education-row">
+                        <div class="text-container">
+                          <label class="education-label">Lighting and shadows may be off</label>
+                          <p class="education-text">
+                            Inconsistencies in lighting or shadow direction are common in AI-created images.
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
 
               `;
             }
 
             analyzeButton.disabled = false;
-            analyzeButton.textContent = "Check";
+            analyzeButton.textContent = "Analyse";
           })
           .catch((error) => {
             console.error("Error uploading image:", error);
             analyzeButton.disabled = false;
-            analyzeButton.textContent = "Check";
+            analyzeButton.textContent = "Analyse";
             alert("Error uploading image. Please try again.");
           });
       });

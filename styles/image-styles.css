@@ -73,8 +73,8 @@
 }
 
 .upload-icon {
-    height: 2.5rem;
-    width: 2.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 /* button */
@@ -116,4 +116,249 @@
 .btn-outline:hover {
   background-color: rgba(25, 118, 210, 0.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* return value */
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.info-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem; /* space between the two boxes */
+  justify-content: space-between; /* optional: center them horizontally */
+  align-items: flex-start; /* align top edges */
+  margin-top: 2rem;
+  flex-wrap: wrap; /* optional: responsive layout */
+}
+
+.info-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 4 6px 12px rgba(0, 0, 0, 0.08);
+  width: 200px;
+  color: #b4aeb8;
+  font-family: "Inter", sans-serif;
+}
+
+.info-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.info-icon i {
+  width: 32px;
+  height: 32px;
+  stroke-width: 1.5;
+  margin-bottom: 0.25rem;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.result-container > p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #333;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 1.25rem;
+  box-shadow: 4 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* metadata container */
+.info-metadata {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 4 6px 12px rgba(0, 0, 0, 0.08);
+  width: 70%;
+  color: #b4aeb8;
+  font-family: "Inter", sans-serif;
+}
+
+.info-metadata-header {
+  padding-right: 20px;
+}
+
+.info-metadata-header h3 {
+  margin-top: 20px;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: #4a4a4a;
+}
+
+.info-metadata-content {
+  gap: 3rem;
+}
+
+.info-metadata-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: black;
+}
+
+.info-metadata-content p {
+  font-size: 0.95rem;
+  margin: 20px;
+  color: #333;
+}
+
+/* education */
+.website-education {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.website-education section h2 {
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.education-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  max-width: 800px;;
+}
+
+.text-container {
+  display: flex;
+  margin: 0 auto;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+/* Responsive sizes: adjust these to control column widths */
+.text-container-left {
+  flex: 1;
+  min-width: 200px;
+}
+
+.image-container {
+  flex: 1.5;
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.text-container-right {
+  flex: 2;
+  min-width: 250px;
+}
+
+/* container 2 */
+.text-container-left-2 {
+  flex: 1.2;
+  min-width: 200px;
+}
+
+.image-container-2 img {
+  flex: 1.5;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+}
+
+.text-container-right-2 {
+  flex: 0.8;
+  min-width: 250px;
+}
+
+/* Common styles */
+.education-label {
+  font-weight: 600;
+  font-size: 1.4rem;
+  display: block;
+  margin-bottom: 3.5rem;
+}
+
+.education-text {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Responsive stacking for smaller screens */
+@media screen and (max-width: 768px) {
+  .education-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text-container-left,
+  .text-container-right,
+  .image-container {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+
+/* next section */
+.next-section-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  font-size: 18px;
+}
+
+.next-section > .next > label {
+  display: flex;
+  vertical-align: middle;
+}
+
+.section-options {
+  display: flex;
+  flex-flow: column;
+  margin: 0 1rem;
+}
+
+.section-options span {
+  text-align: left;
+}
+
+.section-options span > a {
+  text-decoration: none;
+  color: black;
 }
