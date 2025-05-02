@@ -36,7 +36,118 @@ async function fetchAddressFromCoordinates(locationString) {
   }
 }
 
+// Create and append spinner styles to the document head
+function createSpinnerStyles() {
+  const styleEl = document.createElement("style");
+  styleEl.innerHTML = `
+    .spinner-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .spinner-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .upload-progress {
+      width: 100%;
+      height: 4px;
+      background-color: #f1f1f1;
+      border-radius: 2px;
+      margin-top: 10px;
+      overflow: hidden;
+      display: none;
+    }
+    
+    .upload-progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #4CAF50;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    
+    .upload-area.uploading {
+      border-color: #4CAF50;
+    }
+    
+    .pulse-animation {
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+  `;
+  document.head.appendChild(styleEl);
+}
+
+// Create spinner overlay element
+function createSpinnerOverlay() {
+  const overlay = document.createElement("div");
+  overlay.className = "spinner-overlay";
+  overlay.innerHTML = '<div class="spinner"></div>';
+  document.body.appendChild(overlay);
+  return overlay;
+}
+
+// Show spinner with timeout
+function showSpinnerWithTimeout(timeout = 30000) {
+  const spinner =
+    document.querySelector(".spinner-overlay") || createSpinnerOverlay();
+  spinner.classList.add("active");
+
+  // Set timeout to hide spinner and show error if it takes too long
+  const timeoutId = setTimeout(() => {
+    hideSpinner();
+    alert("Request timed out. Please try again later.");
+  }, timeout);
+
+  return { spinner, timeoutId };
+}
+
+// Hide spinner and clear timeout
+function hideSpinner(timeoutId) {
+  const spinner = document.querySelector(".spinner-overlay");
+  if (spinner) {
+    spinner.classList.remove("active");
+  }
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Add spinner styles to document
+  createSpinnerStyles();
+
   // Tab switching functionality
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabPanes = document.querySelectorAll(".tab-pane");
@@ -82,6 +193,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const websiteUrl = websiteInput.value.trim();
 
     if (websiteUrl) {
+      // Show spinner with 30-second timeout
+      const { timeoutId } = showSpinnerWithTimeout(30000);
+
       // Show loading state
       checkWebsiteButton.disabled = true;
       checkWebsiteButton.textContent = "Analysing...";
@@ -120,6 +234,9 @@ document.addEventListener("DOMContentLoaded", () => {
         body: requestBodyString,
       })
         .then((response) => {
+          // Hide spinner and clear timeout
+          hideSpinner(timeoutId);
+
           // Reset button state
           checkWebsiteButton.disabled = false;
           checkWebsiteButton.textContent = "Analyse";
@@ -281,7 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     >
                     <p class="education-text">
                       Avoid giving your passwords, ID numbers, or payment details unless
-                      you’re 100% sure the site is legitimate.
+                      you're 100% sure the site is legitimate.
                     </p>
                   </div>
                 </div>
@@ -328,10 +445,10 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                   <div class="text-container-right-3">
                     <label class="education-label"
-                      >Don’t trust “too good to be true” offers</label
+                      >Don't trust "too good to be true" offers</label
                     >
                     <p class="education-text">
-                      If it promises huge rewards for little effort, it’s probably a scam.
+                      If it promises huge rewards for little effort, it's probably a scam.
                     </p>
                   </div>
                 </div>
@@ -342,6 +459,9 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         })
         .catch((error) => {
+          // Hide spinner and clear timeout
+          hideSpinner(timeoutId);
+
           // Reset button state
           checkWebsiteButton.disabled = false;
           checkWebsiteButton.textContent = "Analyse";
@@ -372,6 +492,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please enter a valid website URL.");
     }
   });
+});
 
 // Image upload functionality
 const uploadArea = document.getElementById("upload-area");
@@ -379,6 +500,55 @@ const fileInput = document.getElementById("image-upload");
 const analyzeButton = document.getElementById("analyze-image");
 
 let file; // Global file variable to store the selected image
+
+// Add progress bar to upload area
+function addProgressBarToUploadArea() {
+  // Check if progress bar already exists
+  if (!uploadArea.querySelector(".upload-progress")) {
+    const progressBar = document.createElement("div");
+    progressBar.className = "upload-progress";
+    progressBar.innerHTML = '<div class="upload-progress-bar"></div>';
+    uploadArea.appendChild(progressBar);
+  }
+}
+
+// Function to simulate upload progress
+function simulateUploadProgress() {
+  addProgressBarToUploadArea();
+
+  const progressBar = uploadArea.querySelector(".upload-progress");
+  const progressBarInner = uploadArea.querySelector(".upload-progress-bar");
+
+  uploadArea.classList.add("uploading");
+  progressBar.style.display = "block";
+  progressBarInner.style.width = "0%";
+
+  // Simulate progress animation
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.random() * 10;
+    if (progress > 90) {
+      clearInterval(interval);
+      progress = 90; // Cap at 90%, will be completed when actually uploaded
+    }
+    progressBarInner.style.width = `${progress}%`;
+  }, 200);
+
+  return { progressBar, progressBarInner, interval };
+}
+
+// Complete upload progress
+function completeUploadProgress(progressBar, progressBarInner, interval) {
+  if (interval) clearInterval(interval);
+
+  progressBarInner.style.width = "100%";
+
+  // Remove the upload animation after a delay
+  setTimeout(() => {
+    uploadArea.classList.remove("uploading");
+    progressBar.style.display = "none";
+  }, 500);
+}
 
 uploadArea.addEventListener("click", () => {
   fileInput.click();
@@ -416,13 +586,23 @@ fileInput.addEventListener("change", (event) => {
 
 function handleFileSelect(selectedFile) {
   if (selectedFile.type.startsWith("image/")) {
+    // Start upload progress animation
+    const { progressBar, progressBarInner, interval } =
+      simulateUploadProgress();
+
     // Display the selected image
     const reader = new FileReader();
     reader.onload = function (e) {
+      // Complete upload progress
+      completeUploadProgress(progressBar, progressBarInner, interval);
+
       uploadArea.innerHTML = `
           <img src="${e.target.result}" alt="Selected image" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
           <p>${selectedFile.name}</p>
         `;
+
+      // Add the progress bar back to the upload area
+      addProgressBarToUploadArea();
     };
     reader.readAsDataURL(selectedFile);
 
@@ -433,8 +613,12 @@ function handleFileSelect(selectedFile) {
     if (!analyzeButton.hasEventListener) {
       analyzeButton.hasEventListener = true;
       analyzeButton.addEventListener("click", () => {
+        // Show spinner with 30-second timeout
+        const { timeoutId } = showSpinnerWithTimeout(30000);
+
         analyzeButton.disabled = true;
         analyzeButton.textContent = "Analysing...";
+        analyzeButton.classList.add("pulse-animation");
 
         // Clear the previous results
         const imageResultContainer = document.getElementById(
@@ -459,6 +643,12 @@ function handleFileSelect(selectedFile) {
           }
         )
           .then((response) => {
+            // Hide spinner and clear timeout
+            hideSpinner(timeoutId);
+
+            // Remove pulse animation
+            analyzeButton.classList.remove("pulse-animation");
+
             if (!response.ok) {
               throw new Error("Failed to upload image");
             }
@@ -627,6 +817,12 @@ function handleFileSelect(selectedFile) {
             analyzeButton.textContent = "Analyse";
           })
           .catch((error) => {
+            // Hide spinner and clear timeout
+            hideSpinner(timeoutId);
+
+            // Remove pulse animation
+            analyzeButton.classList.remove("pulse-animation");
+
             console.error("Error uploading image:", error);
             analyzeButton.disabled = false;
             analyzeButton.textContent = "Analyse";
