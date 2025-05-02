@@ -1,3 +1,41 @@
+// reverse geocoding
+async function fetchAddressFromCoordinates(locationString) {
+  if (!locationString || !locationString.includes(",")) {
+    return {
+      coordinates: "No location available",
+      address: "No address available",
+    };
+  }
+
+  const [latStr, lonStr] = locationString.split(",");
+  const lat = latStr.trim();
+  const lon = lonStr.trim();
+  const coordinates = `${lat}, ${lon}`;
+
+  console.log("Coordinates:", coordinates);
+  console.log("Latitude:", lat);
+  console.log("Longitude:", lon);
+  try {
+    const response = await fetch(
+      `https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}&api_key=67d2cb0b79d0a488838208mrv29f789`
+    );
+
+    if (!response.ok) {
+      console.warn("Reverse geocoding failed:", response.status);
+      return { coordinates, address: "Address not found" };
+    }
+    console.log("Response status:", response.status);
+    const data = await response.json();
+    console.log("Data:", data);
+    const address = data.address.city || "Address not found";
+    console.log("Address:", address);
+    return { coordinates, address };
+  } catch (error) {
+    console.error("Geocoding error:", error);
+    return { coordinates, address: "Address fetch failed" };
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Tab switching functionality
   const tabButtons = document.querySelectorAll(".tab-btn");
@@ -335,99 +373,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Fake News Detector functionality
-  const newsInput = document.getElementById("news-input");
-  const checkNewsButton = document.getElementById("check-news");
-  const mediaInput = document.getElementById("media-input");
-
-  checkNewsButton.addEventListener("click", () => {
-    const newsContent = newsInput.value.trim();
-    const mediaName = mediaInput.value.trim();
-
-    if (!newsContent) {
-      alert("Please enter news content to check.");
-      return;
-    } else {
-      checkNewsButton.disabled = true;
-      checkNewsButton.textContent = "Checking...";
-    }
-
-    // Prepare the data for API submission
-    const formData = JSON.stringify({
-      text: newsContent,
-      mediaName: mediaName || null,
-    });
-
-    // Log the news content for debugging
-    console.log("Sending news content to backend:", formData);
-
-    // Send the news content to the Java backend
-    fetch("https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByNews", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: formData,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to check news legitimacy");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Response from backend:", data);
-
-        var newsResultSummary =
-          data.data.resultSummary || "No result available";
-        var newsConfidenceScore =
-          data.data.confidenceScore || "No score available";
-        var newsMediaBiasRating =
-          data.data.mediaBiasRating || "No rating available";
-        var newsMediamediaBiasScore =
-          data.data.mediaBiasScore || "No score available";
-
-        // formatting output
-        if (newsResultSummary.toLowerCase() === "AI-generated") {
-          newsResultSummary = "Ai-Generated";
-        } else {
-          newsResultSummary = "Human-written";
-        }
-
-        // Display the data on the index.html page
-        const newsResultContainer = document.getElementById(
-          "news-result-container"
-        );
-        if (newsResultContainer) {
-          newsResultContainer.innerHTML = `
-            <div class="result-card ${
-              newsResultSummary === "Ai-Generated" ? "safe" : "unsafe"
-            }">
-              <img src="scripts/news-detection-results/${
-                newsResultSummary === "Ai-Generated"
-                  ? "result-aigenerated.png"
-                  : "result-real.png"
-              }" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-              <p>${newsResultSummary}</p>
-              <p>Confidence Score: ${newsConfidenceScore}</p>
-              <p>Media Bias Rating: ${newsMediaBiasRating}</p>
-              <p>Media Bias Score: ${newsMediamediaBiasScore}</p>
-              <caption>All detection results are for informational purposes only and do not constitute professional or legal advice.</caption>
-            </div>
-            `;
-        }
-      })
-      .catch((error) => {
-        // Reset button state
-        checkNewsButton.disabled = false;
-        checkNewsButton.textContent = "Check";
-
-        console.error("Error checking news:", error);
-        alert("Error checking news. Please try again.");
-      });
-  });
-});
-
 // Image upload functionality
 const uploadArea = document.getElementById("upload-area");
 const fileInput = document.getElementById("image-upload");
@@ -534,11 +479,21 @@ function handleFileSelect(selectedFile) {
             const imageCaptureDate =
               data.data.captureDate || "No date available";
             // Filming Locations
-            const imageCaptureLocation =
+            let imageCaptureLocation =
               data.data.location || "No location available";
             // Filming Equipment
             const imageCameraModel =
               data.data.cameraModel || "No model available";
+
+            let imageCaptureAddress = "No address available";
+
+            // Reverse geocoding for filming locations
+            // if (data.data.location) {
+            //   fetchAddressFromCoordinates(data.data.location).then((result) => {
+            //     imageCaptureLocation = result.coordinates;
+            //     imageCaptureAddress = result.address;
+            //   });
+            // }
 
             // Formatting output
             const resultText =
