@@ -5,6 +5,10 @@
   font-family: "Inter", Arial, sans-serif;
 }
 
+:root {
+  --dark-gray: #333; /* Define the dark gray color */
+}
+
 body {
   background-color: #fff;
   color: #333;
@@ -338,8 +342,11 @@ body {
 }
 
 .stats-grid {
-  display: grid;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   grid-template-columns: repeat(3, 1fr);
+  width: 100%;
   gap: 30px;
 }
 
@@ -348,6 +355,7 @@ body {
   border-radius: 12px;
   background-color: var(--light-gray);
   transition: transform 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
 .stat-item:hover {
@@ -364,6 +372,12 @@ body {
 .stat-label {
   font-size: 1.1rem;
   color: var(--medium-gray);
+}
+
+.stats-section p {
+  font-size: 1rem;
+  margin-top: 20px;
+  color: var(--dark-gray);
 }
 
 /* info */
