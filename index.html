@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IYAKAH - Truth Detection</title>
     <script
       defer
       src="/_vercel/insights/script.js"
@@ -17,283 +18,202 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
-    <!-- dancing script font for the header styling -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@300;400;500;700&display=swap"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
-
-    <!-- almarai font for the header styling
-     can't be read -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Iyakah - Discover the Truth</title>
-    <meta name="description" content="Discover the truth." />
-
-    <!-- main stylesheet -->
-    <link rel="stylesheet" href="./styles/styles.css" />
+    <!-- link to alternative styling -->
+    <link rel="stylesheet" href="./styles/alternative-styles.css" />
   </head>
   <body>
-    <!-- navbar -->
-    <nav class="navbar">
-      <div class="nav-logo">IYAKAH</div>
-      <ul class="nav-links">
-        <li class="nav-item"><a href="index.html">Home</a></li>
-        <li class="nav-item">
-          About
-          <ul class="dropdown">
-            <!-- introduction link -->
-            <li><a href="./introduction.html">Introduction</a></li>
-            <!-- open data link -->
-            <li><a href="./open-data.html">Open Data</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          Support
-          <ul class="dropdown">
-            <!-- FAQ link -->
-            <li><a href="./faq.html">FAQ</a></li>
-            <!-- search ranking link -->
-            <li><a href="./search-ranking.html">Search Ranking</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-
-    <main class="container-fluid">
-      <!-- hero media section -->
-      <section class="hero">
+    <div class="container">
+      <section class="hero" id="hero">
+        <div class="pattern-overlay"></div>
+        <div class="particles" id="particles"></div>
         <div class="hero-content">
-          <h1>
-            <span class="highlight">Truth Tools</span>
-            <span>for Digital Age</span>
-          </h1>
+          <div class="company-name-container">
+            <span class="company-name" id="company-name">IYAKAH</span>
+            <span class="question-mark" id="question-mark">?</span>
+          </div>
+          <p class="hero-subtitle" id="hero-subtitle">
+            Your one-stop solution to battling misinformation online
+          </p>
+
+          <div class="features">
+            <a
+              href="./website-verification.html"
+              class="feature-card"
+              id="feature-1"
+            >
+              <i class="fas fa-globe-americas"></i>
+              <h3>Website Legitimacy Checker</h3>
+              <p>
+                Detect phishing attempts and verify website authenticity in
+                real-time with our advanced security tools.
+              </p>
+            </a>
+
+            <a
+              href="./image-verification.html"
+              class="feature-card"
+              id="feature-2"
+            >
+              <i class="fas fa-camera-retro"></i>
+              <h3>Fake Image Detector</h3>
+              <p>
+                Identify AI-generated and manipulated images with
+                state-of-the-art detection technology.
+              </p>
+            </a>
+
+            <a
+              href="./news-verification.html"
+              class="feature-card"
+              id="feature-3"
+            >
+              <i class="fas fa-balance-scale"></i>
+              <h3>News Bias Detector</h3>
+              <p>
+                Analyse news sources for bias and get a balanced perspective on
+                current events and topics.
+              </p>
+            </a>
+          </div>
+
+          <div class="cta-button" id="cta-button"></div>
+        </div>
+
+        <div class="scroll-indicator" id="scroll-indicator">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </section>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <h2>The Misinformation Crisis</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" data-target="69">0</div>
+          <div class="stat-label">
+            % of Malaysians encounter fake news weekly
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="454">0</div>
+          <div class="stat-label">
+            cases of fraud are caused by deepfakes in 2024
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="2">0</div>
+          <div class="stat-label">Billion RM lost to cybercrime in 2024</div>
+        </div>
+      </div>
+      <caption class="stats-caption">
+        <p>
+          Sourced from: The Star, MyCERT Report, NST Malaysia
+        </p>
+      </caption>
+    </section>
+
+    <!-- resources -->
+    <section class="resources">
+      <h2>See It in Action</h2>
+      <div class="resource-gallery">
+        <!-- deepfake -->
+        <a>
+          <iframe
+            loading="lazy"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/6_QX12szXTM?si=DVHeBIf92XUG0Jvm"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </a>
+
+        <a>
+          <iframe
+            loading="lazy"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/ACWNZIkTTBM?si=xm_DejXK-VNlsOr-"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </a>
+
+        <a>
+          <iframe
+            loading="lazy"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/aO858HyFbKI?si=-OXN9-WqM70ivVOm"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </a>
+
+        <a>
+          <iframe
+            loading="lazy"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/6R6-2_8m4Co?si=Dql-d7LWitj1zHtl"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </a>
+      </div>
+
+      <div id="view-more">
+        <span><a href="./quiz.html">VIEW MORE</a></span>
+      </div>
+    </section>
+
+    <!-- why iyakah -->
+    <section class="why-iyakah">
+      <h2>Why Iyakah?</h2>
+      <div class="why-cards">
+        <div class="card">
+          <img src="./styles/media/why-shield.png" alt="shield" />
+          <h3>Comprehensive Safety Testing</h3>
           <p>
-            Empowering you to detect fake websites, AI-generated images, and
-            news biases — all in one place.
+            Providing end-to-end security analysis of websites, images and news
+            to help build a trustworthy online experience.
           </p>
         </div>
-        <div class="hero-video">
-          <video id="video-playing" autoplay loop muted playsinline>
-            <source src="./styles/media/home_page_media.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </section>
-
-      <!-- carousel section -->
-      <section class="carousel-section">
-        <div
-          id="carouselExample"
-          class="carousel slide"
-          data-bs-ride="carousel"
-        >
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img
-                src="./styles/media/cs-1.png"
-                class="d-block w-100"
-                alt="slide 1"
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="./styles/media/cs-2.png"
-                class="d-block w-100"
-                alt="slide 2"
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="./styles/media/cs-3.png"
-                class="d-block w-100"
-                alt="slide 3"
-              />
-            </div>
-          </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- website verification -->
-      <section class="info-section">
-        <div class="info-text">
-          <h2>Fake Website Verification</h2>
+        <div class="card">
+          <img src="./styles/media/why-lightning.png" alt="lightning" />
+          <h3>Fast and Accurate Results</h3>
           <p>
-            Enter the URL you want to verify and we will analyze the security,
-            credibility and potential risks of the website for you.
+            Using AI-powered technology to immediately detect security
+            vulnerabilities across web, images and media.
           </p>
-          <div class="landing-next-section">
-            <spam>→</spam> <a href="./website-verification.html">Get Started</a>
-          </div>
         </div>
-        <div class="info-img">
-          <p>“ Ever wondered if that link is really safe to click? ”</p>
-          <img
-            src="./styles/media/website-verif.png"
-            alt="Website Verification"
-          />
-        </div>
-      </section>
-
-      <!-- image detection -->
-      <section class="info-section reverse">
-        <div class="info-text">
-          <h2>AI Image Detection</h2>
+        <div class="card">
+          <img src="./styles/media/why-lock.png" alt="lock" />
+          <h3>Data Security</h3>
           <p>
-            Upload or specify a link, we will analyze the authenticity of the
-            image & provide you with the extraction information.
+            Strict data encryption and privacy protection to safeguard your
+            sensitive information securely.
           </p>
-          <div class="landing-next-section">
-            <spam>→</spam> <a href="./image-verification.html">Get Started</a>
-          </div>
         </div>
-        <div class="info-img">
-          <p>“ Does the photo look too perfect to be real? ”</p>
-          <img
-            src="./styles/media/fake-image-verif.png"
-            alt="Image Detection"
-          />
-        </div>
-      </section>
-
-      <!-- news detection -->
-      <section class="info-section">
-        <div class="info-text">
-          <h2>News Bias Detection</h2>
-          <p>
-            Enter news content and we will analyze journalistic integrity and
-            detect whether the articles are genuine or misinformation.
-          </p>
-          <div class="landing-next-section">
-            <spam>→</spam> <a href="./news-verification.html">Get Started</a>
-          </div>
-        </div>
-        <div class="info-img">
-          <p>“ Can you spot the bias in today’s headlines? ”</p>
-          <img src="./styles/media/fake-news-detec.png" alt="News Detection" />
-        </div>
-      </section>
-
-      <!-- resources -->
-      <section class="resources">
-        <h2>Resources</h2>
-        <div class="resource-gallery">
-          <!-- deepfake -->
-          <a>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/6_QX12szXTM?si=DVHeBIf92XUG0Jvm"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-          </a>
-
-          <a>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/ACWNZIkTTBM?si=xm_DejXK-VNlsOr-"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-          </a>
-
-          <a>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/aO858HyFbKI?si=-OXN9-WqM70ivVOm"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-          </a>
-
-          <a>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/6R6-2_8m4Co?si=Dql-d7LWitj1zHtl"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-          </a>
-        </div>
-
-        <div id="view-more">
-          <span><a href="./quiz.html">VIEW MORE</a></span>
-        </div>
-      </section>
-
-      <!-- why iyakah -->
-      <section class="why-iyakah">
-        <h2>Why Iyakah?</h2>
-        <div class="why-cards">
-          <div class="card">
-            <img src="./styles/media/why-shield.png" alt="shield" />
-            <h3>Comprehensive Safety Testing</h3>
-            <p>
-              Providing end-to-end security analysis of websites, images and
-              news to help build a trustworthy online experience.
-            </p>
-          </div>
-          <div class="card">
-            <img src="./styles/media/why-lightning.png" alt="lightning" />
-            <h3>Fast and Accurate Results</h3>
-            <p>
-              Using AI-powered technology to immediately detect security
-              vulnerabilities across web, images and media.
-            </p>
-          </div>
-          <div class="card">
-            <img src="./styles/media/why-lock.png" alt="lock" />
-            <h3>Data Security</h3>
-            <p>
-              Strict data encryption and privacy protection to safeguard your
-              sensitive information securely.
-            </p>
-          </div>
-        </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
     <!-- footer -->
     <footer class="footer">
@@ -305,9 +225,9 @@
         <div class="footer-links">
           <div>
             <h4>Products and Services</h4>
-            <a href="./website-verification.html">Website Verification</a>
-            <a href="./image-verification.html">Image Verification</a>
-            <a href="./news-verification.html">News Verification</a>
+            <a href="./website-verification.html">Website Legitimacy Checker</a>
+            <a href="./image-verification.html">Fake Image Detector</a>
+            <a href="./news-verification.html">News Bias Detector</a>
             <a href="./resources.html">Resources</a>
           </div>
           <div>
@@ -329,6 +249,6 @@
     </footer>
 
     <script type="module" src="middleware.js"></script>
-    <script type="module" src="./scripts/script.js"></script>
+    <script type="module" src="scripts/alternative-landing.js"></script>
   </body>
 </html>
