@@ -17,12 +17,12 @@ function createSpinnerStyles() {
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    
+
     .spinner-overlay.active {
       opacity: 1;
       visibility: visible;
     }
-    
+
     .spinner {
       width: 50px;
       height: 50px;
@@ -31,11 +31,11 @@ function createSpinnerStyles() {
       border-top-color: #fff;
       animation: spin 1s ease-in-out infinite;
     }
-    
+
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-    
+
     .upload-progress {
       width: 100%;
       height: 4px;
@@ -45,7 +45,7 @@ function createSpinnerStyles() {
       overflow: hidden;
       display: none;
     }
-    
+
     .upload-progress-bar {
       height: 100%;
       width: 0%;
@@ -53,15 +53,15 @@ function createSpinnerStyles() {
       border-radius: 2px;
       transition: width 0.3s ease;
     }
-    
+
     .upload-area.uploading {
       border-color: #4CAF50;
     }
-    
+
     .pulse-animation {
       animation: pulse 1.5s infinite;
     }
-    
+
     @keyframes pulse {
       0% { opacity: 1; }
       50% { opacity: 0.6; }
@@ -130,6 +130,67 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // info card for loading animations
+  const infoCard = document.getElementById("loading-card");
+  const infoMessage = document.getElementById("loading-message");
+  const closeBtn = document.getElementById("loading-close-btn");
+
+  // random facts about website verification and safety
+  const facts = [
+    "Did you know? Over 90% of phishing attacks are delivered via email.",
+    "Fact: 1 in 3 people have fallen victim to a phishing attack at least once.",
+    "Fact: 43% of cyber attacks target small businesses.",
+    "Did you know? 95% of successful cyber attacks are due to human error.",
+    "Fact: 60% of small businesses go out of business within 6 months of a cyber attack.",
+  ];
+
+  function showDidYouKnow() {
+    const randomIndex = Math.floor(Math.random() * facts.length);
+    const selectedFact = facts[randomIndex];
+
+    infoMessage.textContent = selectedFact;
+    closeBtn.classList.add("hidden");
+    infoCard.classList.remove("hidden");
+  }
+
+  function showResultReady() {
+    infoMessage.textContent = "The result is ready! Click below to view.";
+    closeBtn.textContent = "View Results";
+    closeBtn.classList.remove("hidden");
+    closeBtn.disabled = false;
+  }
+
+  function showErrorState() {
+    infoMessage.textContent = "An error occurred while fetching your result.";
+    closeBtn.textContent = "An Error Has Occurred";
+    closeBtn.classList.remove("hidden");
+    closeBtn.disabled = true; // Optional: prevent clicking
+    closeBtn.classList.add("error");
+  }
+
+  function hideInfoCard() {
+    infoCard.classList.add("hidden");
+    document
+      .getElementById("news-result-container")
+      ?.scrollIntoView({ behavior: "smooth" });
+  }
+
+  closeBtn.addEventListener("click", () => {
+    hideInfoCard();
+  });
+
+  // Wrap fetch logic in this modular function
+  function showLoadingCard(fetchFunction) {
+    showDidYouKnow();
+    fetchFunction()
+      .then(() => {
+        showResultReady();
+      })
+      .catch(() => {
+        showErrorState();
+      });
+  }
+
   // Option tabs for Fake News Detector
   const optionTabs = document.querySelectorAll(".option-tab");
   const optionContents = document.querySelectorAll(".option-content");
@@ -152,11 +213,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const checkWebsiteButton = document.getElementById("check-website");
 
   checkWebsiteButton.addEventListener("click", () => {
+    // clear previous results
+    const websiteResultContainer = document.getElementById("info-card-website");
+
     const websiteUrl = websiteInput.value.trim();
 
     if (websiteUrl) {
       // Show spinner with 30-second timeout
-      const { timeoutId } = showSpinnerWithTimeout(30000);
+      // const { timeoutId } = showSpinnerWithTimeout(30000);
+
+      // Clear previous results
+      websiteResultContainer.innerHTML = "";
 
       // Show loading state
       checkWebsiteButton.disabled = true;
@@ -171,101 +238,99 @@ document.addEventListener("DOMContentLoaded", () => {
         processedUrl = "https://" + processedUrl;
       }
 
-      // Prepare the data in the format expected by the Java backend
-      const requestBody = {
-        url: processedUrl,
-      };
+      showLoadingCard(() => {
+        return new Promise((resolve, reject) => {
+          const requestBodyString = JSON.stringify({
+            url: processedUrl,
+          });
 
-      // Convert the request body to JSON string
-      const requestBodyString = JSON.stringify(requestBody);
+          // Log the request for debugging
+          console.log("Sending request to backend:", requestBodyString);
 
-      // Log the request for debugging
-      console.log("Sending request to backend:", requestBodyString);
+          // Get the API endpoint - use a local proxy if needed to avoid CORS issues
+          const apiUrl =
+            "https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByUrl";
 
-      // Get the API endpoint - use a local proxy if needed to avoid CORS issues
-      const apiUrl =
-        "https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByUrl";
+          // Send the website URL to the Java backend
+          fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: requestBodyString,
+          })
+            .then((response) => {
+              // Hide spinner and clear timeout
+              // hideSpinner(timeoutId);
 
-      // Send the website URL to the Java backend
-      fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: requestBodyString,
-      })
-        .then((response) => {
-          // Hide spinner and clear timeout
-          hideSpinner(timeoutId);
+              // Reset button state
+              checkWebsiteButton.disabled = false;
+              checkWebsiteButton.textContent = "Analyse";
 
-          // Reset button state
-          checkWebsiteButton.disabled = false;
-          checkWebsiteButton.textContent = "Analyse";
+              if (!response.ok) {
+                console.error("Response status:", response.status);
+                throw new Error(
+                  `Failed to check website legitimacy (Status: ${response.status})`
+                );
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Response from backend:", data);
 
-          if (!response.ok) {
-            console.error("Response status:", response.status);
-            throw new Error(
-              `Failed to check website legitimacy (Status: ${response.status})`
-            );
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Response from backend:", data);
+              // data.data.resultSummary is the expected format for the result summary
+              // data.data.confidenceScore is the expected format for the confidence score
+              var websiteResultSummary =
+                data.data.resultSummary || "No result available";
+              var websiteConfidenceScore =
+                data.data.confidenceScore || "No score available";
 
-          // data.data.resultSummary is the expected format for the result summary
-          // data.data.confidenceScore is the expected format for the confidence score
-          var websiteResultSummary =
-            data.data.resultSummary || "No result available";
-          var websiteConfidenceScore =
-            data.data.confidenceScore || "No score available";
+              // websiteLogId to check for dynamic update
+              var websiteLogId = data.data.logId || "No log ID available";
 
-          // websiteLogId to check for dynamic update
-          var websiteLogId = data.data.logId || "No log ID available";
+              // urlResult
+              var googleResult =
+                data.data.urlResult.googleResult || "No result available";
+              var officialResults =
+                data.data.urlResult.officialResults || "No result available";
+              var sslCaResult =
+                data.data.urlResult.sslCaResult || "No result available";
+              var sslValidityResult =
+                data.data.urlResult.sslValidityResult || "No result available";
+              var sslKeyResult =
+                data.data.urlResult.sslKeyResult || "No result available";
 
-          // urlResult
-          var googleResult =
-            data.data.urlResult.googleResult || "No result available";
-          var officialResults =
-            data.data.urlResult.officialResults || "No result available";
-          var sslCaResult =
-            data.data.urlResult.sslCaResult || "No result available";
-          var sslValidityResult =
-            data.data.urlResult.sslValidityResult || "No result available";
-          var sslKeyResult =
-            data.data.urlResult.sslKeyResult || "No result available";
+              // formatting output
+              // if (websiteResultSummary.toLowerCase() === "safe website") {
+              //   websiteResultSummary = "Safe Website";
+              // } else {
+              //   websiteResultSummary = "Unsafe Website";
+              // }
 
-          // formatting output
-          // if (websiteResultSummary.toLowerCase() === "safe website") {
-          //   websiteResultSummary = "Safe Website";
-          // } else {
-          //   websiteResultSummary = "Unsafe Website";
-          // }
+              var safetyRating = "";
+              var imgRating = "";
 
-          var safetyRating = "";
-          var imgRating = "";
+              if (websiteConfidenceScore < 50) {
+                safetyRating = "High Risk";
+                imgRating =
+                  "./scripts/website-detection-result/website-unsafe-icon.png";
+              } else if (websiteConfidenceScore < 70) {
+                safetyRating = "Doubtful";
+                imgRating =
+                  "./scripts/website-detection-result/website-doubtful-icon.png";
+              } else {
+                safetyRating = "Safe";
+                imgRating =
+                  "./scripts/website-detection-result/website-safe-icon.png";
+              }
 
-          if (websiteConfidenceScore < 50) {
-            safetyRating = "High Risk";
-            imgRating =
-              "./scripts/website-detection-result/website-unsafe-icon.png";
-          } else if (websiteConfidenceScore < 70) {
-            safetyRating = "Doubtful";
-            imgRating =
-              "./scripts/website-detection-result/website-doubtful-icon.png";
-          } else {
-            safetyRating = "Safe";
-            imgRating =
-              "./scripts/website-detection-result/website-safe-icon.png";
-          }
+              // Display the data on the index.html page
+              const websiteResultContainer =
+                document.getElementById("info-card-website");
 
-          // Display the data on the index.html page
-          const websiteResultContainer =
-            document.getElementById("info-card-website");
-
-          if (websiteResultContainer) {
-            websiteResultContainer.innerHTML = `
+              if (websiteResultContainer) {
+                websiteResultContainer.innerHTML = `
 
             <div class="info-card">
               <div class="info-icon">
@@ -418,38 +483,48 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             `;
-          }
-        })
-        .catch((error) => {
-          // Hide spinner and clear timeout
-          hideSpinner(timeoutId);
+              }
+              // Re-enable the button
+              checkWebsiteButton.disabled = false;
+              checkWebsiteButton.textContent = "Analyse";
+              resolve();
+            })
+            .catch((error) => {
+              // Hide spinner and clear timeout
+              // hideSpinner(timeoutId);
 
-          // Reset button state
-          checkWebsiteButton.disabled = false;
-          checkWebsiteButton.textContent = "Analyse";
+              // Reset button state
+              checkWebsiteButton.disabled = false;
+              checkWebsiteButton.textContent = "Analyse";
 
-          console.error("Error checking website:", error);
+              console.error("Error checking website:", error);
 
-          // More detailed error message
-          let errorMessage = "Error checking website. ";
+              // More detailed error message
+              let errorMessage = "Error checking website. ";
 
-          // Check if it's a network error
-          if (
-            error.message.includes("NetworkError") ||
-            error.message.includes("Failed to fetch") ||
-            error.message.includes("ERR_CONNECTION_RESET")
-          ) {
-            errorMessage +=
-              "Cannot connect to the server. The server might be down or unreachable. Please try again later.";
-          } else {
-            errorMessage += "Please try again.";
-          }
+              // Check if it's a network error
+              if (
+                error.message.includes("NetworkError") ||
+                error.message.includes("Failed to fetch") ||
+                error.message.includes("ERR_CONNECTION_RESET")
+              ) {
+                errorMessage +=
+                  "Cannot connect to the server. The server might be down or unreachable. Please try again later.";
+              } else {
+                errorMessage += "Please try again.";
+              }
 
-          alert(errorMessage);
+              alert(errorMessage);
 
-          // Provide a way to test with mock data for development
-          console.log("For development, you can use mock data to test the UI");
+              reject();
+
+              // Provide a way to test with mock data for development
+              console.log(
+                "For development, you can use mock data to test the UI"
+              );
+            });
         });
+      });
     } else {
       alert("Please enter a valid website URL.");
     }
@@ -576,7 +651,7 @@ function handleFileSelect(selectedFile) {
       analyzeButton.hasEventListener = true;
       analyzeButton.addEventListener("click", () => {
         // Show spinner with 30-second timeout
-        const { timeoutId } = showSpinnerWithTimeout(30000);
+        // const { timeoutId } = showSpinnerWithTimeout(30000);
 
         analyzeButton.disabled = true;
         analyzeButton.textContent = "Analysing...";
@@ -606,7 +681,7 @@ function handleFileSelect(selectedFile) {
         )
           .then((response) => {
             // Hide spinner and clear timeout
-            hideSpinner(timeoutId);
+            // hideSpinner(timeoutId);
 
             // Remove pulse animation
             analyzeButton.classList.remove("pulse-animation");
@@ -780,7 +855,7 @@ function handleFileSelect(selectedFile) {
           })
           .catch((error) => {
             // Hide spinner and clear timeout
-            hideSpinner(timeoutId);
+            // hideSpinner(timeoutId);
 
             // Remove pulse animation
             analyzeButton.classList.remove("pulse-animation");

@@ -158,5 +158,27 @@
 
     <script type="module" src="middleware.js"></script>
     <script type="module" src="./scripts/script.js"></script>
+
+    <!-- info card during loading animation -->
+    <div id="loading-card" class="loading-card hidden">
+      <div class="loading-card-content">
+        <img
+          src="./styles/media/lightbulb.svg"
+          alt="Did you know?"
+          class="loading-image"
+        />
+        <div class="loading-text">
+          <h3>Did you know?</h3>
+          <p id="loading-message">
+            Nearly 40% of news shared on social media is shared without being
+            read!
+          </p>
+          <!-- this button is dynamically updated to -->
+          <button id="loading-close-btn" class="loading-close-btn hidden">
+            Start
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
