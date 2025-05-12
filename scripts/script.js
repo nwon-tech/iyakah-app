@@ -621,6 +621,67 @@ fileInput.addEventListener("change", (event) => {
   }
 });
 
+// info card for loading animations
+const infoCard = document.getElementById("loading-card");
+const infoMessage = document.getElementById("loading-message");
+const closeBtn = document.getElementById("loading-close-btn");
+
+// random facts about website verification and safety
+const facts = [
+  "Did you know? Over 90% of phishing attacks are delivered via email.",
+  "Fact: 1 in 3 people have fallen victim to a phishing attack at least once.",
+  "Fact: 43% of cyber attacks target small businesses.",
+  "Did you know? 95% of successful cyber attacks are due to human error.",
+  "Fact: 60% of small businesses go out of business within 6 months of a cyber attack.",
+];
+
+function showDidYouKnow() {
+  const randomIndex = Math.floor(Math.random() * facts.length);
+  const selectedFact = facts[randomIndex];
+
+  infoMessage.textContent = selectedFact;
+  closeBtn.classList.add("hidden");
+  infoCard.classList.remove("hidden");
+}
+
+function showResultReady() {
+  infoMessage.textContent = "The result is ready! Click below to view.";
+  closeBtn.textContent = "View Results";
+  closeBtn.classList.remove("hidden");
+  closeBtn.disabled = false;
+}
+
+function showErrorState() {
+  infoMessage.textContent = "An error occurred while fetching your result.";
+  closeBtn.textContent = "An Error Has Occurred";
+  closeBtn.classList.remove("hidden");
+  closeBtn.disabled = true; // Optional: prevent clicking
+  closeBtn.classList.add("error");
+}
+
+function hideInfoCard() {
+  infoCard.classList.add("hidden");
+  document
+    .getElementById("news-result-container")
+    ?.scrollIntoView({ behavior: "smooth" });
+}
+
+closeBtn.addEventListener("click", () => {
+  hideInfoCard();
+});
+
+// Wrap fetch logic in this modular function
+function showLoadingCard(fetchFunction) {
+  showDidYouKnow();
+  fetchFunction()
+    .then(() => {
+      showResultReady();
+    })
+    .catch(() => {
+      showErrorState();
+    });
+}
+
 function handleFileSelect(selectedFile) {
   if (selectedFile.type.startsWith("image/")) {
     // Start upload progress animation
@@ -671,75 +732,77 @@ function handleFileSelect(selectedFile) {
 
         console.log("Image sent: ", file.name); // Log the file name being sent
 
-        // Send the image to the Java backend
-        fetch(
-          "https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByImage",
-          {
-            method: "POST",
-            body: formData,
-          }
-        )
-          .then((response) => {
-            // Hide spinner and clear timeout
-            // hideSpinner(timeoutId);
+        showLoadingCard(() => {
+          return new Promise((resolve, reject) => {
+            // Send the image to the Java backend
+            fetch(
+              "https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByImage",
+              {
+                method: "POST",
+                body: formData,
+              }
+            )
+              .then((response) => {
+                // Hide spinner and clear timeout
+                // hideSpinner(timeoutId);
 
-            // Remove pulse animation
-            analyzeButton.classList.remove("pulse-animation");
+                // Remove pulse animation
+                analyzeButton.classList.remove("pulse-animation");
 
-            if (!response.ok) {
-              throw new Error("Failed to upload image");
-            }
-            console.log("Response status:", response.status);
-            return response.json();
-          })
-          .then((data) => {
-            console.log("Response from backend:", data);
+                if (!response.ok) {
+                  throw new Error("Failed to upload image");
+                }
+                console.log("Response status:", response.status);
+                return response.json();
+              })
+              .then((data) => {
+                console.log("Response from backend:", data);
 
-            // labelling the image
-            const imageResultSummary =
-              data.data.resultSummary || "No result available";
-            const imageConfidenceScore =
-              data.data.confidenceScore || "No score available";
+                // labelling the image
+                const imageResultSummary =
+                  data.data.resultSummary || "No result available";
+                const imageConfidenceScore =
+                  data.data.confidenceScore || "No score available";
 
-            // Metadata Field (only present for actual DSLR images)
-            // Shooting Date
-            const imageCaptureDate =
-              data.data.captureDate || "No date available";
-            // Filming Locations
-            let imageCaptureLocation =
-              data.data.location || "No location available";
-            // Filming Equipment
-            const imageCameraModel =
-              data.data.cameraModel || "No model available";
+                // Metadata Field (only present for actual DSLR images)
+                // Shooting Date
+                const imageCaptureDate =
+                  data.data.captureDate || "No date available";
+                // Filming Locations
+                let imageCaptureLocation =
+                  data.data.location || "No location available";
+                // Filming Equipment
+                const imageCameraModel =
+                  data.data.cameraModel || "No model available";
 
-            let imageCaptureAddress = "No address available";
+                let imageCaptureAddress = "No address available";
 
-            // Reverse geocoding for filming locations
-            // if (data.data.location) {
-            //   fetchAddressFromCoordinates(data.data.location).then((result) => {
-            //     imageCaptureLocation = result.coordinates;
-            //     imageCaptureAddress = result.address;
-            //   });
-            // }
+                // Reverse geocoding for filming locations
+                // if (data.data.location) {
+                //   fetchAddressFromCoordinates(data.data.location).then((result) => {
+                //     imageCaptureLocation = result.coordinates;
+                //     imageCaptureAddress = result.address;
+                //   });
+                // }
 
-            // Formatting output
-            const resultText =
-              imageResultSummary === "Real Image" ? "Real" : "AI-Generated";
+                // Formatting output
+                const resultText =
+                  imageResultSummary === "Real Image" ? "Real" : "AI-Generated";
 
-            let imgRating = "";
+                let imgRating = "";
 
-            // update info card based on the result
-            if (resultText === "Real") {
-              imgRating =
-                "./scripts/image-detection-result/image-safe-icon.png";
-            } else {
-              imgRating =
-                "./scripts/image-detection-result/image-unsafe-icon.png";
-            }
+                // update info card based on the result
+                if (resultText === "Real") {
+                  imgRating =
+                    "./scripts/image-detection-result/image-safe-icon.png";
+                } else {
+                  imgRating =
+                    "./scripts/image-detection-result/image-unsafe-icon.png";
+                }
 
-            // Display the data on the index.html page
-            if (imageResultContainer) {
-              imageResultContainer.innerHTML = `
+                // Display the data on the index.html page
+                if (imageResultContainer) {
+                  imageResultContainer.innerHTML = `
 
                 <div class="info-container">
                   <div class="info-card">
@@ -848,23 +911,27 @@ function handleFileSelect(selectedFile) {
                   </div>
 
               `;
-            }
+                }
 
-            analyzeButton.disabled = false;
-            analyzeButton.textContent = "Analyse";
-          })
-          .catch((error) => {
-            // Hide spinner and clear timeout
-            // hideSpinner(timeoutId);
+                analyzeButton.disabled = false;
+                analyzeButton.textContent = "Analyse";
+                resolve();
+              })
+              .catch((error) => {
+                // Hide spinner and clear timeout
+                // hideSpinner(timeoutId);
 
-            // Remove pulse animation
-            analyzeButton.classList.remove("pulse-animation");
+                // Remove pulse animation
+                analyzeButton.classList.remove("pulse-animation");
 
-            console.error("Error uploading image:", error);
-            analyzeButton.disabled = false;
-            analyzeButton.textContent = "Analyse";
-            alert("Error uploading image. Please try again.");
+                console.error("Error uploading image:", error);
+                analyzeButton.disabled = false;
+                analyzeButton.textContent = "Analyse";
+                alert("Error uploading image. Please try again.");
+                reject();
+              });
           });
+        });
       });
     }
   } else {
