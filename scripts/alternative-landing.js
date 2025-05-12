@@ -1,4 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // disappearing navbar
+  const navbar = document.getElementById("navbar");
+  const heroSection = document.getElementById("hero");
+
+  window.addEventListener("scroll", () => {
+    const heroBottom = heroSection.getBoundingClientRect().bottom;
+
+    if (heroBottom <= 0) {
+      navbar.classList.remove("hidden");
+      navbar.classList.add("flex");
+    } else {
+      navbar.classList.remove("flex");
+      navbar.classList.add("hidden");
+    }
+  });
+
   // Create particles
   createParticles();
 
