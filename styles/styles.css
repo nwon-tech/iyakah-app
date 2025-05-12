@@ -10,6 +10,7 @@
 .navbar {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Distribute logo and center wrapper */
   padding: 20px 5%;
   background-color: white;
   color: black;
@@ -18,9 +19,17 @@
   z-index: 999;
 }
 
-.nav-logo {
+.nav-logo > a {
   font-weight: bold;
   font-size: 1.5em;
+  text-decoration: none;
+  color: black;
+}
+
+.nav-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .nav-links {
@@ -28,6 +37,8 @@
   display: flex;
   gap: 40px;
   color: black;
+  margin: 0;
+  padding: 0;
 }
 
 /* remove the blue underline for links */

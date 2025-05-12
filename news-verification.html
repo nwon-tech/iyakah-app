@@ -77,28 +77,31 @@
   <body>
     <!-- navbar -->
     <nav class="navbar">
-      <div class="nav-logo">IYAKAH</div>
-      <ul class="nav-links">
-        <li class="nav-item"><a href="index.html">Home</a></li>
-        <li class="nav-item">
-          About
-          <ul class="dropdown">
-            <!-- introduction link -->
-            <li><a href="./introduction.html">Introduction</a></li>
-            <!-- open data link -->
-            <li><a href="./open-data.html">Open Data</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          Support
-          <ul class="dropdown">
-            <!-- FAQ link -->
-            <li><a href="./faq.html">FAQ</a></li>
-            <!-- search ranking link -->
-            <li><a href="./search-ranking.html">Search Ranking</a></li>
-          </ul>
-        </li>
-      </ul>
+      <div class="nav-logo"><a href="index.html">IYAKAH</a></div>
+      <div class="nav-center">
+        <ul class="nav-links">
+          <li class="nav-item">
+            Functions
+            <ul class="dropdown">
+              <!-- introduction link -->
+              <li>
+                <a href="./website-verification.html"
+                  >Website Legitimacy Checker</a
+                >
+              </li>
+              <!-- open data link -->
+              <li>
+                <a href="./image-verification.html">Fake Image Detector</a>
+              </li>
+              <!-- function link -->
+              <li><a href="./news-verification.html">News Bias Detector</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="./education.html">Education</a>
+          </li>
+        </ul>
+      </div>
     </nav>
 
     <!-- news verification  -->
@@ -511,7 +514,9 @@
 
         function hideInfoCard() {
           infoCard.classList.add("hidden");
-          document.getElementById("news-result-container")?.scrollIntoView({ behavior: "smooth" });
+          document
+            .getElementById("news-result-container")
+            ?.scrollIntoView({ behavior: "smooth" });
         }
 
         closeBtn.addEventListener("click", () => {
@@ -521,12 +526,13 @@
         // Wrap fetch logic in this modular function
         function showLoadingCard(fetchFunction) {
           showDidYouKnow();
-          fetchFunction().then(() => {
-            showResultReady();
-          })
-          .catch(() => {
-            showErrorState();
-          });
+          fetchFunction()
+            .then(() => {
+              showResultReady();
+            })
+            .catch(() => {
+              showErrorState();
+            });
         }
 
         // News verification functionality
@@ -535,13 +541,13 @@
           const mediaName = mediaInput.value.trim();
 
           // Clear the previous results
-        const newsesultContainer = document.getElementById(
-          "news-result-container"
-        );
+          const newsesultContainer = document.getElementById(
+            "news-result-container"
+          );
 
-        if (newsesultContainer) {
-          newsesultContainer.innerHTML = "";
-        }
+          if (newsesultContainer) {
+            newsesultContainer.innerHTML = "";
+          }
 
           let timeoutId;
 
