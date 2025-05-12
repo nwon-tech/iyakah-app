@@ -225,7 +225,7 @@ body {
   font-size: 1.6rem;
   margin-bottom: 15px;
   position: relative;
-  display: inline-block;
+  display: block;
   color: #000;
 }
 
