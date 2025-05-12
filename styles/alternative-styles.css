@@ -521,7 +521,8 @@ body {
 }
 
 .resource-gallery a iframe {
-  width: 428px;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   transition: transform 0.3s;
   margin: 10px 20px;
