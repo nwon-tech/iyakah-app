@@ -204,112 +204,112 @@
     <!-- Load the autocomplete data first -->
     <script>
       // Create and append spinner styles to the document head
-      function createSpinnerStyles() {
-        const styleEl = document.createElement("style");
-        styleEl.innerHTML = `
-    .spinner-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-    
-    .spinner-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    .upload-progress {
-      width: 100%;
-      height: 4px;
-      background-color: #f1f1f1;
-      border-radius: 2px;
-      margin-top: 10px;
-      overflow: hidden;
-      display: none;
-    }
-    
-    .upload-progress-bar {
-      height: 100%;
-      width: 0%;
-      background-color: #4CAF50;
-      border-radius: 2px;
-      transition: width 0.3s ease;
-    }
-    
-    .upload-area.uploading {
-      border-color: #4CAF50;
-    }
-    
-    .pulse-animation {
-      animation: pulse 1.5s infinite;
-    }
-    
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
-  `;
-        document.head.appendChild(styleEl);
-      }
+      //     function createSpinnerStyles() {
+      //       const styleEl = document.createElement("style");
+      //       styleEl.innerHTML = `
+      //   .spinner-overlay {
+      //     position: fixed;
+      //     top: 0;
+      //     left: 0;
+      //     width: 100%;
+      //     height: 100%;
+      //     background-color: rgba(0, 0, 0, 0.5);
+      //     display: flex;
+      //     justify-content: center;
+      //     align-items: center;
+      //     z-index: 9999;
+      //     opacity: 0;
+      //     visibility: hidden;
+      //     transition: opacity 0.3s ease, visibility 0.3s ease;
+      //   }
+
+      //   .spinner-overlay.active {
+      //     opacity: 1;
+      //     visibility: visible;
+      //   }
+
+      //   .spinner {
+      //     width: 50px;
+      //     height: 50px;
+      //     border: 5px solid rgba(255, 255, 255, 0.3);
+      //     border-radius: 50%;
+      //     border-top-color: #fff;
+      //     animation: spin 1s ease-in-out infinite;
+      //   }
+
+      //   @keyframes spin {
+      //     to { transform: rotate(360deg); }
+      //   }
+
+      //   .upload-progress {
+      //     width: 100%;
+      //     height: 4px;
+      //     background-color: #f1f1f1;
+      //     border-radius: 2px;
+      //     margin-top: 10px;
+      //     overflow: hidden;
+      //     display: none;
+      //   }
+
+      //   .upload-progress-bar {
+      //     height: 100%;
+      //     width: 0%;
+      //     background-color: #4CAF50;
+      //     border-radius: 2px;
+      //     transition: width 0.3s ease;
+      //   }
+
+      //   .upload-area.uploading {
+      //     border-color: #4CAF50;
+      //   }
+
+      //   .pulse-animation {
+      //     animation: pulse 1.5s infinite;
+      //   }
+
+      //   @keyframes pulse {
+      //     0% { opacity: 1; }
+      //     50% { opacity: 0.6; }
+      //     100% { opacity: 1; }
+      //   }
+      // `;
+      //       document.head.appendChild(styleEl);
+      //     }
 
       // Create spinner overlay element
-      function createSpinnerOverlay() {
-        const overlay = document.createElement("div");
-        overlay.className = "spinner-overlay";
-        overlay.innerHTML = '<div class="spinner"></div>';
-        document.body.appendChild(overlay);
-        return overlay;
-      }
+      // function createSpinnerOverlay() {
+      //   const overlay = document.createElement("div");
+      //   overlay.className = "spinner-overlay";
+      //   overlay.innerHTML = '<div class="spinner"></div>';
+      //   document.body.appendChild(overlay);
+      //   return overlay;
+      // }
 
-      // Show spinner with timeout
-      function showSpinnerWithTimeout(timeout = 30000) {
-        const spinner =
-          document.querySelector(".spinner-overlay") || createSpinnerOverlay();
-        spinner.classList.add("active");
+      // // Show spinner with timeout
+      // function showSpinnerWithTimeout(timeout = 30000) {
+      //   const spinner =
+      //     document.querySelector(".spinner-overlay") || createSpinnerOverlay();
+      //   spinner.classList.add("active");
 
-        // Set timeout to hide spinner and show error if it takes too long
-        const timeoutId = setTimeout(() => {
-          hideSpinner();
-          alert("Request timed out. Please try again later.");
-        }, timeout);
+      //   // Set timeout to hide spinner and show error if it takes too long
+      //   const timeoutId = setTimeout(() => {
+      //     hideSpinner();
+      //     alert("Request timed out. Please try again later.");
+      //   }, timeout);
 
-        return { spinner, timeoutId };
-      }
+      //   return { spinner, timeoutId };
+      // }
 
-      // Hide spinner and clear timeout
-      function hideSpinner(timeoutId) {
-        const spinner = document.querySelector(".spinner-overlay");
-        if (spinner) {
-          spinner.classList.remove("active");
-        }
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-        }
-      }
+      // // Hide spinner and clear timeout
+      // function hideSpinner(timeoutId) {
+      //   const spinner = document.querySelector(".spinner-overlay");
+      //   if (spinner) {
+      //     spinner.classList.remove("active");
+      //   }
+      //   if (timeoutId) {
+      //     clearTimeout(timeoutId);
+      //   }
+      // }
       // Global variable to store media data
       let mediaItems = [];
 
@@ -396,15 +396,15 @@
           const probability = Math.floor(sentence.bias_probability * 100);
 
           tableHTML += `
-      <tr>
-        <td>${biasType.charAt(0).toUpperCase() + biasType.slice(1)} Bias</td>
-        <td>
-          <p><strong>${biasDescription}</strong></p>
-          <p class="biased-text">Detected Sentence: "${sentence.text}"</p>
-          <p class="bias-probability">Confidence: ${probability}%</p>
-        </td>
-      </tr>
-    `;
+        <tr>
+          <td>${biasType.charAt(0).toUpperCase() + biasType.slice(1)} Bias</td>
+          <td>
+            <p><strong>${biasDescription}</strong></p>
+            <p class="biased-text">Detected Sentence: "${sentence.text}"</p>
+            <p class="bias-probability">Confidence: ${probability}%</p>
+          </td>
+        </tr>
+      `;
         });
 
         return (
@@ -413,9 +413,8 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-
         // Add spinner styles to document
-        createSpinnerStyles();
+        // createSpinnerStyles();
 
         // Fake News Detector functionality
         const newsInput = document.getElementById("news-input");
@@ -469,204 +468,297 @@
           }
         });
 
+        // info card for loading animations
+        const infoCard = document.getElementById("loading-card");
+        const infoMessage = document.getElementById("loading-message");
+        const closeBtn = document.getElementById("loading-close-btn");
+
+        // random facts appear everytime the user clicks the button
+        // to show the loading animation
+        const facts = [
+          "Nearly 40% of news shared on social media is shared without being read!",
+          "The average person consumes more than 100,000 words per day online.",
+          "AI-generated articles are shared 3x more often than human-written ones.",
+          "False news spreads 6 times faster on Twitter than true news.",
+          "Most users can't distinguish between sponsored content and real articles.",
+          "Misinformation is most common during elections and crises.",
+        ];
+
+        function showDidYouKnow() {
+          const randomIndex = Math.floor(Math.random() * facts.length);
+          const selectedFact = facts[randomIndex];
+
+          infoMessage.textContent = selectedFact;
+          closeBtn.classList.add("hidden");
+          infoCard.classList.remove("hidden");
+        }
+
+        function showResultReady() {
+          infoMessage.textContent = "The result is ready! Click below to view.";
+          closeBtn.textContent = "View Results";
+          closeBtn.classList.remove("hidden");
+          closeBtn.disabled = false;
+        }
+
+        function showErrorState() {
+          infoMessage.textContent =
+            "An error occurred while fetching your result.";
+          closeBtn.textContent = "An Error Has Occurred";
+          closeBtn.classList.remove("hidden");
+          closeBtn.disabled = true; // Optional: prevent clicking
+          closeBtn.classList.add("error");
+        }
+
+        function hideInfoCard() {
+          infoCard.classList.add("hidden");
+          document.getElementById("news-result-container")?.scrollIntoView({ behavior: "smooth" });
+        }
+
+        closeBtn.addEventListener("click", () => {
+          hideInfoCard();
+        });
+
+        // Wrap fetch logic in this modular function
+        function showLoadingCard(fetchFunction) {
+          showDidYouKnow();
+          fetchFunction().then(() => {
+            showResultReady();
+          })
+          .catch(() => {
+            showErrorState();
+          });
+        }
+
         // News verification functionality
         checkNewsButton.addEventListener("click", () => {
           const newsContent = newsInput.value.trim();
           const mediaName = mediaInput.value.trim();
+
+          // Clear the previous results
+        const newsesultContainer = document.getElementById(
+          "news-result-container"
+        );
+
+        if (newsesultContainer) {
+          newsesultContainer.innerHTML = "";
+        }
 
           let timeoutId;
 
           if (!newsContent) {
             alert("Please enter news content to check.");
             return;
-          } else {
-            checkNewsButton.disabled = true;
-            // Show spinner with 30-second timeout
-            ({ timeoutId } = showSpinnerWithTimeout(30000));
-            checkNewsButton.textContent = "Analysing...";
           }
 
-          // Prepare the data for API submission
-          const formData = JSON.stringify({
-            text: newsContent,
-            mediaName: mediaName || null,
-          });
+          checkNewsButton.disabled = true;
+          checkNewsButton.textContent = "Analysing...";
 
-          // Log the news content for debugging
-          console.log("Sending news content to backend:", formData);
+          showLoadingCard(() => {
+            return new Promise((resolve, reject) => {
+              const formData = JSON.stringify({
+                text: newsContent,
+                mediaName: mediaName || null,
+              });
 
-          // Send the news content to the Java backend
-          fetch(
-            "https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByNews",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: formData,
-            }
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Failed to check news legitimacy");
-              }
-              return response.json();
-            })
-            .then((data) => {
-              // Hide spinner and clear timeout
-              hideSpinner(timeoutId);
+              // Log the news content for debugging
+              console.log("Sending news content to backend:", formData);
 
-              console.log("Response from backend:", data);
+              // Send the news content to the Java backend
+              fetch(
+                "https://www.pollucheck8.com:8088/analysislog/addAnalysisLogByNews",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: formData,
+                }
+              )
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Failed to check news legitimacy");
+                  }
+                  return response.json();
+                })
+                .then((data) => {
+                  // Hide spinner and clear timeout
+                  // hideSpinner(timeoutId);
 
-              var newsResultSummary =
-                data.data.resultSummary || "No result available";
-              var newsConfidenceScore =
-                data.data.confidenceScore || "No score available";
-              var newsMediaBiasRating =
-                data.data.mediaBiasRating || "No rating available";
-              var newsMediamediaBiasScore =
-                data.data.mediaBiasScore || "No score available";
+                  console.log("Response from backend:", data);
 
-              // for textBiasResult Section
-              var newsBiasScore =
-                data.data.textBiasScore || "No data available";
+                  var newsResultSummary =
+                    data.data.resultSummary || "No result available";
+                  var newsConfidenceScore =
+                    data.data.confidenceScore || "No score available";
+                  var newsMediaBiasRating =
+                    data.data.mediaBiasRating || "No rating available";
+                  var newsMediamediaBiasScore =
+                    data.data.mediaBiasScore || "No score available";
 
-              var newsBiasType =
-                data.data.textBiasResult?.document_analysis.bias_type ||
-                "No data available";
+                  // for textBiasResult Section
+                  var newsBiasScore =
+                    data.data.textBiasScore || "No data available";
 
-              // show sentences for bias analysis
-              var newsBiasSentences =
-                data.data.textBiasResult.biased_sentences.text ||
-                "No data available";
+                  var newsBiasType =
+                    data.data.textBiasResult?.document_analysis.bias_type ||
+                    "No data available";
 
-              // formatting output
-              if (newsResultSummary.toLowerCase() === "AI-generated") {
-                newsResultSummary = "Ai-Generated";
-              } else {
-                newsResultSummary = "Human-written";
-              }
+                  // show sentences for bias analysis
+                  var newsBiasSentences =
+                    data.data.textBiasResult.biased_sentences.text ||
+                    "No data available";
 
-              var imgRating = "";
+                  // formatting output
+                  if (newsResultSummary.toLowerCase() === "AI-generated") {
+                    newsResultSummary = "Ai-Generated";
+                  } else {
+                    newsResultSummary = "Human-written";
+                  }
 
-              if (newsResultSummary === "Ai-Generated") {
-                imgRating =
-                  "./scripts/news-detection-results/news-unsafe-icon.png";
-              } else {
-                imgRating =
-                  "./scripts/news-detection-results/news-safe-icon.png";
-              }
+                  var imgRating = "";
 
-              // floor the number
-              newsConfidenceScore = Math.floor(newsConfidenceScore);
-              newsBiasScore = Math.floor(newsBiasScore);
+                  if (newsResultSummary === "Ai-Generated") {
+                    imgRating =
+                      "./scripts/news-detection-results/news-unsafe-icon.png";
+                  } else {
+                    imgRating =
+                      "./scripts/news-detection-results/news-safe-icon.png";
+                  }
 
-              // bias portrait
-              const imgBias =
-                "./scripts/news-detection-results/news-bias-icon.png";
+                  // floor the number
+                  newsConfidenceScore = Math.floor(newsConfidenceScore);
+                  newsBiasScore = Math.floor(newsBiasScore);
 
-              // media bias potrait
-              const imgMediaBias =
-                "./scripts/news-detection-results/news-media-icon.png";
+                  // bias portrait
+                  const imgBias =
+                    "./scripts/news-detection-results/news-bias-icon.png";
 
-              // Display the data on the index.html page
+                  // media bias potrait
+                  const imgMediaBias =
+                    "./scripts/news-detection-results/news-media-icon.png";
 
-              const newsResultContainer = document.getElementById(
-                "news-result-container"
-              );
-              if (newsResultContainer) {
-                // Process the bias data to create table rows
-                const biasTableRows = processBiasData(data);
+                  // Display the data on the index.html page
 
-                newsResultContainer.innerHTML = `
-                <div class="info-container">
-                    <div class="info-card">
-                      <div class="info-icon">
-                        <img src="${imgRating}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-                        <span class="label">${newsResultSummary}</span>
+                  const newsResultContainer = document.getElementById(
+                    "news-result-container"
+                  );
+                  if (newsResultContainer) {
+                    // Process the bias data to create table rows
+                    const biasTableRows = processBiasData(data);
+
+                    newsResultContainer.innerHTML = `
+                  <div class="info-container">
+                      <div class="info-card">
+                        <div class="info-icon">
+                          <img src="${imgRating}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                          <span class="label">${newsResultSummary}</span>
+                        </div>
+                        <div class="info-value">${newsConfidenceScore}%</div>
                       </div>
-                      <div class="info-value">${newsConfidenceScore}%</div>
-                    </div>
 
-                    <div class="info-card">
-                      <div class="info-icon">
-                        <img src="${imgBias}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-                        <span class="label">${
-                          newsBiasType.charAt(0).toUpperCase() +
-                          newsBiasType.slice(1)
-                        } Bias</span>
+                      <div class="info-card">
+                        <div class="info-icon">
+                          <img src="${imgBias}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                          <span class="label">${
+                            newsBiasType.charAt(0).toUpperCase() +
+                            newsBiasType.slice(1)
+                          } Bias</span>
+                        </div>
+                        <div class="info-value">${newsBiasScore}%</div>
                       </div>
-                      <div class="info-value">${newsBiasScore}%</div>
-                    </div>
 
-                    <div class="info-card">
-                      <div class="info-icon">
-                        <img src="${imgMediaBias}" alt="${newsMediaBiasRating}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-                        <span class="label">${newsMediaBiasRating}</span>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
-                  
-                  <h2> Bias Analysis Report</h2>
-                  <table>
-                    <colgroup>
-                      <col style="width: 30%" />
-                      <col style="width: 70%" />
-                    </colgroup>
-
-                    <tbody>
-                      ${biasTableRows}
-                    </tbody>
-                  </table>
-
-                  <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
-
-                  <div>
-                  <section class="hero-feedback">
-                    <div class="feedback-container">
-                      <h2>Your Feedback Matters</h2>
-
-                      <div class="feedback-row">
-                        <label class="feedback-label">Was this result helpful?</label>
-                        <div class="feedback-buttons">
-                          <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
-                            👍🏻
-                          </button>
-                          <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
-                            👎🏻
-                          </button>
+                      <div class="info-card">
+                        <div class="info-icon">
+                          <img src="${imgMediaBias}" alt="${newsMediaBiasRating}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                          <span class="label">${newsMediaBiasRating}</span>
                         </div>
                       </div>
 
-                      <div class="feedback-row">
-                        <label class="feedback-label">Tell us more (optional)</label>
-                        <input type="text" id="feedback-text" placeholder="Please enter your feedback" />
-                        <button class="submit-btn">Submit</button>
-                      </div>
                     </div>
-                  </section>
-                  </div>
-                `;
-              }
 
-              // Re-enable the button
-              checkNewsButton.disabled = false;
-              checkNewsButton.textContent = "Analyse";
-            })
-            .catch((error) => {
-              // Reset button state
-              checkNewsButton.disabled = false;
-              checkNewsButton.textContent = "Analyse";
+                    <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 
-              console.error("Error checking news:", error);
-              alert("Error checking news. Please try again.");
+                    <h2> Bias Analysis Report</h2>
+                    <table>
+                      <colgroup>
+                        <col style="width: 30%" />
+                        <col style="width: 70%" />
+                      </colgroup>
+
+                      <tbody>
+                        ${biasTableRows}
+                      </tbody>
+                    </table>
+
+                    <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
+
+                    <div>
+                    <section class="hero-feedback">
+                      <div class="feedback-container">
+                        <h2>Your Feedback Matters</h2>
+
+                        <div class="feedback-row">
+                          <label class="feedback-label">Was this result helpful?</label>
+                          <div class="feedback-buttons">
+                            <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
+                              👍🏻
+                            </button>
+                            <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
+                              👎🏻
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="feedback-row">
+                          <label class="feedback-label">Tell us more (optional)</label>
+                          <input type="text" id="feedback-text" placeholder="Please enter your feedback" />
+                          <button class="submit-btn">Submit</button>
+                        </div>
+                      </div>
+                    </section>
+                    </div>
+                  `;
+                  }
+
+                  // Re-enable the button
+                  checkNewsButton.disabled = false;
+                  checkNewsButton.textContent = "Analyse";
+                  resolve();
+                })
+                .catch((error) => {
+                  hideSpinner(timeoutId);
+                  checkNewsButton.disabled = false;
+                  checkNewsButton.textContent = "Analyse";
+                  alert("Error checking news. Please try again.");
+                  console.error(error);
+                  reject();
+                });
             });
+          });
         });
       });
     </script>
     <script type="module" src="middleware.js"></script>
+    <!-- info card during loading animation -->
+    <div id="loading-card" class="loading-card hidden">
+      <div class="loading-card-content">
+        <img
+          src="./styles/media/lightbulb.svg"
+          alt="Did you know?"
+          class="loading-image"
+        />
+        <div class="loading-text">
+          <h3>Did you know?</h3>
+          <p id="loading-message">
+            Nearly 40% of news shared on social media is shared without being
+            read!
+          </p>
+          <!-- this button is dynamically updated to -->
+          <button id="loading-close-btn" class="loading-close-btn hidden">
+            Start
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
