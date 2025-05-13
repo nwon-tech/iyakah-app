@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Quiz questions array
-  const questions = [
+  const allQuestions = [
     {
       question:
         "You see a website offering a free iPhone if you click a link. What do you do?",
@@ -56,35 +55,159 @@ document.addEventListener("DOMContentLoaded", () => {
       correct: 1,
       mark: 1,
     },
+    {
+      question:
+        "Which of the following online behaviors is NOT considered a responsible example of digital citizenship?",
+      options: [
+        "Respecting others' opinions and viewpoints in online discussions.",
+        "Sharing personal information and passwords freely on social media.",
+        "Citing sources properly when using online content for schoolwork.",
+      ],
+      correct: 1,
+      mark: 1,
+    },
+    {
+      question:
+        "If someone puts copyrighted material on the internet and another person wants to use it, that person should:",
+      options: [
+        "Not user the information because it is too much trouble.",
+        "Ask permission from the author or at least cite the source",
+        "Take it, and use it as they want.",
+      ],
+      correct: 1,
+      mark: 1,
+    },
+    {
+      question: "When dealing with strangers, online users should:",
+      options: [
+        "Give personal information freely.",
+        "Be cautious about giving information",
+        "Not tell anyone about the people they meet online.",
+      ],
+      correct: 1,
+      mark: 1,
+    },
+    {
+      question: "Information on the internet is:",
+      options: [
+        "Always true and reliable.",
+        "Not always true and reliable.",
+        "Only true if it is from a government source.",
+      ],
+      correct: 1,
+      mark: 1,
+    },
+    {
+      question: "What are some useful clues to spot AI-generated images?",
+      options: [
+        "Unnatural features, odd backgrounds, and inconsistent lighting.",
+        "Perfect symmetry and flawless skin.",
+        "High resolution and vibrant colors.",
+      ],
+      correct: 1,
+      mark: 1,
+    },
+    {
+      question:
+        "Email authentication can help protect against phishing attacks. True or False?",
+      options: ["True", "False"],
+      correct: 0,
+      mark: 1,
+    },
+    {
+      question:
+        "If you fall for a phishing scam, what should you do to limit the damage?",
+      options: [
+        "Delete the phising email and forget about it.",
+        "Change any compromised passwords and monitor your accounts for unusual activity.",
+        "Unplug the computer.",
+      ],
+      correct: 0,
+      mark: 1,
+    },
+    {
+      question:
+        "You can tell whether a link in email will take you to a genuine website, for example belonging to a bank, without risk, by:",
+      options: [
+        "Hovering over the link to see the actual URL it points to.",
+        "Clicking on the link to see where it takes you.",
+        "Ignoring the link and going directly to the bank's website.",
+      ],
+      correct: 0,
+      mark: 1,
+    },
+    {
+      question:
+        "When reading the news, different viewpoints will infer different meanings. As readers, we need to:",
+      options: [
+        "Be aware of our own biases and try to understand the perspectives of others.",
+        "Only read articles that confirm our own beliefs.",
+        "Ignore any viewpoints that differ from our own.",
+      ],
+      correct: 0,
+      mark: 1,
+    },
+    {
+      question:
+        "If we suspect a news article being published is heavily sensationalised, what can we do about it:",
+      options: [
+        "Share it anyway, it’s just a bit of fun.",
+        "Report it to the platform or website hosting it.",
+        "Ignore it, it’s not my problem.",
+      ],
+      correct: 1,
+      mark: 1,
+    },
   ];
 
+  // for (let i = 6; i <= 15; i++) {
+  //   allQuestions.push({
+  //     question: `Dummy Question ${i}?`,
+  //     options: ["Option A", "Option B", "Option C"],
+  //     correct: Math.floor(Math.random() * 3),
+  //     mark: 1,
+  //   });
+  // }
+
+  // Shuffle utility
+  function shuffleArray(arr) {
+    return arr.sort(() => Math.random() - 0.5);
+  }
+
+  // Select 5 random questions on load
+  const selectedQuestions = shuffleArray([...allQuestions]).slice(0, 5);
+
   let currentQuestion = 0;
-  let userAnswers = Array(questions.length).fill(null);
+  let userAnswers = Array(selectedQuestions.length).fill(null);
 
   const quizContent = document.getElementById("quiz-content");
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
+  const progressText = document.getElementById("question-progress");
+
+  function updateProgress() {
+    progressText.textContent = `Question ${currentQuestion + 1} of ${
+      selectedQuestions.length
+    }`;
+  }
 
   function loadQuestion(index) {
-    let q = questions[index];
+    const q = selectedQuestions[index];
     let html = `<h2>Question ${index + 1}</h2><p>${q.question}</p><form>`;
     q.options.forEach((option, i) => {
       const checked = userAnswers[index] === i ? "checked" : "";
-      html += `
-            <label>
-              <input type="radio" name="answer" value="${i}" ${checked}/> ${option}
-            </label><br/>
-          `;
+      html += `<label><input type="radio" name="answer" value="${i}" ${checked}/> ${option}</label><br/>`;
     });
     html += `</form>`;
     quizContent.innerHTML = html;
     updateButtons();
+    updateProgress();
   }
 
   function updateButtons() {
     prevBtn.style.display = currentQuestion === 0 ? "none" : "inline-block";
     nextBtn.textContent =
-      currentQuestion === questions.length - 1 ? "Submit" : "Next";
+      currentQuestion === selectedQuestions.length - 1 ? "Submit" : "Next";
   }
 
   function saveAnswer() {
@@ -96,68 +219,86 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showResult() {
     let score = 0;
-    let resultHTML = `<div class="result">Quiz Completed!<br/>`;
-    let resultMessage = "";
-
     userAnswers.forEach((answer, i) => {
-      if (answer === questions[i].correct) {
-        score += questions[i].mark;
+      if (answer === selectedQuestions[i].correct) {
+        score += selectedQuestions[i].mark;
       }
     });
 
-    if (score < 2) {
-      resultMessage =
-        "Time to boost your awareness. Start with our detection tools!";
-    } else if (score < 4) {
-      resultMessage = "You're learning — stay alert and keep improving.";
-    } else {
-      resultMessage = "You're a savvy digital citizen!";
-    }
+    const total = selectedQuestions.reduce((sum, q) => sum + q.mark, 0);
+    let resultMessage =
+      score < 2
+        ? "Time to boost your awareness. Start with our detection tools!"
+        : score < 4
+        ? "You're learning — stay alert and keep improving."
+        : "You're a savvy digital citizen!";
 
-    resultHTML += `Your Score: ${score} / ${questions.reduce(
-      (sum, q) => sum + q.mark,
-      0
-    )}</div>`;
+    let resultHTML = `<div class="result">Quiz Completed!<br/>Your Score: ${score} / ${total}</div>`;
     resultHTML += `<div style="text-align:center; font-size:1.5rem;"><p>${resultMessage}</p></div>`;
-    resultHTML += `
-          <div class="controls">
-            <button onclick="reviewAnswers()">Review Answers</button>
-            <button onclick="restartQuiz()">Retake Quiz</button>
-          </div>
-        `;
+
+    resultHTML += `<div id="comparison-result">Comparing with other users...</div>`;
+
+    resultHTML += `<div class="controls">
+      <button onclick="reviewAnswers()">Review Answers</button>
+      <button onclick="restartQuiz()">Retake Quiz</button>
+    </div>`;
+
     quizContent.innerHTML = resultHTML;
     prevBtn.style.display = "none";
     nextBtn.style.display = "none";
+
+    sendScoreToServer(score, total); // Call the backend
   }
 
-  // Expose to global scope for result sharing if necessary
+  // This function sends score to your Java backend and receives comparison
+  function sendScoreToServer(score, total) {
+    const endpoint = "https://your-java-server.com/api/compare"; // <-- replace with actual endpoint
+    fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ score, total }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // Example structure: { betterThanPercent: 72 }
+        document.getElementById(
+          "comparison-result"
+        ).innerHTML = `You scored better than <strong>${data.betterThanPercent}%</strong> of users.`;
+      })
+      .catch(() => {
+        document.getElementById("comparison-result").innerHTML =
+          "Comparison data not available at the moment.";
+      });
+  }
+
+  // Expose these for buttons
   window.reviewAnswers = function () {
     let html = `<h2>Review Your Answers</h2>`;
-    questions.forEach((q, i) => {
+    selectedQuestions.forEach((q, i) => {
       let userAnswer = userAnswers[i];
       let isCorrect = userAnswer === q.correct;
       html += `<div class="review-answer">
-            <strong>Q${i + 1}: ${q.question}</strong><br/>
-            Your Answer: <span class="${isCorrect ? "correct" : "incorrect"}">${
+        <strong>Q${i + 1}: ${q.question}</strong><br/>
+        Your Answer: <span class="${isCorrect ? "correct" : "incorrect"}">${
         q.options[userAnswer] || "No Answer"
       }</span><br/>
-            Correct Answer: <span class="correct">${q.options[q.correct]}</span>
-          </div>`;
+        Correct Answer: <span class="correct">${q.options[q.correct]}</span>
+      </div>`;
     });
-    html += `<div class="controls">
-          <button onclick="restartQuiz()">Retake Quiz</button>
-        </div>`;
+    html += `<div class="controls"><button onclick="restartQuiz()">Retake Quiz</button></div>`;
     quizContent.innerHTML = html;
+    progressText.textContent = "";
   };
 
   window.restartQuiz = function () {
     currentQuestion = 0;
-    userAnswers = Array(questions.length).fill(null);
+    userAnswers = Array(selectedQuestions.length).fill(null);
     loadQuestion(currentQuestion);
     prevBtn.style.display = "inline-block";
     nextBtn.style.display = "inline-block";
   };
 
+  // Event Listeners
   prevBtn.addEventListener("click", () => {
     saveAnswer();
     if (currentQuestion > 0) currentQuestion--;
@@ -166,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nextBtn.addEventListener("click", () => {
     saveAnswer();
-    if (currentQuestion < questions.length - 1) {
+    if (currentQuestion < selectedQuestions.length - 1) {
       currentQuestion++;
       loadQuestion(currentQuestion);
     } else {

@@ -182,11 +182,72 @@ document.addEventListener("DOMContentLoaded", () => {
   // Wrap fetch logic in this modular function
   function showLoadingCard(fetchFunction) {
     showDidYouKnow();
+    let dotCount = 0;
+    const dotStates = [
+      "Analysing",
+      "Analysing.",
+      "Analysing..",
+      "Analysing...",
+    ];
+    let currentMessageIndex = 0;
+
+    const messageStages = [
+      { time: 0, text: "Analysing" },
+      { time: 5000, text: "Still analysing" },
+      { time: 10000, text: "Hang tight, almost there" },
+      { time: 15000, text: "This is taking a bit longer than usual..." },
+      {
+        time: 20000,
+        text: "Server is still working on it — thanks for your patience!",
+      },
+      {
+        time: 25000,
+        text: "We're making sure everything is accurate — almost done!",
+      },
+    ];
+
+    closeBtn.classList.remove("error");
+    closeBtn.disabled = true;
+    closeBtn.classList.remove("hidden");
+    closeBtn.textContent = "Analysing";
+
+    let animationInterval;
+    let messageTimers = [];
+
+    // animate dots
+    animationInterval = setInterval(() => {
+      dotCount = (dotCount + 1) % dotStates.length;
+      closeBtn.textContent = dotStates[dotCount];
+    }, 500);
+
+    // schedule messages
+    messageStages.forEach((stage, i) => {
+      const timer = setTimeout(() => {
+        currentMessageIndex = i;
+      }, stage.time);
+      messageTimers.push(timer);
+    });
+
+    // update message text
+    const messageUpdater = setInterval(() => {
+      if (!closeBtn.disabled) return;
+      closeBtn.textContent = dotStates[dotCount].replace(
+        "Analysing",
+        messageStages[currentMessageIndex].text
+      );
+    }, 500);
+
     fetchFunction()
       .then(() => {
+        clearInterval(animationInterval);
+        clearInterval(messageUpdater);
+        messageTimers.forEach(clearTimeout);
         showResultReady();
       })
       .catch(() => {
+        clearInterval(animationInterval);
+        clearInterval(messageUpdater);
+        messageTimers.forEach(clearTimeout);
         showErrorState();
       });
   }
@@ -673,11 +734,67 @@ closeBtn.addEventListener("click", () => {
 // Wrap fetch logic in this modular function
 function showLoadingCard(fetchFunction) {
   showDidYouKnow();
+  let dotCount = 0;
+  const dotStates = ["Analysing", "Analysing.", "Analysing..", "Analysing..."];
+  let currentMessageIndex = 0;
+
+  const messageStages = [
+    { time: 0, text: "Analysing" },
+    { time: 5000, text: "Still analysing" },
+    { time: 10000, text: "Hang tight, almost there" },
+    { time: 15000, text: "This is taking a bit longer than usual..." },
+    {
+      time: 20000,
+      text: "Server is still working on it — thanks for your patience!",
+    },
+    {
+      time: 25000,
+      text: "We're making sure everything is accurate — almost done!",
+    },
+  ];
+
+  closeBtn.classList.remove("error");
+  closeBtn.disabled = true;
+  closeBtn.classList.remove("hidden");
+  closeBtn.textContent = "Analysing";
+
+  let animationInterval;
+  let messageTimers = [];
+
+  // animate dots
+  animationInterval = setInterval(() => {
+    dotCount = (dotCount + 1) % dotStates.length;
+    closeBtn.textContent = dotStates[dotCount];
+  }, 500);
+
+  // schedule messages
+  messageStages.forEach((stage, i) => {
+    const timer = setTimeout(() => {
+      currentMessageIndex = i;
+    }, stage.time);
+    messageTimers.push(timer);
+  });
+
+  // update message text
+  const messageUpdater = setInterval(() => {
+    if (!closeBtn.disabled) return;
+    closeBtn.textContent = dotStates[dotCount].replace(
+      "Analysing",
+      messageStages[currentMessageIndex].text
+    );
+  }, 500);
+
   fetchFunction()
     .then(() => {
+      clearInterval(animationInterval);
+      clearInterval(messageUpdater);
+      messageTimers.forEach(clearTimeout);
       showResultReady();
     })
     .catch(() => {
+      clearInterval(animationInterval);
+      clearInterval(messageUpdater);
+      messageTimers.forEach(clearTimeout);
       showErrorState();
     });
 }
