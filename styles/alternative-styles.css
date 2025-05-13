@@ -520,16 +520,18 @@ body {
   text-decoration: none;
 }
 
-.resource-gallery a iframe {
-  top: 0;
-  left: 0;
+
+.resource-gallery iframe {
+  width: 100%;
+  max-width: 900px; /* Optional max width */
+  aspect-ratio: 16 / 9;
   border-radius: 10px;
   transition: transform 0.3s;
-  margin: 10px 20px;
 }
 
-.resource-gallery a iframe:hover {
-  transform: scale(1.05);
+
+.resource-gallery iframe:hover {
+  transform: scale(1.02);
 }
 
 #view-more a {
