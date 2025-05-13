@@ -57,6 +57,11 @@ button {
   cursor: pointer;
 }
 
+#question-progress {
+  margin: 0 10px;
+  font-weight: bold;
+}
+
 /* Final score and review */
 .result {
   text-align: center;
