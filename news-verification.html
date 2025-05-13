@@ -525,7 +525,7 @@
 
         // Wrap fetch logic in this modular function
         function showLoadingCard(fetchFunction) {
-          showDidYouKnow(); // Show random fact
+          showDidYouKnow();
           let dotCount = 0;
           const dotStates = [
             "Analysing",
@@ -558,13 +558,13 @@
           let animationInterval;
           let messageTimers = [];
 
-          // Animate dots every 500ms
+          // animate dots
           animationInterval = setInterval(() => {
             dotCount = (dotCount + 1) % dotStates.length;
             closeBtn.textContent = dotStates[dotCount];
           }, 500);
 
-          // Schedule time-based messages
+          // schedule messages
           messageStages.forEach((stage, i) => {
             const timer = setTimeout(() => {
               currentMessageIndex = i;
@@ -572,7 +572,7 @@
             messageTimers.push(timer);
           });
 
-          // Function to update message text based on currentMessageIndex
+          // update message text
           const messageUpdater = setInterval(() => {
             if (!closeBtn.disabled) return;
             closeBtn.textContent = dotStates[dotCount].replace(
@@ -581,7 +581,6 @@
             );
           }, 500);
 
-          // Start the fetch
           fetchFunction()
             .then(() => {
               clearInterval(animationInterval);
