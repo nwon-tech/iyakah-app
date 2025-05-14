@@ -24,6 +24,9 @@
     />
     <!-- link to alternative styling -->
     <link rel="stylesheet" href="./styles/alternative-styles.css" />
+
+    <!-- link to alternative styling -->
+    <link rel="stylesheet" href="./styles/chatbot.css" />
   </head>
   <body>
     <!-- navbar -->
@@ -197,6 +200,37 @@
       </div>
     </section>
 
+    <!-- chatbot widget start -->
+    <div id="chatbot-container">
+      <!-- Chat Bubble -->
+      <div id="chatbot-bubble" title="Open Chatbot">
+        <span>💬</span>
+      </div>
+
+      <!-- window -->
+      <div id="chatbot-window">
+        <div id="chatbot-header">
+          <span>🤖 Iyakah Chatbot</span>
+          <button id="close-chat">✖</button>
+        </div>
+        <div id="chatbot-messages">
+          <div id="typing-indicator" class="message bot" style="display: none">
+            Bot is typing...
+          </div>
+        </div>
+        <div id="chatbot-input-area">
+          <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Type your message..."
+          />
+          <button id="send-message">✈</button>
+        </div>
+      </div>
+    </div>
+    <div id="chatbot-tooltip">Need help? Ask me anything!</div>
+    <!-- chatbot widget end -->
+
     <!-- footer -->
     <footer class="footer">
       <div class="footer-content">
@@ -232,5 +266,6 @@
 
     <script type="module" src="middleware.js"></script>
     <script type="module" src="scripts/alternative-landing.js"></script>
+    <script type="module" src="./scripts/chatbot.js"></script>
   </body>
 </html>
