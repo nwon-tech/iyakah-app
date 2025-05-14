@@ -177,9 +177,13 @@ body {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
-  opacity: 1;
-  animation: fadeOut 5s forwards;
+  cursor: pointer;
   z-index: 9998;
+  transition: opacity 0.3s ease;
+}
+
+#chatbot-tooltip:hover {
+  opacity: 0.8;
 }
 
 @keyframes fadeOut {
@@ -195,4 +199,10 @@ body {
     opacity: 0;
     transform: translateY(-10px);
   }
+}
+
+/* highlight active state */
+#typing-indicator {
+  font-style: italic;
+  color: #666;
 }

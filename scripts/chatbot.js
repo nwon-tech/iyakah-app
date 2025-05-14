@@ -1,12 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+
   const bubble = document.getElementById("chatbot-bubble");
   const windowEl = document.getElementById("chatbot-window");
   const closeBtn = document.getElementById("close-chat");
   const input = document.getElementById("chatbot-input");
   const sendBtn = document.getElementById("send-message");
   const messages = document.getElementById("chatbot-messages");
+  const typingIndicator = document.getElementById("typing-indicator");
+  const tooltip = document.getElementById("chatbot-tooltip");
 
-  // Toggle chat window
+  let typingAnimationInterval = null;
+
+  // Toggle chat window with slide animation
   bubble.addEventListener("click", () => {
     if (windowEl.style.display === "block") {
       windowEl.style.display = "none";
@@ -14,6 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       windowEl.style.display = "block";
       setTimeout(() => windowEl.classList.add("open"), 10); // trigger transition
+
+      // Show initial message every time chat opens
+      showInitialMessage();
+
+      // Reset tooltip if hidden
+      resetTooltip();
     }
   });
 
@@ -21,48 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
     windowEl.style.display = "none";
   });
 
-  //   greeting from chatbot
+  // Show initial message from bot
   function showInitialMessage() {
     const initialMsg = "Hi! I'm here to help. How can I assist you today?";
     appendMessage(initialMsg, "bot");
   }
 
-  // Show only once
-  if (!localStorage.getItem("chatbotOpened")) {
-    showInitialMessage();
-    localStorage.setItem("chatbotOpened", "true");
-  }
-
-  // Send message
-  async function sendMessage() {
-    const text = input.value.trim();
-    if (!text) return;
-
-    appendMessage(text, "user");
-    input.value = "";
-
-    console.log("Sending message:", text);
-
-    try {
-      const response = await fetch(
-        "https://chatbot-assistant-z3ls.onrender.com/chat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ question: text }),
-        }
-      );
-
-      const data = await response.json(); // Since the server returns plain text
-      console.log("Response:", data.response);
-      appendMessage(data.response, "bot");
-    } catch (error) {
-      console.error("Error:", error);
-      appendMessage("❌ Unable to reach chatbot.", "bot");
-    }
-  }
+  // Format message: convert links and newlines
   function makeLinksClickable(text) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(
@@ -72,55 +48,43 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function formatMessage(text) {
-    let formatted = text.replace(/\n/g, "<br>"); // Convert newlines to <br>
-    formatted = makeLinksClickable(formatted); // Convert URLs to <a>
+    let formatted = text.replace(/\n/g, "<br>");
+    formatted = makeLinksClickable(formatted);
     return formatted;
   }
 
-  //   function appendMessage(text, sender) {
-  //     const msg = document.createElement("div");
-  //     msg.className = `message ${sender}`;
-  //     msg.innerHTML = formatMessage(text); // use innerHTML to render HTML
-  //     messages.appendChild(msg);
-  //     messages.scrollTop = messages.scrollHeight;
-  //   }
-
+  // Append message to chat window
   function appendMessage(text, sender) {
     const msg = document.createElement("div");
     msg.className = `message ${sender}`;
-    // Format message
-    const formattedText = formatMessage(text);
-
-    // Use innerHTML to render HTML elements like <br>, <b>, <a>
-    msg.innerHTML = formattedText;
-
+    msg.innerHTML = formatMessage(text); // render HTML
     messages.appendChild(msg);
+
+    // Scroll smoothly to bottom
     messages.scrollTo({
       top: messages.scrollHeight,
       behavior: "smooth",
     });
   }
 
-  // Trigger send on Enter key
-  input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
+  // Start animated typing indicator
+  function startTypingAnimation() {
+    let dotCount = 0;
+    typingIndicator.style.display = "block";
 
-  // Trigger send on button click
-  sendBtn.addEventListener("click", sendMessage);
+    typingAnimationInterval = setInterval(() => {
+      dotCount = (dotCount + 1) % 4;
+      typingIndicator.innerHTML = "Thinking" + ".".repeat(dotCount);
+    }, 500);
+  }
 
-  // remove tooltip after 5 seconds
-  setTimeout(() => {
-    const tooltip = document.getElementById("chatbot-tooltip");
-    if (tooltip) tooltip.remove();
-  }, 5000);
+  // Stop animated typing indicator
+  function stopTypingAnimation() {
+    clearInterval(typingAnimationInterval);
+    typingIndicator.style.display = "none";
+  }
 
-  //   bot is typing animation
-  const typingIndicator = document.getElementById("typing-indicator");
-
+  // Send message via API
   async function sendMessage() {
     const text = input.value.trim();
     if (!text) return;
@@ -128,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     appendMessage(text, "user");
     input.value = "";
 
-    typingIndicator.style.display = "block"; // Show typing
+    startTypingAnimation(); // Show animated typing
 
     try {
       const response = await fetch(
@@ -142,12 +106,46 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       );
 
-      const data = await response.json();
-      typingIndicator.style.display = "none"; // Hide typing
+      const contentType = response.headers.get("content-type");
+
+      let data;
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        data = { response: await response.text() };
+      }
+
+      stopTypingAnimation(); // Stop typing animation
       appendMessage(data.response, "bot");
     } catch (error) {
-      typingIndicator.style.display = "none";
+      stopTypingAnimation();
       appendMessage("❌ Unable to reach chatbot.", "bot");
     }
   }
+
+  // Trigger send on Enter key
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // Trigger send on button click
+  sendBtn.addEventListener("click", sendMessage);
+
+  // Tooltip behavior
+  function resetTooltip() {
+    tooltip.style.display = "none";
+    setTimeout(() => {
+      tooltip.style.display = "block";
+    }, 5000); // Reappear after 5 seconds
+  }
+
+  tooltip.addEventListener("click", () => {
+    tooltip.style.display = "none";
+    setTimeout(() => {
+      tooltip.style.display = "block";
+    }, 5000); // Reappear after 5 seconds
+  });
 });
