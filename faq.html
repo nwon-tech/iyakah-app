@@ -35,6 +35,9 @@
 
     <!-- stylesheet for the FAQ -->
     <link rel="stylesheet" href="./styles/faq-styles.css" />
+
+    <!-- stylesheet for the FAQ -->
+    <link rel="stylesheet" href="./styles/chatbot.css" />
   </head>
   <body>
     <!-- navbar -->
@@ -148,9 +151,40 @@
       </div>
 
       <div class="faq-cat">
-        <img src="./styles/media/faq-cat.png" alt="FAQ cat"/>
+        <img src="./styles/media/faq-cat.png" alt="FAQ cat" />
       </div>
     </main>
+
+    <!-- chatbot widget start -->
+    <div id="chatbot-container">
+      <!-- Chat Bubble -->
+      <div id="chatbot-bubble" title="Open Chatbot">
+        <span>💬</span>
+      </div>
+
+      <!-- window -->
+      <div id="chatbot-window">
+        <div id="chatbot-header">
+          <span>🤖 Chatbot</span>
+          <button id="close-chat">✖</button>
+        </div>
+        <div id="chatbot-messages">
+          <div id="typing-indicator" class="message bot" style="display: none">
+            Bot is typing...
+          </div>
+        </div>
+        <div id="chatbot-input-area">
+          <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Type your message..."
+          />
+          <button id="send-message">✈</button>
+        </div>
+      </div>
+    </div>
+    <div id="chatbot-tooltip">Need help? Ask me anything!</div>
+    <!-- chatbot widget end -->
 
     <!-- footer -->
     <footer class="footer">
@@ -184,5 +218,7 @@
         <p>© 2025 IYAKAH. All rights reserved.</p>
       </div>
     </footer>
+    <script type="module" src="middleware.js"></script>
+    <script type="module" src="./scripts/chatbot.js"></script>
   </body>
 </html>
