@@ -1,6 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
+  
+  let userIp = "Unknown";
+
+  const fetchUserIp = async () => {
+    try {
+      const res = await fetch("https://api.ipify.org?format=json");
+      const data = await res.json();
+      if (data && data.ip) {
+        userIp = data.ip;
+        console.log("User IP:", userIp);
+      } else {
+        throw new Error("No IP in response");
+      }
+    } catch (err) {
+      console.warn("Could not retrieve IP address.", err);
+    }
+  };
+
+  //  list of questions
   const allQuestions = [
     {
+      id: 1,
       question:
         "You see a website offering a free iPhone if you click a link. What do you do?",
       options: [
@@ -12,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 2,
       question:
         "A friend sends you an article with shocking news. What’s your first step?",
       options: [
@@ -23,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 3,
       question:
         "You’re about to upload a photo online. What do you consider first?",
       options: [
@@ -34,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 4,
       question:
         "An unknown website asks for your credit card details. What do you check first?",
       options: [
@@ -45,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 5,
       question:
         "You edited an image with AI tools. Do you need to tell others it’s not real?",
       options: [
@@ -56,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 6,
       question:
         "Which of the following online behaviors is NOT considered a responsible example of digital citizenship?",
       options: [
@@ -67,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 7,
       question:
         "If someone puts copyrighted material on the internet and another person wants to use it, that person should:",
       options: [
@@ -78,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 8,
       question: "When dealing with strangers, online users should:",
       options: [
         "Give personal information freely.",
@@ -88,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 9,
       question: "Information on the internet is:",
       options: [
         "Always true and reliable.",
@@ -98,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 10,
       question: "What are some useful clues to spot AI-generated images?",
       options: [
         "Unnatural features, odd backgrounds, and inconsistent lighting.",
@@ -108,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 11,
       question:
         "Email authentication can help protect against phishing attacks. True or False?",
       options: ["True", "False"],
@@ -115,6 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 12,
       question:
         "If you fall for a phishing scam, what should you do to limit the damage?",
       options: [
@@ -126,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 13,
       question:
         "You can tell whether a link in email will take you to a genuine website, for example belonging to a bank, without risk, by:",
       options: [
@@ -137,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 14,
       question:
         "When reading the news, different viewpoints will infer different meanings. As readers, we need to:",
       options: [
@@ -148,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
     {
+      id: 15,
       question:
         "If we suspect a news article being published is heavily sensationalised, what can we do about it:",
       options: [
@@ -159,15 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
       mark: 1,
     },
   ];
-
-  // for (let i = 6; i <= 15; i++) {
-  //   allQuestions.push({
-  //     question: `Dummy Question ${i}?`,
-  //     options: ["Option A", "Option B", "Option C"],
-  //     correct: Math.floor(Math.random() * 3),
-  //     mark: 1,
-  //   });
-  // }
 
   // Shuffle utility
   function shuffleArray(arr) {
@@ -217,8 +242,59 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function showResult() {
+  async function showResult() {
+
+    // Ensures IP is fetched before proceeding
+    await fetchUserIp(); 
+
+    // prepare the variables for the API call
     let score = 0;
+    const questionList = [];
+    const questionAnswer = [];
+    const questionCorrect = [];
+
+    // to capture the question ID, answer, and mark
+    userAnswers.forEach((answer, i) => {
+      const q = selectedQuestions[i];
+      questionList.push(q.id);
+      questionAnswer.push(answer === null ? -1 : answer); // -1 for unanswered
+      questionCorrect.push(q.mark); // from 'mark' field
+      if (answer === q.correct) score += q.mark;
+    });
+
+    const submissionData = {
+      userIp,
+      questionList,
+      questionAnswer,
+      questionCorrect,
+    };
+
+    // debugging submission data
+    console.log("Submission Data:", submissionData);
+
+    // POST
+    fetch("https://www.pollucheck8.com:8088/answer/addAnswer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(submissionData),
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        console.log("Server Response:", response);
+        // Handle response data here
+        const addNumber = response.data?.addNumber || 0;
+        const allNumber = response.data?.allNumber || 0;
+
+        document.getElementById(
+          "comparison-result"
+        ).innerHTML += `<br/><strong>You are part of a community! ${addNumber} more users like you have taken the quiz out of ${allNumber} total.</strong>`;
+      })
+      .catch((err) => {
+        console.error("Error submitting quiz:", err);
+        document.getElementById(
+          "comparison-result"
+        ).innerHTML += `<br/><span style="color:red;">Could not send your data. Try again later.</span>`;
+      });
     userAnswers.forEach((answer, i) => {
       if (answer === selectedQuestions[i].correct) {
         score += selectedQuestions[i].mark;
@@ -247,12 +323,12 @@ document.addEventListener("DOMContentLoaded", () => {
     prevBtn.style.display = "none";
     nextBtn.style.display = "none";
 
-    sendScoreToServer(score, total); // Call the backend
+    // sendScoreToServer(score, total); // Call the backend
   }
 
   // This function sends score to your Java backend and receives comparison
   function sendScoreToServer(score, total) {
-    const endpoint = "https://your-java-server.com/api/compare"; // <-- replace with actual endpoint
+    const endpoint = "https://your-java-server.com/api/compare";
     fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -316,4 +392,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   loadQuestion(currentQuestion);
+
+  // loading animation in case the API is slow
+  //   document.getElementById("quiz-content").innerHTML = `
+  //   <div style="text-align:center; font-size:1.2rem;">
+  //     Submitting your answers...<br/>
+  //     <img src="spinner.gif" alt="Loading..." />
+  //   </div>
+  // `;
 });
