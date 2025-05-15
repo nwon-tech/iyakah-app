@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  
   let userIp = "Unknown";
 
   const fetchUserIp = async () => {
@@ -243,9 +242,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function showResult() {
-
     // Ensures IP is fetched before proceeding
-    await fetchUserIp(); 
+    await fetchUserIp();
 
     // prepare the variables for the API call
     let score = 0;
@@ -257,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     userAnswers.forEach((answer, i) => {
       const q = selectedQuestions[i];
       questionList.push(q.id);
-      questionAnswer.push(answer === null ? -1 : answer); // -1 for unanswered
+      questionAnswer.push(answer === null ? -1 : answer + 1); // -1 for unanswered, added +1 to match the API
       questionCorrect.push(q.mark); // from 'mark' field
       if (answer === q.correct) score += q.mark;
     });
@@ -270,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // debugging submission data
-    console.log("Submission Data:", submissionData);
+    console.log("Submission Data:", JSON.stringify(submissionData));
 
     // POST
     fetch("https://www.pollucheck8.com:8088/answer/addAnswer", {
@@ -312,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let resultHTML = `<div class="result">Quiz Completed!<br/>Your Score: ${score} / ${total}</div>`;
     resultHTML += `<div style="text-align:center; font-size:1.5rem;"><p>${resultMessage}</p></div>`;
 
-    resultHTML += `<div id="comparison-result">Comparing with other users...</div>`;
+    resultHTML += `<div id="comparison-result"></div>`;
 
     resultHTML += `<div class="controls">
       <button onclick="reviewAnswers()">Review Answers</button>
@@ -322,29 +320,6 @@ document.addEventListener("DOMContentLoaded", () => {
     quizContent.innerHTML = resultHTML;
     prevBtn.style.display = "none";
     nextBtn.style.display = "none";
-
-    // sendScoreToServer(score, total); // Call the backend
-  }
-
-  // This function sends score to your Java backend and receives comparison
-  function sendScoreToServer(score, total) {
-    const endpoint = "https://your-java-server.com/api/compare";
-    fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ score, total }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // Example structure: { betterThanPercent: 72 }
-        document.getElementById(
-          "comparison-result"
-        ).innerHTML = `You scored better than <strong>${data.betterThanPercent}%</strong> of users.`;
-      })
-      .catch(() => {
-        document.getElementById("comparison-result").innerHTML =
-          "Comparison data not available at the moment.";
-      });
   }
 
   // Expose these for buttons
@@ -393,11 +368,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadQuestion(currentQuestion);
 
-  // loading animation in case the API is slow
-  //   document.getElementById("quiz-content").innerHTML = `
-  //   <div style="text-align:center; font-size:1.2rem;">
-  //     Submitting your answers...<br/>
-  //     <img src="spinner.gif" alt="Loading..." />
-  //   </div>
-  // `;
 });
