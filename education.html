@@ -39,10 +39,12 @@
 
     <!-- main stylesheet -->
     <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="./styles/education-styles.css" />
 
-    <!-- website verification -->
-    <!-- <link rel="stylesheet" href="./styles/web-styles.css" /> -->
+    <!-- chatbot -->
+    <link rel="stylesheet" href="./styles/chatbot.css" />
   </head>
+
   <body>
     <!-- navbar -->
     <nav class="navbar" id="navbar">
@@ -78,18 +80,1097 @@
       </div>
     </nav>
 
-    <!-- website verification  -->
-    <main class="container">
-      <div class="tab-pane" id="tab1">
-        <h3>Education</h3>
+    <!-- educational page  -->
+    <div class="main-content">
+      <div class="educational-page">
+        <div class="title">
+          <p>Hello! 👋🏾 Welcome to our Resource Hub</p>
+        </div>
+        <div id="banner">
+          <div class="img-list img-wrapper">
+            <div class="img-box" onclick="showContent('content1')">
+              <div class="info">
+                <h3>Misinformation and Disinformation</h3>
+              </div>
+              <img
+                src="./styles/media/md.png"
+                alt="Misinformation and Disinformation"
+              />
+            </div>
+            <div class="img-box" onclick="showContent('content2')">
+              <div class="info">
+                <h3>Phishing and Scam Websites</h3>
+              </div>
+              <img
+                src="./styles/media/phishing.png"
+                alt="Phishing and Scam Websites"
+              />
+            </div>
+            <div class="img-box" onclick="showContent('content3')">
+              <div class="info">
+                <h3>AI Generated and Deepfake Images</h3>
+              </div>
+              <img
+                src="./styles/media/deepface.png"
+                alt="AI Generated and Deepfake Images"
+              />
+            </div>
+            <div class="img-box" onclick="showContent('content4')">
+              <div class="info">
+                <h3>News Bias</h3>
+              </div>
+              <img src="./styles/media/bias.png" alt="News Bias" />
+            </div>
+            <div class="img-box">
+              <div class="info">
+                <h3></h3>
+              </div>
+              <img src="./styles/media/tech.png" alt="" />
+            </div>
+            <div class="img-box" id="last-img-box">
+              <div class="info">
+                <h3></h3>
+              </div>
+              <img src="./styles/media/AI.png" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="last btn">
+            <svg
+              t="1686471404424"
+              class="icon left"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2373"
+              width="128"
+              height="128"
+            >
+              <path
+                d="M862.485 481.154H234.126l203.3-203.3c12.497-12.497 12.497-32.758 0-45.255s-32.758-12.497-45.255 0L135.397 489.373c-12.497 12.497-12.497 32.758 0 45.254l256.774 256.775c6.249 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372c12.497-12.497 12.497-32.759 0-45.255l-203.3-203.301h628.36c17.036 0 30.846-13.81 30.846-30.846s-13.81-30.846-30.846-30.846z"
+                fill=""
+                p-id="2374"
+              ></path>
+            </svg>
+          </button>
+          <button class="next btn">
+            <svg
+              t="1686471404424"
+              class="icon right"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2373"
+              width="128"
+              height="128"
+            >
+              <path
+                d="M862.485 481.154H234.126l203.3-203.3c12.497-12.497 12.497-32.758 0-45.255s-32.758-12.497-45.255 0L135.397 489.373c-12.497 12.497-12.497 32.758 0 45.254l256.774 256.775c6.249 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372c12.497-12.497 12.497-32.759 0-45.255l-203.3-203.301h628.36c17.036 0 30.846-13.81 30.846-30.846s-13.81-30.846-30.846-30.846z"
+                fill=""
+                p-id="2374"
+              ></path>
+            </svg>
+          </button>
+        </div>
 
-        <p id="caption">Check website security and credibility</p>
+        <!-- New content section -->
+        <!-- Navigation Bar -->
+        <div id="navBar">
+          <div class="navButton" onclick="showContent('content1')">
+            <img
+              src="./styles/media/md.png"
+              class="navImg"
+              alt="Misinformation and Disinformation"
+            />
+            <div class="navText">Misinform & Disinformate</div>
+          </div>
+          <div class="navButton" onclick="showContent('content2')">
+            <img
+              src="./styles/media/phishing.png"
+              class="navImg"
+              alt="Phishing and Scam Websites"
+            />
+            <div class="navText">Fake Websites</div>
+          </div>
+          <div class="navButton" onclick="showContent('content3')">
+            <img
+              src="./styles/media/deepface.png"
+              class="navImg"
+              alt="AI Generated and Deepfake Images"
+            />
+            <div class="navText">AI & deepfake</div>
+          </div>
+          <div class="navButton" onclick="showContent('content4')">
+            <img src="./styles/media/bias.png" class="navImg" alt="News Bias" />
+            <div class="navText">News Bias</div>
+          </div>
+        </div>
 
-        <p id="description">
-          Enter a URL to verify the legitimacy of a website and check for
-          potential security issues.
-        </p>
-    </main>
+        <!-- Content sections  -->
+        <div id="content1" class="newContent" style="display: none">
+          <h2 class="gradient-text">Misinformation and Disinformation</h2>
+          <!-- Card Layout Section -->
+          <div class="wrapper">
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-code"></i></div>
+                <span>Misinformation vs. Disinformation</span>
+              </div>
+              <div class="back-face">
+                <span>Misinformation vs. Disinformation</span>
+                <p>
+                  Misinformation: False info spread unintentionally.<br />
+                  Disinformation: False info spread intentionally to deceive.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <span>Spread Causes</span>
+              </div>
+              <div class="back-face">
+                <span>Spread Causes</span>
+                <p>
+                  People spread misinformation due to mental shortcuts,
+                  emotions, biases, and social media algorithms reinforcing
+                  beliefs.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Belief Factors</span>
+              </div>
+              <div class="back-face">
+                <span>Belief Factors</span>
+                <p>
+                  Emotions, political bias, and social media influence
+                  gullibility. Sharing misinformation can seek attention or
+                  social connection.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Emotional Appeal</span>
+              </div>
+              <div class="back-face">
+                <span>Emotional Appeal</span>
+                <p>
+                  Misinformation often triggers strong emotions, making people
+                  more likely to believe and share false information.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Social Influence</span>
+              </div>
+              <div class="back-face">
+                <span>Social Influence</span>
+                <p>
+                  Social media and emotional responses increase gullibility,
+                  leading people to share misinformation without verifying it.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Digital Literacy</span>
+              </div>
+              <div class="back-face">
+                <span>Digital Literacy</span>
+                <p>
+                  Promoting digital literacy helps individuals recognize
+                  misinformation and resist manipulation online.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Section -->
+          <div class="video-container">
+            <!-- Description -->
+            <div class="video-description">
+              <h3>How to Identify Fake Information?</h3>
+              <p>
+                To learn five essential tips to help you identify fake news.
+                From checking the source to verifying facts, this guide will
+                help you navigate the world of misinformation and spot
+                misleading content before it spreads.
+              </p>
+            </div>
+            <!-- Video  -->
+            <div class="video-embed">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/g2AdkNH-kWA?hl=en&si=3HPw-Q9xERkYGK3v"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Text Content Section -->
+          <div
+            class="custom-content"
+            style="
+              background-image: url('./scripts/educational/bg.jpg');
+              background-size: cover;
+            "
+          >
+            <div id="main">
+              <div id="click-section">
+                <div id="drawerboxes">
+                  <div class="drawerbox active">
+                    <button class="drawer-btn active" onclick="slideTo(1)">
+                      What are They?<span class="drawer-head">1</span>
+                    </button>
+                  </div>
+
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(2)">
+                      Why Trust It?<span class="drawer-head">2</span>
+                    </button>
+                  </div>
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(3)">
+                      What's the Impact?<span class="drawer-head">3</span>
+                    </button>
+                  </div>
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(4)">
+                      What Can We Do?<span class="drawer-head">4</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div id="slide-section">
+                <div id="slide-bar">
+                  <div id="bar"></div>
+                </div>
+                <div
+                  id="card-section"
+                  style="
+                    background-image: url('./scripts/educational/bg.jpg');
+                    background-size: cover;
+                  "
+                >
+                  <div id="card1" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">
+                      Misinformation and Disinformation
+                    </div>
+                    <div class="card-content">
+                      Misinformation: False information spread inadvertently
+                      without intent to harm.<br />
+                      In simpler words, misinformation is fake news that is
+                      created and spread by mistake — by someone who doesn't
+                      realise that it's false.<br />
+                      <br />
+                      Disinformation: False information spread deliberately to
+                      mislead and manipulate truth.<br />
+                      In simpler words, disinformation is fake news that is
+                      created and spread deliberately — by someone who knows
+                      full well that it's false.
+                    </div>
+                  </div>
+                  <div id="card2" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">The Fact Is</div>
+                    <div class="card-content">
+                      People believe and spread misinformation due to mental
+                      shortcuts, emotional responses, and alignment with
+                      personal beliefs. Strong emotions like fear or anger
+                      increase gullibility, while political bias and emotional
+                      states affect judgment. Some share misinformation to
+                      connect socially or gain attention. Social media
+                      algorithms worsen the problem by promoting similar content
+                      once users engage with it, creating a feedback loop. Even
+                      attempts to debunk falsehoods can amplify them.
+                      Disinformation, unlike misinformation, is spread
+                      intentionally for political, financial, or ideological
+                      goals to influence large audiences.
+                    </div>
+                  </div>
+                  <div id="card3" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Case in Study</div>
+                    <div class="card-content">
+                      The COVID-19 pandemic exposed the dangers of
+                      misinformation and disinformation. Early false claims
+                      about cures, vaccine risks, and virus origins spread
+                      online, amplifying confusion as governments struggled to
+                      understand the virus. Influencers and media figures
+                      worsened the situation. A 2022 CDC review acknowledged
+                      that unclear messaging added to public confusion. A 2023
+                      JAMA study found that one-third of COVID-19 deaths in the
+                      U.S. could have been prevented with accurate health
+                      guidance. This highlights how misinformation fuels vaccine
+                      hesitancy, public mistrust, and preventable deaths,
+                      showing its severe impact on public health and safety.
+                    </div>
+                  </div>
+                  <div id="card4" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">As Digital Citizens</div>
+                    <div class="card-content">
+                      Ⅰ. Pause and verify——<br />
+                      Always take a moment to check if the information you see
+                      online is accurate before believing or sharing it.<br />
+                      Ⅱ. Cross-check sources——<br />
+                      Look for confirmation from trustworthy news outlets or
+                      reliable leaders to ensure the information is being widely
+                      and accurately reported.<br />
+                      Ⅲ. Research the author——<br />
+                      Do a quick search on the author to verify their
+                      credibility, background, and whether they are a real,
+                      trustworthy source.<br />
+                      Ⅳ. Verify before sharing——<br />
+                      If you're still unsure about a claim, avoid engaging or
+                      sharing it until you can confirm its truth through
+                      reliable sources.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="content2" class="newContent" style="display: none">
+          <h2 class="gradient-text">Fake Websites</h2>
+          <!-- Card Layout Section -->
+          <div class="wrapper">
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-code"></i></div>
+                <span>Fake Website</span>
+              </div>
+              <div class="back-face">
+                <span>Fake Website</span>
+                <p>
+                  A fake website misleads users by pretending to be a legitimate
+                  site, often for scamming, phishing, or spreading
+                  misinformation.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <span>Common Goals</span>
+              </div>
+              <div class="back-face">
+                <span>Common Goals</span>
+                <p>
+                  Fake websites aim to scam users, steal sensitive information,
+                  or spread false news to influence behavior or opinion.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Scamming Intent</span>
+              </div>
+              <div class="back-face">
+                <span>Scamming Intent</span>
+                <p>
+                  Fake websites trick users into paying for fake products,
+                  donating to fraudulent causes, or investing in scams.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Phishing Risks</span>
+              </div>
+              <div class="back-face">
+                <span>Phishing Risks</span>
+                <p>
+                  Fake sites mimic trusted platforms, like bank login pages, to
+                  steal personal information, including usernames and passwords.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Financial Motive</span>
+              </div>
+              <div class="back-face">
+                <span>Financial Motive</span>
+                <p>
+                  Fake websites are often created to deceive users into parting
+                  with money, either through fake sales or fraudulent schemes.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Trust Erosion</span>
+              </div>
+              <div class="back-face">
+                <span>Trust Erosion</span>
+                <p>
+                  Fake websites undermine public trust by impersonating
+                  legitimate organizations, causing confusion and spreading
+                  false narratives.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Video Section -->
+          <div class="video-container">
+            <!-- Video Description Section -->
+            <div class="video-description">
+              <h3>Understanding Phishing Attacks</h3>
+              <p>
+                Phishing attacks involve tricking individuals into revealing
+                sensitive information through fraudulent emails, websites, or
+                messages. These scams often impersonate trusted entities to
+                steal personal data like passwords and banking credentials.
+                Recognizing the signs of phishing and taking precautions can
+                help protect against these threats.
+              </p>
+            </div>
+            <!-- Video Embed Section -->
+            <div class="video-embed">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/BnmneAjVrM4?hl=en&si=D3ELuz7f-q0NR3Z5"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Text Content Section -->
+          <div
+            class="custom-content"
+            style="
+              background-image: url('./scripts/educational/bg.jpg');
+              background-size: cover;
+            "
+          >
+            <div id="main">
+              <div id="click-section">
+                <div id="drawerboxes">
+                  <div class="drawerbox active">
+                    <button class="drawer-btn active" onclick="slideTo(1)">
+                      What are They?<span class="drawer-head">1</span>
+                    </button>
+                  </div>
+
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(2)">
+                      Which Include?<span class="drawer-head">2</span>
+                    </button>
+                  </div>
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(3)">
+                      What's Its Disguise?<span class="drawer-head">3</span>
+                    </button>
+                  </div>
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(4)">
+                      How to Spot?<span class="drawer-head">4</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div id="slide-section">
+                <div id="slide-bar">
+                  <div id="bar"></div>
+                </div>
+                <div
+                  id="card-section"
+                  style="
+                    background-image: url('./scripts/educational/bg.jpg');
+                    background-size: cover;
+                  "
+                >
+                  <div id="card1" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">What is a Fake Website</div>
+                    <div class="card-content">
+                      A fake website is any website designed to deliberately
+                      mislead, deceive, or manipulate users by pretending to be
+                      something it is not. These sites often impersonate
+                      legitimate brands, organizations, or services to steal
+                      information, money, or trust.
+                    </div>
+                  </div>
+                  <div id="card2" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Its Purpose might be</div>
+                    <div class="card-content">
+                      Ⅰ. Scamming:<br />
+                      Trick users into paying for fake products, donating to
+                      fake causes, or investing in fraudulent schemes.<br />
+                      Ⅱ. Phishing:<br />
+                      Steal sensitive information such as usernames, passwords,
+                      or credit card numbers by mimicking trusted sites.<br />
+                      Ⅲ. Misinformation:<br />
+                      Spread false news, impersonate real news outlets or
+                      government agencies, and influence public opinion or
+                      behaviour.
+                    </div>
+                  </div>
+                  <div id="card3" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Some Examples Are</div>
+                    <div class="card-content">
+                      A fake online store that sells high-end items at low
+                      prices but never ships anything.<br />
+                      <br />
+                      A phishing site that mimics a bank login page to steal
+                      your credentials.<br />
+                      <br />
+                      A clone of a legitimate news website spreading false
+                      stories.<br />
+                    </div>
+                  </div>
+                  <div id="card4" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Check and Check</div>
+                    <div class="card-content">
+                      1. Check the URL: Look for misspelled domains, unusual
+                      domain extensions, extra characters, deceptive subdomains,
+                      or embedded brand names.<br />
+
+                      2. Check site security: Ensure the site uses TLS/SSL
+                      certificates. Types include DV (minimal validation), OV
+                      (business-verified), and EV (high-level verification).
+                      Fraudsters often use DV certificates.<br />
+
+                      3. Check domain age: New domains may indicate scams, as
+                      scammers often register short-term domains to reduce
+                      costs.<br />
+
+                      4. Check for errors: Scammers often have spelling or
+                      grammatical mistakes, poor design, and missing info (e.g.,
+                      no contact details or “About Us” page).
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="content3" class="newContent" style="display: none">
+          <h2 class="gradient-text">AI Generated and Deepfake Images</h2>
+          <!-- Card Layout Section -->
+          <div class="wrapper">
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-code"></i></div>
+                <span>AI Creation</span>
+              </div>
+              <div class="back-face">
+                <span>AI Creation</span>
+                <p>
+                  AI-generated images are created by algorithms, enabling
+                  realistic visuals for art, marketing, and entertainment.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <span>Deepfake</span>
+              </div>
+              <div class="back-face">
+                <span>Deepfake</span>
+                <p>
+                  Deepfake images use AI to create realistic but false visuals,
+                  altering appearances to deceive viewers.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Ethical Issues</span>
+              </div>
+              <div class="back-face">
+                <span>Ethical Issues</span>
+                <p>
+                  AI images raise concerns about privacy violations, defamation,
+                  and manipulation for personal or political gain.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Positive Uses</span>
+              </div>
+              <div class="back-face">
+                <span>Positive Uses</span>
+                <p>
+                  AI images are used creatively in art, entertainment,
+                  advertising, and education, fostering innovation.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Disinformation Risk</span>
+              </div>
+              <div class="back-face">
+                <span>Disinformation Risk</span>
+                <p>
+                  Deepfake images can manipulate public opinion, spreading
+                  disinformation by making fake content seem authentic.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Detection Challenge</span>
+              </div>
+              <div class="back-face">
+                <span>Detection Challenge</span>
+                <p>
+                  As AI technology advances, distinguishing real from fake
+                  images becomes harder, requiring sophisticated detection
+                  tools.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Video Section -->
+          <div class="video-container">
+            <!-- Video Description Section -->
+            <div class="video-description">
+              <h3>Identify Deepfake Images</h3>
+              <p>
+                Deepfake images can be convincingly manipulated, making it
+                crucial to recognize signs of AI-generated content. Learn how to
+                spot inconsistencies, facial distortions, and other visual clues
+                that can help distinguish fake images from genuine ones.
+                Understanding these techniques is essential in combating
+                misinformation.
+              </p>
+            </div>
+            <!-- Video Embed Section -->
+            <div class="video-embed">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/mcpV857mMCI?hl=en&si=1wZNs1nwOfuzD5_2"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Text Content Section -->
+          <div
+            class="custom-content"
+            style="
+              background-image: url('./scripts/educational/bg.jpg');
+              background-size: cover;
+            "
+          >
+            <div id="main">
+              <div id="click-section">
+                <div id="drawerboxes">
+                  <div class="drawerbox active">
+                    <button class="drawer-btn active" onclick="slideTo(1)">
+                      What are They?<span class="drawer-head">1</span>
+                    </button>
+                  </div>
+
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(2)">
+                      Positive or Negative?<span class="drawer-head">2</span>
+                    </button>
+                  </div>
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(3)">
+                      What's the Impact?<span class="drawer-head">3</span>
+                    </button>
+                  </div>
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(4)">
+                      How to Spot?<span class="drawer-head">4</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div id="slide-section">
+                <div id="slide-bar">
+                  <div id="bar"></div>
+                </div>
+                <div
+                  id="card-section"
+                  style="
+                    background-image: url('./scripts/educational/bg.jpg');
+                    background-size: cover;
+                  "
+                >
+                  <div id="card1" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">The Response</div>
+                    <div class="card-content">
+                      AI-generated images are visuals created by artificial
+                      intelligence algorithms without using real cameras or
+                      physical scenes. They can be realistic or abstract and
+                      convey themes or messages. AI can enhance existing photos
+                      by correcting issues like red eyes or improving sharpness
+                      and contrast. Alternatively, AI can create entirely new
+                      images using generators that combine various elements to
+                      produce original artworks or unique perspectives. These
+                      images are produced by machine learning models such as
+                      GANs or text-to-image systems like DALL·E, Midjourney, and
+                      Stable Diffusion, which generate visuals from input data
+                      or text prompts.
+                    </div>
+                  </div>
+                  <div id="card2" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Be Careful</div>
+                    <div class="card-content">
+                      AI-generated and deepfake images have both positive and
+                      negative implications. On the positive side, they enable
+                      creativity in fields like art, entertainment, and
+                      education, providing innovative tools for content
+                      creation. However, they can also be misused to create
+                      misleading or harmful content, such as fake news, fraud,
+                      and privacy violations. The ability to manipulate images
+                      convincingly raises concerns about trust and authenticity
+                      in digital media. While AI advancements offer exciting
+                      possibilities, they also require ethical considerations
+                      and regulation to prevent misuse and ensure they are used
+                      responsibly.
+                    </div>
+                  </div>
+                  <div id="card3" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Case in Study</div>
+                    <div class="card-content">
+                      A notable case of deepfake images involved a series of
+                      manipulated photos that placed celebrities in compromising
+                      or false situations. One example was a deepfake image of
+                      actress Scarlett Johansson’s face superimposed onto a body
+                      in explicit content, which circulated online without her
+                      consent. This incident sparked outrage and highlighted the
+                      potential for deepfake images to harm individuals'
+                      reputations and violate privacy. The case raised concerns
+                      about the misuse of AI-generated content, showing how
+                      easily these images can deceive viewers and contribute to
+                      online harassment, defamation, and privacy violations.
+                    </div>
+                  </div>
+                  <div id="card4" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Remain Skeptical</div>
+                    <div class="card-content">
+                      1. Watch out for misplaced content<br />
+                      Check for missing body parts, incorrect shadows, or
+                      nonsensical text that indicate AI-generated image
+                      flaws.<br />
+                      2. Be suspicious of smooth features<br />
+                      Look for unnaturally glossy skin, overly smooth textures,
+                      or blurred backgrounds common in AI images.<br />
+                      3. Check for watermarks<br />
+                      Some AI images include small logos or text showing they
+                      were created by AI tools.<br />
+                      4. Flip It and Reverse It<br />
+                      Use reverse image search to verify image authenticity,
+                      especially if it's viral but not on trusted sites.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="content4" class="newContent" style="display: none">
+          <h2 class="gradient-text">News bias</h2>
+          <!-- Card Layout Section -->
+          <div class="wrapper">
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-code"></i></div>
+                <span>General Philosophy</span>
+              </div>
+              <div class="back-face">
+                <span>General Philosophy</span>
+                <p>
+                  Left: Community, equality, education, social safety nets.<br />
+                  Right: Individual freedom, limited government, personal
+                  property, competition, free market.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <span>Economic Policy</span>
+              </div>
+              <div class="back-face">
+                <span>Economic Policy</span>
+                <p>
+                  Left: Higher taxes, social programs, wealth redistribution.<br />
+                  Right: Lower taxes, less regulation, free market wages.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Education Policy</span>
+              </div>
+              <div class="back-face">
+                <span>Education Policy</span>
+                <p>
+                  Left: Support expanded public education, reduced or free
+                  college.<br />
+                  Right: Favor homeschooling, private schools, critical of
+                  public education content.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Environmental Policy</span>
+              </div>
+              <div class="back-face">
+                <span>Environmental Policy</span>
+                <p>
+                  Left: Regulations, climate change is human-influenced, urgent
+                  action.<br />
+                  Right: Economic impact, free market solutions, climate change
+                  denial.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Healthcare Policy</span>
+              </div>
+              <div class="back-face">
+                <span>Healthcare Policy</span>
+                <p>
+                  Left: Support universal healthcare, government-funded, basic
+                  right.<br />
+                  Right: Support private healthcare, market solutions,
+                  competition, personal choice.
+                </p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="front-face">
+                <div class="icon"><i class="fas fa-rocket"></i></div>
+                <span>Immigration Policy</span>
+              </div>
+              <div class="back-face">
+                <span>Immigration Policy</span>
+                <p>
+                  Left: Favor inclusive immigration, support refugees and
+                  citizenship.<br />
+                  Right: Stricter controls, national security, prioritize
+                  skilled immigrants, legal processes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Section -->
+          <div class="video-container">
+            <!-- Video Description Section -->
+            <div class="video-description">
+              <h3>"Identifying Media Bias</h3>
+              <p>
+                Learn how to recognize bias in media coverage by understanding
+                the subtle ways information is presented. This guide explores
+                different techniques used to detect bias, helping you critically
+                evaluate news and avoid being misled.
+              </p>
+            </div>
+            <!-- Video Embed Section -->
+            <div class="video-embed">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/6R6-2_8m4Co?hl=en&si=VDICHIXLEsxrKjKE"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Text Content Section -->
+          <div
+            class="custom-content"
+            style="
+              background-image: url('./scripts/educational/bg.jpg');
+              background-size: cover;
+            "
+          >
+            <div id="main">
+              <div id="click-section">
+                <div id="drawerboxes">
+                  <div class="drawerbox active">
+                    <button class="drawer-btn active" onclick="slideTo(1)">
+                      What Is It?<span class="drawer-head">1</span>
+                    </button>
+                  </div>
+
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(2)">
+                      Left or Right?<span class="drawer-head">2</span>
+                    </button>
+                  </div>
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(3)">
+                      What's the Impact?<span class="drawer-head">3</span>
+                    </button>
+                  </div>
+                  <div class="drawerbox">
+                    <button class="drawer-btn" onclick="slideTo(4)">
+                      How to Identify?<span class="drawer-head">4</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div id="slide-section">
+                <div id="slide-bar">
+                  <div id="bar"></div>
+                </div>
+                <div
+                  id="card-section"
+                  style="
+                    background-image: url('./scripts/educational/bg.jpg');
+                    background-size: cover;
+                  "
+                >
+                  <div id="card1" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">What is a News Bias</div>
+                    <div class="card-content">
+                      News Bias is defined as the tendency of news media to
+                      report in a way that reinforces a viewpoint, preference or
+                      political ideology, instead of reporting the news
+                      objectively. A media outlet may reveal bias in how it
+                      reports specific news stories or which stories they choose
+                      to cover, i.e., deem more important than others to cover
+                      or emphasize.
+                    </div>
+                  </div>
+                  <div id="card2" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Learn About</div>
+                    <div class="card-content">
+                      Left-Wing and Right-Wing are terms used to describe
+                      opposing political ideologies:<br />
+                      • Left-wing politics generally support social equality,
+                      government intervention in the economy, and progressive
+                      values like environmental protection, minority rights, and
+                      wealth redistribution. It focuses on collective welfare
+                      and reducing inequality.<br />
+                      • Right-wing politics typically favor free markets,
+                      individual responsibility, limited government, and
+                      traditional values such as family, religion, and national
+                      pride. It emphasizes personal freedom and economic growth
+                      with less state interference.
+                    </div>
+                  </div>
+                  <div id="card3" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Don't Ignore</div>
+                    <div class="card-content">
+                      News bias can significantly impact public perception and
+                      decision-making. When media outlets present information
+                      with a particular slant or omit key details, it shapes how
+                      audiences interpret events, often reinforcing existing
+                      beliefs or creating polarization. This bias can lead to
+                      misinformed opinions, as people may only receive one-sided
+                      perspectives. Over time, biased reporting erodes trust in
+                      the media and undermines the quality of public discourse.
+                      In political contexts, news bias can influence elections,
+                      as voters may be swayed by skewed portrayals of candidates
+                      or policies, ultimately affecting democratic processes and
+                      social unity.
+                    </div>
+                  </div>
+                  <div id="card4" class="card">
+                    <div class="card-small-title">IYAKAH TIPS</div>
+                    <div class="card-title">Get Ready</div>
+                    <div class="card-content">
+                      To start by examining the source. Consider the outlet's
+                      political alignment or past tendencies to favor certain
+                      viewpoints. Next, check the language used; biased
+                      reporting often includes emotionally charged or loaded
+                      words to influence readers. Look for the omission of key
+                      facts or one-sided reporting that fails to present
+                      multiple perspectives. Analyze the framing of stories—how
+                      events are presented can shape perception. Additionally,
+                      cross-check information with other reputable sources to
+                      see if different outlets offer balanced views. Recognizing
+                      news bias requires critical thinking and awareness of the
+                      subtle ways media can shape opinions.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- chatbot widget start -->
+    <div id="chatbot-container">
+      <!-- Chat Bubble -->
+      <div id="chatbot-bubble" title="Open Chatbot">
+        <span>💬</span>
+      </div>
+
+      <!-- window -->
+      <div id="chatbot-window">
+        <div id="chatbot-header">
+          <span>🤖 Iyakah Chatbot</span>
+          <button id="close-chat">✖</button>
+        </div>
+        <div id="chatbot-messages">
+          <div id="typing-indicator" class="message bot" style="display: none">
+            Thinking
+          </div>
+        </div>
+        <div id="chatbot-input-area">
+          <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Type your message..."
+          />
+          <button id="send-message">✈</button>
+        </div>
+      </div>
+    </div>
+    <div id="chatbot-tooltip">Need help? Ask me anything!</div>
+    <!-- chatbot widget end -->
+
     <!-- footer -->
     <footer class="footer">
       <div class="footer-content">
@@ -103,7 +1184,6 @@
             <a href="./website-verification.html">Website Legitimacy Checker</a>
             <a href="./image-verification.html">Fake Image Detector</a>
             <a href="./news-verification.html">News Bias Detector</a>
-            <a href="./resources.html">Resources</a>
           </div>
           <div>
             <h4>About Us</h4>
@@ -124,28 +1204,7 @@
     </footer>
 
     <script type="module" src="middleware.js"></script>
-    <script type="module" src="./scripts/script.js"></script>
-
-    <!-- info card during loading animation -->
-    <div id="loading-card" class="loading-card hidden">
-      <div class="loading-card-content">
-        <img
-          src="./styles/media/lightbulb.svg"
-          alt="Did you know?"
-          class="loading-image"
-        />
-        <div class="loading-text">
-          <h3>Did you know?</h3>
-          <p id="loading-message">
-            Nearly 40% of news shared on social media is shared without being
-            read!
-          </p>
-          <!-- this button is dynamically updated to -->
-          <button id="loading-close-btn" class="loading-close-btn hidden">
-            Start
-          </button>
-        </div>
-      </div>
-    </div>
+    <script src="./scripts/education.js"></script>
+    <script type="module" src="./scripts/chatbot.js"></script>
   </body>
 </html>
