@@ -211,115 +211,12 @@
 
     <!-- Load the autocomplete data first -->
     <script>
-      // Create and append spinner styles to the document head
-      //     function createSpinnerStyles() {
-      //       const styleEl = document.createElement("style");
-      //       styleEl.innerHTML = `
-      //   .spinner-overlay {
-      //     position: fixed;
-      //     top: 0;
-      //     left: 0;
-      //     width: 100%;
-      //     height: 100%;
-      //     background-color: rgba(0, 0, 0, 0.5);
-      //     display: flex;
-      //     justify-content: center;
-      //     align-items: center;
-      //     z-index: 9999;
-      //     opacity: 0;
-      //     visibility: hidden;
-      //     transition: opacity 0.3s ease, visibility 0.3s ease;
-      //   }
-
-      //   .spinner-overlay.active {
-      //     opacity: 1;
-      //     visibility: visible;
-      //   }
-
-      //   .spinner {
-      //     width: 50px;
-      //     height: 50px;
-      //     border: 5px solid rgba(255, 255, 255, 0.3);
-      //     border-radius: 50%;
-      //     border-top-color: #fff;
-      //     animation: spin 1s ease-in-out infinite;
-      //   }
-
-      //   @keyframes spin {
-      //     to { transform: rotate(360deg); }
-      //   }
-
-      //   .upload-progress {
-      //     width: 100%;
-      //     height: 4px;
-      //     background-color: #f1f1f1;
-      //     border-radius: 2px;
-      //     margin-top: 10px;
-      //     overflow: hidden;
-      //     display: none;
-      //   }
-
-      //   .upload-progress-bar {
-      //     height: 100%;
-      //     width: 0%;
-      //     background-color: #4CAF50;
-      //     border-radius: 2px;
-      //     transition: width 0.3s ease;
-      //   }
-
-      //   .upload-area.uploading {
-      //     border-color: #4CAF50;
-      //   }
-
-      //   .pulse-animation {
-      //     animation: pulse 1.5s infinite;
-      //   }
-
-      //   @keyframes pulse {
-      //     0% { opacity: 1; }
-      //     50% { opacity: 0.6; }
-      //     100% { opacity: 1; }
-      //   }
-      // `;
-      //       document.head.appendChild(styleEl);
-      //     }
-
-      // Create spinner overlay element
-      // function createSpinnerOverlay() {
-      //   const overlay = document.createElement("div");
-      //   overlay.className = "spinner-overlay";
-      //   overlay.innerHTML = '<div class="spinner"></div>';
-      //   document.body.appendChild(overlay);
-      //   return overlay;
-      // }
-
-      // // Show spinner with timeout
-      // function showSpinnerWithTimeout(timeout = 30000) {
-      //   const spinner =
-      //     document.querySelector(".spinner-overlay") || createSpinnerOverlay();
-      //   spinner.classList.add("active");
-
-      //   // Set timeout to hide spinner and show error if it takes too long
-      //   const timeoutId = setTimeout(() => {
-      //     hideSpinner();
-      //     alert("Request timed out. Please try again later.");
-      //   }, timeout);
-
-      //   return { spinner, timeoutId };
-      // }
-
-      // // Hide spinner and clear timeout
-      // function hideSpinner(timeoutId) {
-      //   const spinner = document.querySelector(".spinner-overlay");
-      //   if (spinner) {
-      //     spinner.classList.remove("active");
-      //   }
-      //   if (timeoutId) {
-      //     clearTimeout(timeoutId);
-      //   }
-      // }
       // Global variable to store media data
       let mediaItems = [];
+
+      // call user IP
+      let userIp = "Unknown";
+      let isIpFetched = false;
 
       // Fetch data.json before other scripts
       fetch("./scripts/data.json")
@@ -336,10 +233,24 @@
         .catch((error) => {
           console.error("Error loading media data:", error);
         });
-    </script>
 
-    <!-- Load the main script after DOM is ready -->
-    <script>
+      // Function to fetch user IP
+      const fetchUserIp = async () => {
+        try {
+          const res = await fetch("https://api.ipify.org?format=json");
+          const data = await res.json();
+          if (data && data.ip) {
+            userIp = data.ip;
+            isIpFetched = true;
+          } else {
+            console.warn("IP not found in response.");
+            isIpFetched = true;
+          }
+        } catch (err) {
+          console.error("Could not fetch IP:", err);
+          isIpFetched = true;
+        }
+      };
       // Function to process bias data and create table content
       function processBiasData(data) {
         // Check if bias data exists
@@ -421,8 +332,7 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        // Add spinner styles to document
-        // createSpinnerStyles();
+        fetchUserIp();
 
         // Fake News Detector functionality
         const newsInput = document.getElementById("news-input");
@@ -653,8 +563,47 @@
                   return response.json();
                 })
                 .then((data) => {
-                  // Hide spinner and clear timeout
-                  // hideSpinner(timeoutId);
+                  // Wait for IP before sending chatbot request
+                  if (!isIpFetched) {
+                    alert(
+                      "Still retrieving your IP address. Please wait a moment."
+                    );
+                    return;
+                  }
+
+                  // Call endpoint
+                  fetch("https://chatbot-assistant-z3ls.onrender.com/explain", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      user_ip: userIp,
+                      feature: "News Analysis",
+                    }),
+                  })
+                    .then((res) => {
+                      if (!res.ok) {
+                        throw new Error("Chatbot endpoint error");
+                      }
+                      return res.json();
+                    })
+                    .then((chatbotData) => {
+                      console.log("Chatbot response:", chatbotData);
+                      // Display chatbot response
+                      const chatbotContainer = document.createElement("div");
+                      chatbotContainer.className = "chatbot-response";
+                      chatbotContainer.innerHTML = `
+    <h2>What our chatbot thinks:</h2>
+    <p>${chatbotData.response}</p>
+  `;
+                      document
+                        .getElementById("news-result-container")
+                        .appendChild(chatbotContainer);
+                    })
+                    .catch((err) => {
+                      console.error("Error fetching chatbot response:", err);
+                    });
 
                   console.log("Response from backend:", data);
 
@@ -761,6 +710,9 @@
                         ${biasTableRows}
                       </tbody>
                     </table>
+
+                    <h2>What our chatbot thinks:</h2>
+                      <p>${chatbotData.response}</p>
 
                     <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 

@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About - IYAKAH</title>
-  <link rel="stylesheet" href="styles/alternative-styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IYAKAH - Truth Detection</title>
+    <script
+      defer
+      src="/_vercel/insights/script.js"
+      onerror="console.error('Insights script failed to load.')"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- general font for the page -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- link to alternative styling -->
+    <link rel="stylesheet" href="./styles/about.css" />
 
-  <!-- navbar -->
+    <!-- link to alternative styling -->
+    <link rel="stylesheet" href="./styles/chatbot.css" />
+  </head>
+  <body>
+    <!-- navbar -->
     <nav class="navbar" id="navbar">
       <div class="nav-logo"><a href="index.html">IYAKAH</a></div>
       <div class="nav-center">
@@ -41,102 +62,215 @@
         </ul>
       </div>
     </nav>
+    <div class="container">
+      <h3>About Us</h3>
+      <!-- Hero Section -->
+      <section class="hero">
+        <h2>Who We Are</h2>
+        <p>
+          We are a passionate team on a mission to empower individuals with the
+          tools they need to navigate the digital world confidently and
+          critically. In an age where misinformation and disinformation spread
+          faster than facts, Iyakah offers a 3-in-1 solution to help users
+          verify what they see, read, and share online.
+        </p>
+      </section>
 
-  <!-- About Introduction Section -->
-  <section class="about-section">
-    <h1>About</h1>
-    <p>Introduction</p>
+      <!-- Our Mission -->
+      <section class="section mission" id="mission">
+        <div class="container">
+          <h3>Our Mission</h3>
+          <p>
+            To combat online misinformation and disinformation by providing
+            <strong>accessible, intelligent, and educational tools</strong> that
+            help users make informed decisions in real time.
+          </p>
+        </div>
+      </section>
 
-    <!-- Image Placeholder 1 -->
-    <div class="image-placeholder">
-      <p>Image Placeholder 1</p>
+      <!-- Our Values -->
+      <section class="section values" id="values">
+        <div class="container">
+          <h3>Our Core Values</h3>
+          <div class="card-grid">
+            <div class="card">
+              <h4>Truth & Transparency</h4>
+              <p>
+                We are committed to providing accurate information and
+                empowering users to discern fact from fiction.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Digital Empowerment</h4>
+              <p>
+                We strive to equip individuals with the skills and knowledge
+                necessary to navigate the digital landscape safely and
+                responsibly.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Accessibility for All</h4>
+              <p>
+                We believe that everyone should have access to the tools and
+                knowledge needed to navigate the digital landscape safely.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Innovation with Integrity</h4>
+              <p>
+                We leverage cutting-edge technology to provide reliable
+                solutions while maintaining ethical standards.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Problem & Solution -->
+      <section class="section problem-solution">
+        <div class="container split">
+          <div class="content-box">
+            <h3>Our Problem Statement</h3>
+            <p>
+              The principles of digital citizenship in Malaysia are increasingly
+              challenged with the worry surge in misinformation. This website
+              aims to empower Malaysian digital citizens, especially students,
+              with the necessary skills to differentiate trustworthy information
+              from deceptive or misleading content. This website will leverage
+              <strong
+                >machine learning algorithms, natural language processing and
+                image recognition techniques</strong
+              >
+              for the functions offered. Educational resources will also be
+              included in the website where users can be made aware of the
+              various techniques on how to spot deceptive content and what to do
+              about it. This comprehensive approach aims to not only enhance
+              digital literacy but also build a resilient community.
+            </p>
+          </div>
+          <div class="content-box">
+            <h3>Our Solution</h3>
+            <p>
+              To combat misinformation and disinformation online, we are
+              providing a unique 3-in-1 solution on our website in the form of:
+            </p>
+
+            <p>
+              To combat misinformation and disinformation online, we are
+              providing a unique 3-in-1 solution on our website in the form of:
+            </p>
+            <ol>
+              <li>
+                <strong>Website Legitimacy Checker</strong>: Instantly analyze a
+                website’s trustworthiness based on its domain, SSL certificate,
+                privacy policy, and more.
+              </li>
+              <li>
+                <strong>Fake Image Detector</strong>: Spot AI-generated or
+                manipulated visuals using advanced detection models.
+              </li>
+              <li>
+                <strong>News Bias Detector</strong>: Assess the credibility of
+                articles and headlines through language pattern analysis and
+                source cross-referencing.
+              </li>
+            </ol>
+            <p>
+              Furthermore, we have an Educational Corner to teach users on how
+              misinformation works, how to spot it, and how to build lifelong
+              digital literacy skills.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- see the stats -->
+      <section class="section stats-section">
+        <div class="stats-header">
+          <h3>See the Stats</h3>
+          <p>
+            Explore real-time insights on misinformation trends, detection rates, and digital literacy impact powered by our analytics dashboard.
+          </p>
+        </div>
+        <div class="stats-embed-container">
+          <iframe
+            title="Iyakah Analytics Dashboard"
+            width="100%"
+            height="480"
+            src="https://lookerstudio.google.com/embed/reporting/7be47712-ea51-43fb-8981-33c782d878e2/page/tK7JF"
+            frameborder="0"
+            style="border:0;"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
     </div>
 
-    <!-- Website Section -->
-    <div class="text-block">
-      <h2>Website</h2>
-      <p>This platform equips users — especially students — with real-time machine learning tools to detect news bias, fraudulent websites, and AI-generated images. By combining powerful analysis features with educational content and a user reporting system, the website promotes digital literacy and empowers users to think critically online. The goal is to build a smarter, safer, and more resilient digital community.</p>
-    </div>
+    <!-- chatbot widget start -->
+    <div id="chatbot-container">
+      <!-- Chat Bubble -->
+      <div id="chatbot-bubble" title="Open Chatbot">
+        <span>💬</span>
+      </div>
 
-    <!-- Image Placeholder 2 -->
-    <div class="image-placeholder">
-      <p>Image Placeholder 2</p>
-    </div>
-
-    <!-- Digital Citizen Section -->
-    <div class="text-block">
-      <h2>Digital Citizen</h2>
-      <p>In today’s information-driven world, being a digital citizen means having the ability to identify misinformation, recognize online threats, and engage safely in digital spaces.</p>
-    </div>
-
-    <!-- Next Section Navigation -->
-    <div class="next-section">
-      <span>Next</span> → <a href="#">Open Data</a>
-    </div>
-  </section>
-
-  <!-- About Open Data Section -->
-  <section class="open-data-section">
-    <h1>About</h1>
-    <p>Open Data</p>
-
-    <!-- Background Image with Overlayed Links -->
-    <div class="overlay-container">
-      <img src="About_Open_data.png" alt="Open Data Background" class="background-image">
-
-      <!-- Overlayed Links -->
-      <div class="overlay-links">
-        <a href="#">Google Safe Browsing API</a>
-        <a href="#">Virustotal API</a>
-        <a href="#">AllSides Media Bias Ratings</a>
-        <a href="#">ISTE Standards: For Students</a>
+      <!-- window -->
+      <div id="chatbot-window">
+        <div id="chatbot-header">
+          <span>🤖 Iyakah Chatbot</span>
+          <button id="close-chat">✖</button>
+        </div>
+        <div id="chatbot-messages">
+          <div id="typing-indicator" class="message bot" style="display: none">
+            Thinking
+          </div>
+        </div>
+        <div id="chatbot-input-area">
+          <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Type your message..."
+          />
+          <button id="send-message">✈</button>
+        </div>
       </div>
     </div>
+    <div id="chatbot-tooltip">Need help? Ask me anything!</div>
+    <!-- chatbot widget end -->
 
-    <!-- Next Section Navigation -->
-    <div class="next-section">
-      <span>Next</span> → <a href="#">Introduction</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-logo">
-        <h4>IYAKAH</h4>
-        <p>Your trusted safety testing partner</p>
-      </div>
-      <div class="footer-links">
-        <div>
-          <h5>Products and Services</h5>
-          <ul>
-            <li>Website Verification</li>
-            <li>Image Detection</li>
-            <li>News Detection</li>
-            <li>Resources</li>
-          </ul>
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <p>IYAKAH</p>
+          <p>Your one-stop solution to battling misinformation online</p>
         </div>
-        <div>
-          <h5>About Us</h5>
-          <ul>
-            <li>Introduction</li>
-            <li>Open Data</li>
-          </ul>
-        </div>
-        <div>
-          <h5>Help & Support</h5>
-          <ul>
-            <li>FAQ</li>
-            <li>Search Ranking</li>
-          </ul>
+        <div class="footer-links">
+          <div>
+            <h4>Products and Services</h4>
+            <a href="./website-verification.html">Website Legitimacy Checker</a>
+            <a href="./image-verification.html">Fake Image Detector</a>
+            <a href="./news-verification.html">News Bias Detector</a>
+            <a href="./resources.html">Resources</a>
+          </div>
+          <div>
+            <h4>About Us</h4>
+            <a href="./who-are-we.html">Who we are</a>
+            <a href="#">Our Story</a>
+          </div>
+          <div>
+            <h4>Help & Support</h4>
+            <a href="./faq.html">FAQ</a>
+            <a href="#">Support Team</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      © 2025 Iyakah. reserves all rights
-    </div>
-  </footer>
+      <hr />
+      <div class="footer-bottom">
+        <p>© 2025 IYAKAH. All rights reserved.</p>
+      </div>
+    </footer>
 
-  <script src="script.js"></script>
-</body>
+    <script type="module" src="middleware.js"></script>
+    <script type="module" src="./scripts/chatbot.js"></script>
+  </body>
 </html>
