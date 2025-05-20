@@ -293,11 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
           "comparison-result"
         ).innerHTML += `<br/><span style="color:red;">Could not send your data. Try again later.</span>`;
       });
-    userAnswers.forEach((answer, i) => {
-      if (answer === selectedQuestions[i].correct) {
-        score += selectedQuestions[i].mark;
-      }
-    });
 
     const total = selectedQuestions.reduce((sum, q) => sum + q.mark, 0);
     let resultMessage =
