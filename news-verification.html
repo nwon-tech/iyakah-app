@@ -559,48 +559,6 @@
                   return response.json();
                 })
                 .then((data) => {
-                  // Wait for IP before sending chatbot request
-                  if (!isIpFetched) {
-                    alert(
-                      "Still retrieving your IP address. Please wait a moment."
-                    );
-                    return;
-                  }
-
-                  // Call endpoint
-                  fetch("https://chatbot-assistant-z3ls.onrender.com/explain", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      user_ip: userIp,
-                      feature: "News Analysis",
-                    }),
-                  })
-                    .then((res) => {
-                      if (!res.ok) {
-                        throw new Error("Chatbot endpoint error");
-                      }
-                      return res.json();
-                    })
-                    .then((chatbotData) => {
-                      console.log("Chatbot response:", chatbotData);
-                      // Display chatbot response
-                      const chatbotContainer = document.createElement("div");
-                      chatbotContainer.className = "chatbot-response";
-                      chatbotContainer.innerHTML = `
-    <h2>What our chatbot thinks:</h2>
-    <p>${chatbotData.response}</p>
-  `;
-                      document
-                        .getElementById("news-result-container")
-                        .appendChild(chatbotContainer);
-                    })
-                    .catch((err) => {
-                      console.error("Error fetching chatbot response:", err);
-                    });
-
                   console.log("Response from backend:", data);
 
                   var newsResultSummary =
@@ -706,9 +664,6 @@
                         ${biasTableRows}
                       </tbody>
                     </table>
-
-                    <h2>What our chatbot thinks:</h2>
-                      <p>${chatbotData.response}</p>
 
                     <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 
