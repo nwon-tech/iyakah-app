@@ -436,32 +436,6 @@ document.addEventListener("DOMContentLoaded", () => {
               </tbody>
             </table>
 
-            <div>
-            <section class="hero-feedback">
-              <div class="feedback-container">
-                <h2>Your Feedback Matters</h2>
-
-                <div class="feedback-row">
-                  <label class="feedback-label">Was this result helpful?</label>
-                  <div class="feedback-buttons">
-                    <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
-                      👍🏻
-                    </button>
-                    <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
-                      👎🏻
-                    </button>
-                  </div>
-                </div>
-
-                <div class="feedback-row">
-                  <label class="feedback-label">Tell us more (optional)</label>
-                  <input type="text" id="feedback-text" placeholder="Please enter your feedback" />
-                  <button class="submit-btn">Submit</button>
-                </div>
-              </div>
-            </section>
-            </div>
-
             <div class="website-education">
               <section>
                 <h2>How to Spot a Phishing or Scam Website</h2>
@@ -544,7 +518,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             `;
-              }
+          
+          }
               // Re-enable the button
               checkWebsiteButton.disabled = false;
               checkWebsiteButton.textContent = "Analyse";
@@ -953,32 +928,6 @@ function handleFileSelect(selectedFile) {
                 </div>
 
                 <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
-
-                <div>
-                <section class="hero-feedback">
-                  <div class="feedback-container">
-                    <h2>Your Feedback Matters</h2>
-
-                    <div class="feedback-row">
-                      <label class="feedback-label">Was this result helpful?</label>
-                      <div class="feedback-buttons">
-                        <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
-                          👍🏻
-                        </button>
-                        <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
-                          👎🏻
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="feedback-row">
-                      <label class="feedback-label">Tell us more (optional)</label>
-                      <input type="text" id="feedback-text" placeholder="Please enter your feedback" />
-                      <button class="submit-btn">Submit</button>
-                    </div>
-                  </div>
-                </section>
-                </div>
 
                 <div class="website-education">
                 <section>

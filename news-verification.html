@@ -42,6 +42,9 @@
     <!-- fake image -->
     <link rel="stylesheet" href="./styles/news-styles.css" />
 
+    <!-- chatbot styles -->
+    <link rel="stylesheet" href="./styles/chatbot.css" />
+
     <!-- Add autocomplete specific CSS -->
     <style>
       #autocomplete-results {
@@ -154,6 +157,41 @@
           </div>
         </div>
       </div>
+
+      <!-- chatbot widget start -->
+      <div id="chatbot-container">
+        <!-- Chat Bubble -->
+        <div id="chatbot-bubble" title="Open Chatbot">
+          <span>💬</span>
+        </div>
+
+        <!-- window -->
+        <div id="chatbot-window">
+          <div id="chatbot-header">
+            <span>🤖 Iyakah Chatbot</span>
+            <button id="close-chat">✖</button>
+          </div>
+          <div id="chatbot-messages">
+            <div
+              id="typing-indicator"
+              class="message bot"
+              style="display: none"
+            >
+              Thinking
+            </div>
+          </div>
+          <div id="chatbot-input-area">
+            <input
+              type="text"
+              id="chatbot-input"
+              placeholder="Type your message..."
+            />
+            <button id="send-message">✈</button>
+          </div>
+        </div>
+      </div>
+      <div id="chatbot-tooltip">Need help? Ask me anything!</div>
+      <!-- chatbot widget end -->
 
       <!-- Next Section Navigation -->
       <div class="next-section-options">
@@ -667,31 +705,6 @@
 
                     <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 
-                    <div>
-                    <section class="hero-feedback">
-                      <div class="feedback-container">
-                        <h2>Your Feedback Matters</h2>
-
-                        <div class="feedback-row">
-                          <label class="feedback-label">Was this result helpful?</label>
-                          <div class="feedback-buttons">
-                            <button class="thumb-btn" id="thumb-up" aria-label="Thumbs up">
-                              👍🏻
-                            </button>
-                            <button class="thumb-btn" id="thumb-down" aria-label="Thumbs down">
-                              👎🏻
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="feedback-row">
-                          <label class="feedback-label">Tell us more (optional)</label>
-                          <input type="text" id="feedback-text" placeholder="Please enter your feedback" />
-                          <button class="submit-btn">Submit</button>
-                        </div>
-                      </div>
-                    </section>
-                    </div>
                   `;
                   }
 
