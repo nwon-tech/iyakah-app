@@ -520,7 +520,6 @@ body {
   text-decoration: none;
 }
 
-
 .resource-gallery iframe {
   width: 100%;
   max-width: 900px; /* Optional max width */
@@ -528,7 +527,6 @@ body {
   border-radius: 10px;
   transition: transform 0.3s;
 }
-
 
 .resource-gallery iframe:hover {
   transform: scale(1.02);

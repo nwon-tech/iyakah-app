@@ -1,115 +1,66 @@
 // Create and append spinner styles to the document head
-function createSpinnerStyles() {
-  const styleEl = document.createElement("style");
-  styleEl.innerHTML = `
-    .spinner-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
+function displayChatbotResponse(responseText) {
+  console.log("Chatbot response:", responseText);
+  const container = document.getElementById("chatbot-result-container");
+  if (!container) return;
 
-    .spinner-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+  // Clean and format the response
+  let cleanedText = cleanChatResponse(responseText);
+  let htmlContent = convertMarkdownToHtml(cleanedText);
 
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .upload-progress {
-      width: 100%;
-      height: 4px;
-      background-color: #f1f1f1;
-      border-radius: 2px;
-      margin-top: 10px;
-      overflow: hidden;
-      display: none;
-    }
-
-    .upload-progress-bar {
-      height: 100%;
-      width: 0%;
-      background-color: #4CAF50;
-      border-radius: 2px;
-      transition: width 0.3s ease;
-    }
-
-    .upload-area.uploading {
-      border-color: #4CAF50;
-    }
-
-    .pulse-animation {
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
+  container.innerHTML = `
+    <div class="chatbot-card">
+      <h3>Chatbot Analysis Summary</h3>
+      <div class="chatbot-message">
+        ${htmlContent}
+      </div>
+    </div>
   `;
-  document.head.appendChild(styleEl);
 }
 
-// Create spinner overlay element
-function createSpinnerOverlay() {
-  const overlay = document.createElement("div");
-  overlay.className = "spinner-overlay";
-  overlay.innerHTML = '<div class="spinner"></div>';
-  document.body.appendChild(overlay);
-  return overlay;
+function convertMarkdownToHtml(text) {
+  // Replace **bold** with <strong>
+  text = text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+  // Replace * bullets with <ul><li>...</li></ul>
+  const lines = text.split("\n");
+  let result = "";
+  let inList = false;
+
+  lines.forEach((line) => {
+    if (line.trim().startsWith("* ")) {
+      if (!inList) {
+        result += "<ul>";
+        inList = true;
+      }
+      result += `<li>${line.substring(2)}</li>`;
+    } else {
+      if (inList) {
+        result += "</ul>";
+        inList = false;
+      }
+      if (line.trim()) {
+        result += `<p>${line}</p>`;
+      } else {
+        result += "<br>";
+      }
+    }
+  });
+
+  if (inList) result += "</ul>";
+
+  return result;
 }
 
-// Show spinner with timeout
-function showSpinnerWithTimeout(timeout = 30000) {
-  const spinner =
-    document.querySelector(".spinner-overlay") || createSpinnerOverlay();
-  spinner.classList.add("active");
+function cleanChatResponse(text) {
+  // Remove common emojis (basic version)
+  text = text.replace(/[\u{1F600}-\u{1F6FF}\u{2700}-\u{27BF}]/gu, "");
 
-  // Set timeout to hide spinner and show error if it takes too long
-  const timeoutId = setTimeout(() => {
-    hideSpinner();
-    alert("Request timed out. Please try again later.");
-  }, timeout);
-
-  return { spinner, timeoutId };
-}
-
-// Hide spinner and clear timeout
-function hideSpinner(timeoutId) {
-  const spinner = document.querySelector(".spinner-overlay");
-  if (spinner) {
-    spinner.classList.remove("active");
-  }
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-  }
+  // Remove extra spaces
+  return text.trim();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Add spinner styles to document
-  createSpinnerStyles();
-
   // Tab switching functionality
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabPanes = document.querySelectorAll(".tab-pane");
@@ -279,26 +230,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const websiteUrl = websiteInput.value.trim();
 
-    if (websiteUrl) {
-      // Show spinner with 30-second timeout
-      // const { timeoutId } = showSpinnerWithTimeout(30000);
+    // validation checks
+    let processedUrl = websiteUrl;
 
-      // Clear previous results
-      websiteResultContainer.innerHTML = "";
+    // Step 2: Basic domain format check
+    const domainRegex = /^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
 
-      // Show loading state
-      checkWebsiteButton.disabled = true;
-      checkWebsiteButton.textContent = "Analysing...";
+    // Remove protocol temporarily to validate domain
+    let domainOnly = processedUrl.replace(/^https?:\/\//, "");
 
-      // Make sure URL has a protocol, add http:// if none exists
-      let processedUrl = websiteUrl;
-      if (
-        !processedUrl.startsWith("http://") &&
-        !processedUrl.startsWith("https://")
-      ) {
-        processedUrl = "https://" + processedUrl;
+    if (!domainRegex.test(domainOnly)) {
+      // Try adding .com if it's missing
+      if (!domainOnly.includes(".")) {
+        domainOnly += ".com";
+      } else if (!/\.[a-zA-Z]{2,}$/.test(domainOnly)) {
+        domainOnly += ".com";
       }
 
+      // Rebuild URL
+      processedUrl = domainOnly;
+    }
+
+    // Step 3: Add https:// if no protocol exists
+    if (
+      !processedUrl.startsWith("http://") &&
+      !processedUrl.startsWith("https://")
+    ) {
+      processedUrl = "https://" + processedUrl;
+    }
+
+    console.log("Final processed URL:", processedUrl);
+
+    // Continue with analysis
+    websiteResultContainer.innerHTML = "";
+    checkWebsiteButton.disabled = true;
+    checkWebsiteButton.textContent = "Analysing...";
+
+    if (websiteUrl) {
       showLoadingCard(() => {
         return new Promise((resolve, reject) => {
           const requestBodyString = JSON.stringify({
@@ -340,12 +308,13 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((data) => {
               console.log("Response from backend:", data);
 
-              // data.data.resultSummary is the expected format for the result summary
               // data.data.confidenceScore is the expected format for the confidence score
-              var websiteResultSummary =
-                data.data.resultSummary || "No result available";
               var websiteConfidenceScore =
                 data.data.confidenceScore || "No score available";
+              console.log(
+                "Confidence score from backend:",
+                websiteConfidenceScore
+              );
 
               // websiteLogId to check for dynamic update
               var websiteLogId = data.data.logId || "No log ID available";
@@ -361,13 +330,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 data.data.urlResult.sslValidityResult || "No result available";
               var sslKeyResult =
                 data.data.urlResult.sslKeyResult || "No result available";
-
-              // formatting output
-              // if (websiteResultSummary.toLowerCase() === "safe website") {
-              //   websiteResultSummary = "Safe Website";
-              // } else {
-              //   websiteResultSummary = "Unsafe Website";
-              // }
 
               var safetyRating = "";
               var imgRating = "";
@@ -518,8 +480,13 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             `;
-          
-          }
+              }
+
+              // chatbot response
+              if (data.data.chatResponse) {
+                displayChatbotResponse(data.data.chatResponse);
+              }
+
               // Re-enable the button
               checkWebsiteButton.disabled = false;
               checkWebsiteButton.textContent = "Analyse";
@@ -977,6 +944,11 @@ function handleFileSelect(selectedFile) {
                   </div>
 
               `;
+                }
+
+                // chatbot response
+                if (data.data.chatResponse) {
+                  displayChatbotResponse(data.data.chatResponse);
                 }
 
                 analyzeButton.disabled = false;

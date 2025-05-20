@@ -154,6 +154,7 @@
 
             <!-- result output -->
             <div class="result-container" id="news-result-container"></div>
+            <div id="chatbot-result-container"></div>
           </div>
         </div>
       </div>
@@ -245,6 +246,66 @@
 
     <!-- Load the autocomplete data first -->
     <script>
+      function displayChatbotResponse(responseText) {
+        console.log("Chatbot response:", responseText);
+        const container = document.getElementById("chatbot-result-container");
+        if (!container) return;
+
+        // Clean and format the response
+        let cleanedText = cleanChatResponse(responseText);
+        let htmlContent = convertMarkdownToHtml(cleanedText);
+
+        container.innerHTML = `
+    <div class="chatbot-card">
+      <h3>Chatbot Analysis Summary</h3>
+      <div class="chatbot-message">
+        ${htmlContent}
+      </div>
+    </div>
+  `;
+      }
+
+      function convertMarkdownToHtml(text) {
+        // Replace **bold** with <strong>
+        text = text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+        // Replace * bullets with <ul><li>...</li></ul>
+        const lines = text.split("\n");
+        let result = "";
+        let inList = false;
+
+        lines.forEach((line) => {
+          if (line.trim().startsWith("* ")) {
+            if (!inList) {
+              result += "<ul>";
+              inList = true;
+            }
+            result += `<li>${line.substring(2)}</li>`;
+          } else {
+            if (inList) {
+              result += "</ul>";
+              inList = false;
+            }
+            if (line.trim()) {
+              result += `<p>${line}</p>`;
+            } else {
+              result += "<br>";
+            }
+          }
+        });
+
+        if (inList) result += "</ul>";
+
+        return result;
+      }
+
+      function cleanChatResponse(text) {
+        // Remove common emojis (basic version)
+        text = text.replace(/[\u{1F600}-\u{1F6FF}\u{2700}-\u{27BF}]/gu, "");
+
+        // Remove extra spaces
+        return text.trim();
+      }
       // Global variable to store media data
       let mediaItems = [];
 
@@ -706,6 +767,11 @@
                     <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 
                   `;
+                  }
+
+                  // chatbot response
+                  if (data.data.chatResponse) {
+                    displayChatbotResponse(data.data.chatResponse);
                   }
 
                   // Re-enable the button
