@@ -18,6 +18,14 @@ body {
   padding: 2rem 1rem;
 }
 
+.container h3 {
+  font-family: "Almarao", sans-serif;
+  font-weight: 700;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
 /* nav bar */
 .navbar {
   display: flex;
