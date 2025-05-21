@@ -320,16 +320,47 @@ document.addEventListener("DOMContentLoaded", () => {
               var websiteLogId = data.data.logId || "No log ID available";
 
               // urlResult
-              var googleResult =
-                data.data.urlResult.googleResult || "No result available";
               var officialResults =
                 data.data.urlResult.officialResults || "No result available";
+              var officialResultsVerdict =
+                data.data.urlResult.officialVerdict || "No result available";
+              var officialResultsScore =
+                data.data.urlResult.allScore || "No score available";
+              
+
+              //  format domain age
+              var domainCreationDate =
+                data.data.urlResult.domainAgeDescription ||
+                "No date available";
+              var domainAgeVerdict =
+                data.data.urlResult.domainAgeDescriptionVerdict || "No result available";
+              var domainAgeScore =
+                data.data.urlResult.domainAgeDescriptionScore || "No score available";
+
+              //  SSL certificate
               var sslCaResult =
                 data.data.urlResult.sslCaResult || "No result available";
+              var sslCaResultVerdict =
+              data.data.urlResult.sslCaVerdict || "No result available";
+              var sslCaResultScore =
+                data.data.urlResult.sslCaScore || "No score available";
+
+              // SSL validity
               var sslValidityResult =
                 data.data.urlResult.sslValidityResult || "No result available";
+              var sslValidityResultVerdict =
+                data.data.urlResult.sslValidityVerdict || "No result available";
+              var sslValidityResultScore =
+                data.data.urlResult.sslValidityScore || "No score available";
+
+              // SSL Key
               var sslKeyResult =
                 data.data.urlResult.sslKeyResult || "No result available";
+              var sslKeyResultVerdict =
+                data.data.urlResult.sslKeyVerdict || "No result available";
+              var sslKeyResultScore =
+                data.data.urlResult.sslKeyScore || "No score available";
+
 
               var safetyRating = "";
               var imgRating = "";
@@ -376,24 +407,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
               <tbody>
                 <tr>
+                  <td>Criteria</td>
                   <td>Results</td>
-                  <td>${googleResult}</td>
+                  <td>Verdict</td>
+                  <td>Score</td>
                 </tr>
                 <tr>
                   <td>Rating by Agencies</td>
                   <td>${officialResults}</td>
+                  <td>${officialResultsVerdict}</td>
+                  <td>${officialResultsScore}/40</td>
+                </tr>
+                <tr>
+                  <td>Domain Creation Date</td>
+                  <td>${domainCreationDate}</td>
+                  <td>${domainAgeVerdict}/td>
+                  <td>${domainAgeScore}/15</td>
                 </tr>
                 <tr>
                   <td>SSL Certificate</td>
                   <td>${sslCaResult}</td>
+                  <td>${sslCaResultVerdict}</td>
+                  <td>${sslCaResultScore}/10</td>
                 </tr>
                 <tr>
                   <td>SSL Validity</td>
                   <td>${sslValidityResult}</td>
+                  <td>${sslValidityResultVerdict}/td>
+                  <td>${sslValidityResultScore}/20</td>
                 </tr>
                 <tr>
                   <td>SSL Key</td>
                   <td>${sslKeyResult}</td>
+                  <td>${sslKeyResultVerdict}</td>
+                  <td>${sslKeyResultScore}/15</td>
                 </tr>
               </tbody>
             </table>
