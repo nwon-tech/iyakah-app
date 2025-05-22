@@ -400,11 +400,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 Google Safe Service Results
               </caption>
 
-              <colgroup>
-                <col style="width: 30%" />
-                <col style="width: 70%" />
-              </colgroup>
-
               <tbody>
                 <tr>
                   <td>Criteria</td>
@@ -893,7 +888,7 @@ function handleFileSelect(selectedFile) {
 
                 // Formatting output
                 const resultText =
-                  imageResultSummary === "Real Image" ? "Real" : "AI-Generated";
+                  imageResultSummary === "Real image" ? "Real" : "AI-Generated";
 
                 let imgRating = "";
 
