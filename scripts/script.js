@@ -416,31 +416,31 @@ document.addEventListener("DOMContentLoaded", () => {
                   <td>Rating by Agencies</td>
                   <td>${officialResults}</td>
                   <td>${officialResultsVerdict}</td>
-                  <td>${officialResultsScore}/40</td>
+                  <td>${officialResultsScore}/40.0</td>
                 </tr>
                 <tr>
                   <td>Domain Creation Date</td>
                   <td>${domainCreationDate}</td>
                   <td>${domainAgeVerdict}/td>
-                  <td>${domainAgeScore}/15</td>
+                  <td>${domainAgeScore}/15.0</td>
                 </tr>
                 <tr>
                   <td>SSL Certificate</td>
                   <td>${sslCaResult}</td>
                   <td>${sslCaResultVerdict}</td>
-                  <td>${sslCaResultScore}/10</td>
+                  <td>${sslCaResultScore}/10.0</td>
                 </tr>
                 <tr>
                   <td>SSL Validity</td>
                   <td>${sslValidityResult}</td>
                   <td>${sslValidityResultVerdict}/td>
-                  <td>${sslValidityResultScore}/20</td>
+                  <td>${sslValidityResultScore}/20.0</td>
                 </tr>
                 <tr>
                   <td>SSL Key</td>
                   <td>${sslKeyResult}</td>
                   <td>${sslKeyResultVerdict}</td>
-                  <td>${sslKeyResultScore}/15</td>
+                  <td>${sslKeyResultScore}/15.0</td>
                 </tr>
               </tbody>
             </table>
