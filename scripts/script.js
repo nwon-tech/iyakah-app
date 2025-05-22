@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
               var officialResultsVerdict =
                 data.data.urlResult.officialVerdict || "No result available";
               var officialResultsScore =
-                data.data.urlResult.allScore || "No score available";
+                data.data.urlResult.officialScore || "No score available";
               
 
               //  format domain age
