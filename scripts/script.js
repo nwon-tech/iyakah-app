@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <tr>
                   <td>Domain Creation Date</td>
                   <td>${domainCreationDate}</td>
-                  <td>${domainAgeVerdict}/td>
+                  <td>${domainAgeVerdict}</td>
                   <td>${domainAgeScore}/15.0</td>
                 </tr>
                 <tr>
@@ -433,7 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <tr>
                   <td>SSL Validity</td>
                   <td>${sslValidityResult}</td>
-                  <td>${sslValidityResultVerdict}/td>
+                  <td>${sslValidityResultVerdict}</td>
                   <td>${sslValidityResultScore}/20.0</td>
                 </tr>
                 <tr>
