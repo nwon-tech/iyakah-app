@@ -84,7 +84,7 @@
     <div class="main-content">
       <div class="educational-page">
         <div class="title">
-          <p>Hello! 👋🏾 Welcome to our Resource Hub</p>
+          <p>Resource Hub</p>
         </div>
         <div id="banner">
           <div class="img-list img-wrapper">
@@ -93,13 +93,13 @@
                 <h3>Misinformation and Disinformation</h3>
               </div>
               <img
-                src="./styles/media/md.png"
+                src="./styles/media/md.jpg"
                 alt="Misinformation and Disinformation"
               />
             </div>
             <div class="img-box" onclick="showContent('content2')">
               <div class="info">
-                <h3>Phishing and Scam Websites</h3>
+                <h3>Fake Websites</h3>
               </div>
               <img
                 src="./styles/media/phishing.png"
@@ -108,10 +108,10 @@
             </div>
             <div class="img-box" onclick="showContent('content3')">
               <div class="info">
-                <h3>AI Generated and Deepfake Images</h3>
+                <h3>AI Generated Images</h3>
               </div>
               <img
-                src="./styles/media/deepface.png"
+                src="./styles/media/face.png"
                 alt="AI Generated and Deepfake Images"
               />
             </div>
@@ -121,20 +121,25 @@
               </div>
               <img src="./styles/media/bias.png" alt="News Bias" />
             </div>
-            <div class="img-box">
+            <div class="img-box" onclick="window.location.href='./quiz.html'">
               <div class="info">
-                <h3></h3>
+                <h3>Quiz</h3>
               </div>
-              <img src="./styles/media/tech.png" alt="" />
+              <img src="./styles/media/quizs.jpg" alt="" />
             </div>
-            <div class="img-box" id="last-img-box">
+            <div
+              class="img-box"
+              id="last-img-box"
+              onclick="window.location.href='./about.html'"
+            >
               <div class="info">
-                <h3></h3>
+                <h3>About Us</h3>
               </div>
-              <img src="./styles/media/AI.png" alt="" />
+              <img src="./styles/media/us.jpg" alt="" />
             </div>
           </div>
         </div>
+
         <div class="btn-group">
           <button class="last btn">
             <svg
@@ -144,8 +149,8 @@
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               p-id="2373"
-              width="128"
-              height="128"
+              width="100"
+              height="100"
             >
               <path
                 d="M862.485 481.154H234.126l203.3-203.3c12.497-12.497 12.497-32.758 0-45.255s-32.758-12.497-45.255 0L135.397 489.373c-12.497 12.497-12.497 32.758 0 45.254l256.774 256.775c6.249 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372c12.497-12.497 12.497-32.759 0-45.255l-203.3-203.301h628.36c17.036 0 30.846-13.81 30.846-30.846s-13.81-30.846-30.846-30.846z"
@@ -162,8 +167,8 @@
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
               p-id="2373"
-              width="128"
-              height="128"
+              width="100"
+              height="100"
             >
               <path
                 d="M862.485 481.154H234.126l203.3-203.3c12.497-12.497 12.497-32.758 0-45.255s-32.758-12.497-45.255 0L135.397 489.373c-12.497 12.497-12.497 32.758 0 45.254l256.774 256.775c6.249 6.248 14.438 9.372 22.627 9.372s16.379-3.124 22.627-9.372c12.497-12.497 12.497-32.759 0-45.255l-203.3-203.301h628.36c17.036 0 30.846-13.81 30.846-30.846s-13.81-30.846-30.846-30.846z"
@@ -179,27 +184,27 @@
         <div id="navBar">
           <div class="navButton" onclick="showContent('content1')">
             <img
-              src="./styles/media/md.png"
+              src="./styles/media/md.jpg"
               class="navImg"
               alt="Misinformation and Disinformation"
             />
-            <div class="navText">Misinform & Disinformate</div>
+            <div class="navText">Mis- and Disinformation</div>
           </div>
           <div class="navButton" onclick="showContent('content2')">
             <img
               src="./styles/media/phishing.png"
               class="navImg"
-              alt="Phishing and Scam Websites"
+              alt="Fake Websites"
             />
             <div class="navText">Fake Websites</div>
           </div>
           <div class="navButton" onclick="showContent('content3')">
             <img
-              src="./styles/media/deepface.png"
+              src="./styles/media/face.png"
               class="navImg"
-              alt="AI Generated and Deepfake Images"
+              alt="AI Generated Images"
             />
-            <div class="navText">AI & deepfake</div>
+            <div class="navText">AI Images</div>
           </div>
           <div class="navButton" onclick="showContent('content4')">
             <img src="./styles/media/bias.png" class="navImg" alt="News Bias" />
@@ -319,13 +324,7 @@
           </div>
 
           <!-- Text Content Section -->
-          <div
-            class="custom-content"
-            style="
-              background-image: url('./scripts/educational/bg.jpg');
-              background-size: cover;
-            "
-          >
+          <div class="custom-content">
             <div id="main">
               <div id="click-section">
                 <div id="drawerboxes">
@@ -347,24 +346,18 @@
                   </div>
                   <div class="drawerbox">
                     <button class="drawer-btn" onclick="slideTo(4)">
-                      What Can We Do?<span class="drawer-head">4</span>
+                      What To Do?<span class="drawer-head">4</span>
                     </button>
                   </div>
                 </div>
               </div>
               <div id="slide-section">
                 <div id="slide-bar">
+                  o
                   <div id="bar"></div>
                 </div>
-                <div
-                  id="card-section"
-                  style="
-                    background-image: url('./scripts/educational/bg.jpg');
-                    background-size: cover;
-                  "
-                >
+                <div id="card-section">
                   <div id="card1" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">
                       Misinformation and Disinformation
                     </div>
@@ -383,7 +376,6 @@
                     </div>
                   </div>
                   <div id="card2" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">The Fact Is</div>
                     <div class="card-content">
                       People believe and spread misinformation due to mental
@@ -401,7 +393,6 @@
                     </div>
                   </div>
                   <div id="card3" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Case in Study</div>
                     <div class="card-content">
                       The COVID-19 pandemic exposed the dangers of
@@ -419,24 +410,21 @@
                     </div>
                   </div>
                   <div id="card4" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">As Digital Citizens</div>
                     <div class="card-content">
                       Ⅰ. Pause and verify——<br />
-                      Always take a moment to check if the information you see
-                      online is accurate before believing or sharing it.<br />
+                      Take a moment to check if online information is accurate
+                      before believing or sharing it.<br />
                       Ⅱ. Cross-check sources——<br />
-                      Look for confirmation from trustworthy news outlets or
-                      reliable leaders to ensure the information is being widely
-                      and accurately reported.<br />
+                      Seek confirmation from trustworthy news outlets or
+                      reliable figures to ensure the information is widely and
+                      accurately reported.<br />
                       Ⅲ. Research the author——<br />
-                      Do a quick search on the author to verify their
-                      credibility, background, and whether they are a real,
-                      trustworthy source.<br />
+                      Quickly check the author's credibility and background to
+                      verify their trustworthiness.<br />
                       Ⅳ. Verify before sharing——<br />
-                      If you're still unsure about a claim, avoid engaging or
-                      sharing it until you can confirm its truth through
-                      reliable sources.
+                      If uncertain, refrain from sharing until you can confirm
+                      its truth through reliable sources.
                     </div>
                   </div>
                 </div>
@@ -557,13 +545,7 @@
           </div>
 
           <!-- Text Content Section -->
-          <div
-            class="custom-content"
-            style="
-              background-image: url('./scripts/educational/bg.jpg');
-              background-size: cover;
-            "
-          >
+          <div class="custom-content">
             <div id="main">
               <div id="click-section">
                 <div id="drawerboxes">
@@ -594,15 +576,8 @@
                 <div id="slide-bar">
                   <div id="bar"></div>
                 </div>
-                <div
-                  id="card-section"
-                  style="
-                    background-image: url('./scripts/educational/bg.jpg');
-                    background-size: cover;
-                  "
-                >
+                <div id="card-section">
                   <div id="card1" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">What is a Fake Website</div>
                     <div class="card-content">
                       A fake website is any website designed to deliberately
@@ -613,7 +588,6 @@
                     </div>
                   </div>
                   <div id="card2" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Its Purpose might be</div>
                     <div class="card-content">
                       Ⅰ. Scamming:<br />
@@ -629,7 +603,6 @@
                     </div>
                   </div>
                   <div id="card3" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Some Examples Are</div>
                     <div class="card-content">
                       A fake online store that sells high-end items at low
@@ -643,23 +616,22 @@
                     </div>
                   </div>
                   <div id="card4" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Check and Check</div>
                     <div class="card-content">
-                      1. Check the URL: Look for misspelled domains, unusual
+                      Ⅰ. Check the URL: Look for misspelled domains, unusual
                       domain extensions, extra characters, deceptive subdomains,
                       or embedded brand names.<br />
 
-                      2. Check site security: Ensure the site uses TLS/SSL
+                      Ⅱ. Check site security: Ensure the site uses TLS/SSL
                       certificates. Types include DV (minimal validation), OV
                       (business-verified), and EV (high-level verification).
                       Fraudsters often use DV certificates.<br />
 
-                      3. Check domain age: New domains may indicate scams, as
+                      Ⅲ. Check domain age: New domains may indicate scams, as
                       scammers often register short-term domains to reduce
                       costs.<br />
 
-                      4. Check for errors: Scammers often have spelling or
+                      Ⅳ. Check for errors: Scammers often have spelling or
                       grammatical mistakes, poor design, and missing info (e.g.,
                       no contact details or “About Us” page).
                     </div>
@@ -671,7 +643,7 @@
         </div>
 
         <div id="content3" class="newContent" style="display: none">
-          <h2 class="gradient-text">AI Generated and Deepfake Images</h2>
+          <h2 class="gradient-text">AI Generated Images</h2>
           <!-- Card Layout Section -->
           <div class="wrapper">
             <div class="box">
@@ -781,13 +753,7 @@
           </div>
 
           <!-- Text Content Section -->
-          <div
-            class="custom-content"
-            style="
-              background-image: url('./scripts/educational/bg.jpg');
-              background-size: cover;
-            "
-          >
+          <div class="custom-content">
             <div id="main">
               <div id="click-section">
                 <div id="drawerboxes">
@@ -818,15 +784,8 @@
                 <div id="slide-bar">
                   <div id="bar"></div>
                 </div>
-                <div
-                  id="card-section"
-                  style="
-                    background-image: url('./scripts/educational/bg.jpg');
-                    background-size: cover;
-                  "
-                >
+                <div id="card-section">
                   <div id="card1" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">The Response</div>
                     <div class="card-content">
                       AI-generated images are visuals created by artificial
@@ -844,7 +803,6 @@
                     </div>
                   </div>
                   <div id="card2" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Be Careful</div>
                     <div class="card-content">
                       AI-generated and deepfake images have both positive and
@@ -862,13 +820,12 @@
                     </div>
                   </div>
                   <div id="card3" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Case in Study</div>
                     <div class="card-content">
                       A notable case of deepfake images involved a series of
                       manipulated photos that placed celebrities in compromising
                       or false situations. One example was a deepfake image of
-                      actress Scarlett Johansson’s face superimposed onto a body
+                      actress Scarlett Johansson's face superimposed onto a body
                       in explicit content, which circulated online without her
                       consent. This incident sparked outrage and highlighted the
                       potential for deepfake images to harm individuals'
@@ -879,20 +836,19 @@
                     </div>
                   </div>
                   <div id="card4" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Remain Skeptical</div>
                     <div class="card-content">
-                      1. Watch out for misplaced content<br />
+                      Ⅰ. Watch out for misplaced content<br />
                       Check for missing body parts, incorrect shadows, or
                       nonsensical text that indicate AI-generated image
                       flaws.<br />
-                      2. Be suspicious of smooth features<br />
+                      Ⅱ. Be suspicious of smooth features<br />
                       Look for unnaturally glossy skin, overly smooth textures,
                       or blurred backgrounds common in AI images.<br />
-                      3. Check for watermarks<br />
+                      Ⅲ. Check for watermarks<br />
                       Some AI images include small logos or text showing they
                       were created by AI tools.<br />
-                      4. Flip It and Reverse It<br />
+                      Ⅳ. Flip It and Reverse It<br />
                       Use reverse image search to verify image authenticity,
                       especially if it's viral but not on trusted sites.
                     </div>
@@ -1021,13 +977,7 @@
           </div>
 
           <!-- Text Content Section -->
-          <div
-            class="custom-content"
-            style="
-              background-image: url('./scripts/educational/bg.jpg');
-              background-size: cover;
-            "
-          >
+          <div class="custom-content">
             <div id="main">
               <div id="click-section">
                 <div id="drawerboxes">
@@ -1049,7 +999,7 @@
                   </div>
                   <div class="drawerbox">
                     <button class="drawer-btn" onclick="slideTo(4)">
-                      How to Identify?<span class="drawer-head">4</span>
+                      How to Spot?<span class="drawer-head">4</span>
                     </button>
                   </div>
                 </div>
@@ -1058,15 +1008,8 @@
                 <div id="slide-bar">
                   <div id="bar"></div>
                 </div>
-                <div
-                  id="card-section"
-                  style="
-                    background-image: url('./scripts/educational/bg.jpg');
-                    background-size: cover;
-                  "
-                >
+                <div id="card-section">
                   <div id="card1" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">What is a News Bias</div>
                     <div class="card-content">
                       News Bias is defined as the tendency of news media to
@@ -1079,7 +1022,6 @@
                     </div>
                   </div>
                   <div id="card2" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Learn About</div>
                     <div class="card-content">
                       Left-Wing and Right-Wing are terms used to describe
@@ -1097,7 +1039,6 @@
                     </div>
                   </div>
                   <div id="card3" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Don't Ignore</div>
                     <div class="card-content">
                       News bias can significantly impact public perception and
@@ -1115,7 +1056,6 @@
                     </div>
                   </div>
                   <div id="card4" class="card">
-                    <div class="card-small-title">IYAKAH TIPS</div>
                     <div class="card-title">Get Ready</div>
                     <div class="card-content">
                       To start by examining the source. Consider the outlet's
@@ -1171,6 +1111,7 @@
     <div id="chatbot-tooltip">Need help? Ask me anything!</div>
     <!-- chatbot widget end -->
 
+    <!-- footer -->
     <!-- footer -->
     <footer class="footer">
       <div class="footer-content">
