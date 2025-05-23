@@ -246,6 +246,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function startSlide() {
     intervalID = setInterval(() => {
       slideTo((chosenSlideNumber % 4) + 1, "content1");
-    }, 100000); // 10 min auto switch
+    }, 155000); // 10 min auto switch
   }
 });
