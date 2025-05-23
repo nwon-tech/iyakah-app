@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
               // data.data.confidenceScore is the expected format for the confidence score
               var websiteConfidenceScore =
-                data.data.confidenceScore || "No score available";
+                data.data.confidenceScore;
               console.log(
                 "Confidence score from backend:",
                 websiteConfidenceScore
@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
               var officialResultsVerdict =
                 data.data.urlResult.officialVerdict || "No result available";
               var officialResultsScore =
-                data.data.urlResult.officialScore || "No score available";
+                data.data.urlResult.officialScore;
               
 
               //  format domain age
@@ -335,7 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
               var domainAgeVerdict =
                 data.data.urlResult.domainAgeDescriptionVerdict || "No result available";
               var domainAgeScore =
-                data.data.urlResult.domainAgeDescriptionScore || "No score available";
+                data.data.urlResult.domainAgeDescriptionScore;
 
               //  SSL certificate
               var sslCaResult =
@@ -343,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
               var sslCaResultVerdict =
               data.data.urlResult.sslCaVerdict || "No result available";
               var sslCaResultScore =
-                data.data.urlResult.sslCaScore || "No score available";
+                data.data.urlResult.sslCaScore;
 
               // SSL validity
               var sslValidityResult =
@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
               var sslValidityResultVerdict =
                 data.data.urlResult.sslValidityVerdict || "No result available";
               var sslValidityResultScore =
-                data.data.urlResult.sslValidityScore || "No score available";
+                data.data.urlResult.sslValidityScore;
 
               // SSL Key
               var sslKeyResult =
@@ -359,7 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
               var sslKeyResultVerdict =
                 data.data.urlResult.sslKeyVerdict || "No result available";
               var sslKeyResultScore =
-                data.data.urlResult.sslKeyScore || "No score available";
+                data.data.urlResult.sslKeyScore;
 
 
               var safetyRating = "";
