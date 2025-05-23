@@ -80,18 +80,29 @@
         </ul>
       </div>
     </nav>
-
     <!-- website verification  -->
     <main class="container">
+      <!-- pseudo navigation tab -->
+      <nav class="tab-navigation">
+        <a href="./website-verification.html" class="tab-link active">
+          Website Legitimacy Checker
+        </a>
+        <span class="arrow">→</span>
+        <a href="./image-verification.html" class="tab-link">
+          Fake Image Detector
+        </a>
+        <span class="arrow">→</span>
+        <a href="./news-verification.html" class="tab-link">
+          News Bias Detector
+        </a>
+      </nav>
+
       <div class="tab-pane" id="tab1">
         <h3>Website Legitimacy Checker</h3>
 
-        <p id="caption">Check website security and credibility</p>
+        <p id="caption">Enter a URL to verify the legitimacy of a website and check for
+          potential security issues.</p>
 
-        <p id="description">
-          Enter a URL to verify the legitimacy of a website and check for
-          potential security issues.
-        </p>
         <div class="input-group">
           <input
             id="website-input"
@@ -140,20 +151,6 @@
       <div id="chatbot-tooltip">Need help? Ask me anything!</div>
       <!-- chatbot widget end -->
 
-      <!-- Next Section Navigation -->
-      <div class="next-section-options">
-        <div class="next">
-          <label>Next</label>
-        </div>
-        <div class="section-options">
-          <span
-            >-> <a href="./image-verification.html">AI Image Detection</a></span
-          >
-          <span
-            >-> <a href="./news-verification.html">News Bias Detection</a></span
-          >
-        </div>
-      </div>
     </main>
     <!-- footer -->
     <footer class="footer">

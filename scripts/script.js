@@ -10,7 +10,7 @@ function displayChatbotResponse(responseText) {
 
   container.innerHTML = `
     <div class="chatbot-card">
-      <h3>Chatbot Analysis Summary</h3>
+      <h3>Our Chatbot Analysis:</h3>
       <div class="chatbot-message">
         ${htmlContent}
       </div>
@@ -385,7 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
               if (websiteResultContainer) {
                 websiteResultContainer.innerHTML = `
-
+                <h3>Our Model's Analysis:</h3>
             <div class="info-card">
               <div class="info-icon">
                 <img src="${imgRating}" alt="${safetyRating}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
@@ -393,7 +393,6 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
               <div class="info-value">${websiteConfidenceScore}</div>
             </div>
-            <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 
             <table>
               <caption>
@@ -411,115 +410,36 @@ document.addEventListener("DOMContentLoaded", () => {
                   <td>Rating by Agencies</td>
                   <td>${officialResults}</td>
                   <td>${officialResultsVerdict}</td>
-                  <td>${officialResultsScore}/40.0</td>
+                  <td>${officialResultsScore}/40</td>
                 </tr>
                 <tr>
                   <td>Domain Creation Date</td>
                   <td>${domainCreationDate}</td>
                   <td>${domainAgeVerdict}</td>
-                  <td>${domainAgeScore}/15.0</td>
+                  <td>${domainAgeScore}/15</td>
                 </tr>
                 <tr>
                   <td>SSL Certificate</td>
                   <td>${sslCaResult}</td>
                   <td>${sslCaResultVerdict}</td>
-                  <td>${sslCaResultScore}/10.0</td>
+                  <td>${sslCaResultScore}/10</td>
                 </tr>
                 <tr>
                   <td>SSL Validity</td>
                   <td>${sslValidityResult}</td>
                   <td>${sslValidityResultVerdict}</td>
-                  <td>${sslValidityResultScore}/20.0</td>
+                  <td>${sslValidityResultScore}/20</td>
                 </tr>
                 <tr>
                   <td>SSL Key</td>
                   <td>${sslKeyResult}</td>
                   <td>${sslKeyResultVerdict}</td>
-                  <td>${sslKeyResultScore}/15.0</td>
+                  <td>${sslKeyResultScore}/15</td>
                 </tr>
               </tbody>
             </table>
 
-            <div class="website-education">
-              <section>
-                <h2>How to Spot a Phishing or Scam Website</h2>
-
-                <div class="education-row">
-                  <div class="text-container-left">
-                    <label class="education-label">Check the URL carefully</label>
-                    <p class="education-text">
-                      Avoid websites with strange spellings, extra characters, or unfamiliar
-                      domain extensions (like .xyz, .top, etc.).
-                    </p>
-                  </div>
-                  <div class="image-container">
-                    <img
-                      src="./scripts/website-detection-result/website-education-row1.jpg"
-                      alt="URL Check"
-                    />
-                  </div>
-                  <div class="text-container-right">
-                    <label class="education-label"
-                      >Never enter sensitive info on suspicious pages</label
-                    >
-                    <p class="education-text">
-                      Avoid giving your passwords, ID numbers, or payment details unless
-                      you're 100% sure the site is legitimate.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="education-row">
-                  <div class="text-container-left-2">
-                    <label class="education-label"
-                      >Watch for urgent messages or threats</label
-                    >
-                    <p class="education-text">
-                      Scam sites often try to scare you with fake deadlines or account
-                      closures.
-                    </p>
-                  </div>
-                  <div class="image-container-2">
-                    <img
-                      src="./scripts/website-detection-result/website-education-row2.png"
-                      alt="URL Check"
-                    />
-                  </div>
-                  <div class="text-container-right-2">
-                    <label class="education-label">Look for HTTPS & the padlock icon</label>
-                    <p class="education-text">
-                      Legitimate sites use secure connections. No padlock = risky.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="education-row">
-                  <div class="text-container-left-3">
-                    <label class="education-label"
-                      >Check for spelling & design errors</label
-                    >
-                    <p class="education-text">
-                      Poor grammar, weird formatting, or low-quality images can be a red
-                      flag.
-                    </p>
-                  </div>
-                  <div class="image-container-3">
-                    <img
-                      src="./scripts/website-detection-result/website-education-row3.jpg"
-                      alt="URL Check"
-                    />
-                  </div>
-                  <div class="text-container-right-3">
-                    <label class="education-label"
-                      >Don't trust "too good to be true" offers</label
-                    >
-                    <p class="education-text">
-                      If it promises huge rewards for little effort, it's probably a scam.
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </div>
+            <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 
             `;
               }
@@ -878,17 +798,11 @@ function handleFileSelect(selectedFile) {
 
                 let imageCaptureAddress = "No address available";
 
-                // Reverse geocoding for filming locations
-                // if (data.data.location) {
-                //   fetchAddressFromCoordinates(data.data.location).then((result) => {
-                //     imageCaptureLocation = result.coordinates;
-                //     imageCaptureAddress = result.address;
-                //   });
-                // }
-
                 // Formatting output
                 const resultText =
-                  imageResultSummary === "Real image" ? "Real" : "AI-Generated";
+                  (typeof imageResultSummary === "string" && imageResultSummary === "Real Image")
+                    ? "Real"
+                    : "AI-Generated";
 
                 let imgRating = "";
 
@@ -904,6 +818,8 @@ function handleFileSelect(selectedFile) {
                 // Display the data on the index.html page
                 if (imageResultContainer) {
                   imageResultContainer.innerHTML = `
+
+                  <h3>Our Model's Analysis:</h3>
 
                 <div class="info-container">
                   <div class="info-card">
@@ -937,53 +853,6 @@ function handleFileSelect(selectedFile) {
                 </div>
 
                 <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
-
-                <div class="website-education">
-                <section>
-                  <h2>How to Spot AI-Generated Images</h2>
-
-                  <div class="education-row">
-                    <div class="text-container">
-                      <label class="education-label">Check for distorted details</label>
-                      <p class="education-text">
-                        AI images often have strange hands, mismatched earrings, or unnatural eyes and teeth.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="education-row">
-                        <div class="text-container-left-2">
-                          <label class="education-label"
-                            >Look at the background</label
-                          >
-                          <p class="education-text">
-                            Blurry or chaotic backgrounds can be a sign the image was generated by AI.
-                          </p>
-                        </div>
-                        <div class="image-container-2">
-                          <img
-                            src="./scripts/image-detection-result/image-education-row2.jpg"
-                            alt="image check"
-                          />
-                        </div>
-                        <div class="text-container-right-2">
-                          <label class="education-label">Look for symmetry issues</label>
-                          <p class="education-text">
-                            Faces or objects may be oddly symmetrical — or not symmetrical when they should be.
-                          </p>
-                        </div>
-                      </div>
-
-                      <div class="education-row">
-                        <div class="text-container">
-                          <label class="education-label">Lighting and shadows may be off</label>
-                          <p class="education-text">
-                            Inconsistencies in lighting or shadow direction are common in AI-created images.
-                          </p>
-                        </div>
-                      </div>
-                    </section>
-                  </div>
 
               `;
                 }

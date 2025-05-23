@@ -114,14 +114,27 @@
 
     <!-- news verification  -->
     <main class="container">
+
+      <!-- pseudo navigation tab -->
+      <nav class="tab-navigation">
+        <a href="./website-verification.html" class="tab-link">
+          Website Legitimacy Checker
+        </a>
+        <span class="arrow">→</span>
+        <a href="./image-verification.html" class="tab-link">
+          Fake Image Detector
+        </a>
+        <span class="arrow">→</span>
+        <a href="./news-verification.html" class="tab-link active">
+          News Bias Detector
+        </a>
+      </nav>
+
       <div class="tab-pane active" id="tab1">
         <h3>News Bias Detector</h3>
-        <p id="caption">News bias and AI-generated analysis</p>
+        <p id="caption">Enter news content and we will analyse potential biases, and detect
+          whether the article is AI-generated or human-written.</p>
 
-        <p id="description">
-          Enter news content and we will analyze potential biases, and detect
-          whether the article is AI-generated or human-written
-        </p>
         <div class="input-options">
           <div class="option-content active" id="text-option">
             <p>Article Text</p>
@@ -194,23 +207,6 @@
       <div id="chatbot-tooltip">Need help? Ask me anything!</div>
       <!-- chatbot widget end -->
 
-      <!-- Next Section Navigation -->
-      <div class="next-section-options">
-        <div class="next">
-          <label>Next</label>
-        </div>
-        <div class="section-options">
-          <span
-            >->
-            <a href="./website-verification.html"
-              >Fake Website Verification</a
-            ></span
-          >
-          <span
-            >-> <a href="./image-verification.html">AI Image Detection</a></span
-          >
-        </div>
-      </div>
     </main>
     <!-- footer -->
     <footer class="footer">
@@ -261,7 +257,7 @@
 
         container.innerHTML = `
     <div class="chatbot-card">
-      <h3>Chatbot Analysis Summary</h3>
+      <h3>Our Chatbot Analysis:</h3>
       <div class="chatbot-message">
         ${htmlContent}
       </div>
@@ -333,23 +329,6 @@
           console.error("Error loading media data:", error);
         });
 
-      // Function to fetch user IP
-      const fetchUserIp = async () => {
-        try {
-          const res = await fetch("https://api.ipify.org?format=json");
-          const data = await res.json();
-          if (data && data.ip) {
-            userIp = data.ip;
-            isIpFetched = true;
-          } else {
-            console.warn("IP not found in response.");
-            isIpFetched = true;
-          }
-        } catch (err) {
-          console.error("Could not fetch IP:", err);
-          isIpFetched = true;
-        }
-      };
       // Function to process bias data and create table content
       function processBiasData(data) {
         // Check if bias data exists
@@ -431,7 +410,6 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        fetchUserIp();
 
         // Fake News Detector functionality
         const newsInput = document.getElementById("news-input");
@@ -686,16 +664,14 @@
                     data.data.textBiasResult.biased_sentences.text ||
                     "No data available";
 
+
                   // formatting output
-                  if (newsResultSummary.toLowerCase() === "AI-generated") {
-                    newsResultSummary = "Ai-Generated";
-                  } else {
-                    newsResultSummary = "Human-written";
-                  }
+                  let isAIGenerated = newsResultSummary.toLowerCase() === "ai-generated";
+                  newsResultSummary = isAIGenerated ? "AI-generated" : "Human-written";
 
                   var imgRating = "";
 
-                  if (newsResultSummary === "Ai-Generated") {
+                  if (isAIGenerated) {
                     imgRating =
                       "./scripts/news-detection-results/news-unsafe-icon.png";
                   } else {
@@ -725,34 +701,35 @@
                     const biasTableRows = processBiasData(data);
 
                     newsResultContainer.innerHTML = `
-                  <div class="info-container">
-                      <div class="info-card">
-                        <div class="info-icon">
-                          <img src="${imgRating}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-                          <span class="label">${newsResultSummary}</span>
+                    <h3>Our Model's Analysis:</h3>
+                    <div class="info-container">
+                        <div class="info-card">
+                          <div class="info-icon">
+                            <img src="${imgRating}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                            <span class="label">${newsResultSummary}</span>
+                          </div>
+                          <div class="info-value">${newsConfidenceScore}%</div>
                         </div>
-                        <div class="info-value">${newsConfidenceScore}%</div>
-                      </div>
 
-                      <div class="info-card">
-                        <div class="info-icon">
-                          <img src="${imgBias}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-                          <span class="label">${
-                            newsBiasType.charAt(0).toUpperCase() +
-                            newsBiasType.slice(1)
-                          } Bias</span>
+                        <div class="info-card">
+                          <div class="info-icon">
+                            <img src="${imgBias}" alt="${newsResultSummary}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                            <span class="label">${
+                              newsBiasType.charAt(0).toUpperCase() +
+                              newsBiasType.slice(1)
+                            } Bias</span>
+                          </div>
+                          <div class="info-value">${newsBiasScore}%</div>
                         </div>
-                        <div class="info-value">${newsBiasScore}%</div>
-                      </div>
 
-                      <div class="info-card">
-                        <div class="info-icon">
-                          <img src="${imgMediaBias}" alt="${newsMediaBiasRating}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
-                          <span class="label">${newsMediaBiasRating}</span>
+                        <div class="info-card">
+                          <div class="info-icon">
+                            <img src="${imgMediaBias}" alt="${newsMediaBiasRating}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                            <span class="label">${newsMediaBiasRating}</span>
+                          </div>
                         </div>
-                      </div>
 
-                    </div>
+                      </div>
 
                     <p>All detection results are for informational purposes only and do not constitute professional or legal advice.</p>
 
