@@ -146,7 +146,6 @@
 
 .btn-group {
   height: 10vh;
-  position: absolute;
   left: 50%;
   margin-bottom: 3%;
   -webkit-transform: translate(-50%, -50%);
