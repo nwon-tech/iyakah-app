@@ -3,5 +3,8 @@
   "type": "module",
   "dependencies": {
     "@vercel/edge": "^0.1.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
