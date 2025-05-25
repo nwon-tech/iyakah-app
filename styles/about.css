@@ -59,6 +59,7 @@ body {
   color: black;
   margin: 0;
   padding: 0;
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 /* resrouces */
