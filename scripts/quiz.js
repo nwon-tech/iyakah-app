@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById(
           "comparison-result"
-        ).innerHTML += `<br/><strong>You are part of a community! ${addNumber} more users like you have taken the quiz out of ${allNumber} total.</strong>`;
+        ).innerHTML += `<br/>Congratulations! You have completed <strong>${addNumber} </strong> out of 15 questions that we have prepared for you.`;
       })
       .catch((err) => {
         console.error("Error submitting quiz:", err);
